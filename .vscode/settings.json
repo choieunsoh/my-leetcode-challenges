@@ -1,3 +1,13 @@
 {
-  "conventionalCommits.scopes": ["array"]
+  "conventionalCommits.scopes": [
+    "array",
+    "strings",
+    "linked-list",
+    "trees",
+    "sorting-searching",
+    "dynamic-programming",
+    "design",
+    "math",
+    "others"
+  ]
 }
