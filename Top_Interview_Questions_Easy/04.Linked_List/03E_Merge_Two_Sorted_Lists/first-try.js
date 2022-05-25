@@ -30,17 +30,31 @@ var printList = function (list) {
  * @param {ListNode} list2
  * @return {ListNode}
  */
-var mergeTwoLists = (list1, list2) => {
-  if (list1 === null) return list2;
-  if (list2 === null) return list1;
+var mergeTwoLists = (curr1, curr2) => {
+  let result = new ListNode(0);
+  let curr = result;
+  while (true) {
+    if (curr1 === null) {
+      curr.next = curr2;
+      break;
+    }
+    if (curr2 === null) {
+      curr.next = curr1;
+      break;
+    }
 
-  if (list1.val < list2.val) {
-    list1.next = mergeTwoLists(list1.next, list2);
-    return list1;
-  } else {
-    list2.next = mergeTwoLists(list1, list2.next);
-    return list2;
+    if (curr1.val <= curr2.val) {
+      curr.next = curr1;
+      curr1 = curr1.next;
+    } else {
+      curr.next = curr2;
+      curr2 = curr2.next;
+    }
+
+    curr = curr.next;
   }
+
+  return result.next;
 };
 
 var list1 = [1, 2, 4];
