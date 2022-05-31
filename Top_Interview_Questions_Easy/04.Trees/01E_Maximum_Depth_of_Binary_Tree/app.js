@@ -1,5 +1,5 @@
 // https://leetcode.com/problems/maximum-depth-of-binary-tree/
-const { TreeNode, createTree, printTree } = require('./utils');
+const { TreeNode, createTree } = require('../../../_utils/tree');
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
