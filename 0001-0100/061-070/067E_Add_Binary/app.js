@@ -9,31 +9,16 @@ var addBinary = function (a, b) {
   let i = 1;
   let carry = 0;
   let result = '';
-  while (a.length - i >= 0 && b.length - i >= 0) {
-    let c = carry + +a[a.length - i] + +b[b.length - i];
-    carry = c > 1 ? 1 : 0;
-    c = c % 2;
-    result = c + result;
+  while (carry > 0 || a.length - i >= 0 || b.length - i >= 0) {
+    const A = a.length - i >= 0 ? +a[a.length - i] : 0;
+    const B = b.length - i >= 0 ? +b[b.length - i] : 0;
+    let sum = carry + A + B;
+    carry = sum > 1 ? 1 : 0;
+    result = (sum % 2) + result;
     i++;
   }
 
-  while (a.length - i >= 0) {
-    let c = carry + +a[a.length - i];
-    carry = c > 1 ? 1 : 0;
-    c = c % 2;
-    result = c + result;
-    i++;
-  }
-
-  while (b.length - i >= 0) {
-    let c = carry + +b[b.length - i];
-    carry = c > 1 ? 1 : 0;
-    c = c % 2;
-    result = c + result;
-    i++;
-  }
-
-  return carry === 1 ? carry + result : result;
+  return result;
 };
 
 var a = '11',
