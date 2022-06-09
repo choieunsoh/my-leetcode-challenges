@@ -11,8 +11,15 @@ var findDiagonalOrder = function (mat) {
   let row = 0;
   let col = 0;
 
-  const validPosition = (row, col) =>
-    row >= 0 && row < rows && col >= 0 && col < cols;
+  const validPosition = (i, j) => {
+    const valid =
+      row + i >= 0 && row + i < rows && col + j >= 0 && col + j < cols;
+    if (valid) {
+      row += i;
+      col += j;
+    }
+    return valid;
+  };
 
   while (result.length < rows * cols) {
     if (col < cols && row < rows) {
@@ -22,39 +29,27 @@ var findDiagonalOrder = function (mat) {
     const up = (row + col) % 2 === 0;
     let valid = false;
 
-    // try up
+    // try North East
     if (up) {
-      valid = validPosition(row - 1, col + 1);
-      if (valid) {
-        row--;
-        col++;
+      valid = validPosition(-1, 1);
+      if (!valid) {
+        // try East
+        valid = validPosition(0, 1);
       }
       if (!valid) {
-        // try right
-        valid = validPosition(row, col + 1);
-        if (valid) col++;
-      }
-      if (!valid) {
-        // try down
-        valid = validPosition(row + 1, col);
-        if (valid) row++;
+        // try South
+        valid = validPosition(1, 0);
       }
     } else {
-      // try down
-      valid = validPosition(row + 1, col - 1);
-      if (valid) {
-        row++;
-        col--;
+      // try South West
+      valid = validPosition(1, -1);
+      if (!valid) {
+        // try South
+        valid = validPosition(1, 0);
       }
       if (!valid) {
-        // try down
-        valid = validPosition(row + 1, col);
-        if (valid) row++;
-      }
-      if (!valid) {
-        // try right
-        valid = validPosition(row, col + 1);
-        if (valid) col++;
+        // try East
+        valid = validPosition(0, 1);
       }
     }
   }
