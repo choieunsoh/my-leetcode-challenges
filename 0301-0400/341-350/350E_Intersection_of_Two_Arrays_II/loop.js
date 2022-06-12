@@ -9,14 +9,15 @@ var intersect = function (nums1, nums2) {
   if (nums1.length > nums2.length) {
     [nums1, nums2] = [nums2, nums1];
   }
-  const result = nums1.filter((num) => {
-    const index = nums2.indexOf(num);
-    if (index === -1) return false;
 
-    nums2.splice(index, 1);
-    return true;
-  });
-
+  const result = [];
+  for (let i = 0; i < nums1.length; i++) {
+    const index = nums2.indexOf(nums1[i]);
+    if (index !== -1) {
+      result.push(nums1[i]);
+      nums2[index] = null;
+    }
+  }
   return result;
 };
 
