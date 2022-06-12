@@ -2,6 +2,7 @@
   "conventionalCommits.scopes": [
     "array",
     "strings",
+    "hash-table",
     "linked-list",
     "trees",
     "sorting-searching",
