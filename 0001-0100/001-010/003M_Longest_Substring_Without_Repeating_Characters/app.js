@@ -1,4 +1,6 @@
-const lengthOfLongestSubstringV1 = (s) => {
+// https://leetcode.com/problems/longest-substring-without-repeating-characters/
+// 3. Longest Substring Without Repeating Characters
+var lengthOfLongestSubstringV1 = (s) => {
   let length = 0;
   for (let i = 0; i < s.length; i++) {
     const seen = { [s[i]]: s[i] };
@@ -11,7 +13,7 @@ const lengthOfLongestSubstringV1 = (s) => {
   }
   return length;
 };
-const lengthOfLongestSubstringV2 = (s) => {
+var lengthOfLongestSubstringV2 = (s) => {
   const charSet = new Set();
 
   let l = 0;
@@ -19,9 +21,9 @@ const lengthOfLongestSubstringV2 = (s) => {
 
   for (let r = 0; r <= s.length - 1; r++) {
     while (charSet.has(s[r])) {
-      console.log("A", charSet);
+      console.log('A', charSet);
       charSet.delete(s[l]);
-      console.log("B", charSet);
+      console.log('B', charSet);
       l++;
     }
     charSet.add(s[r]);
@@ -30,8 +32,8 @@ const lengthOfLongestSubstringV2 = (s) => {
   }
   return max;
 };
-const lengthOfLongestSubstring = (s) => {
-  let text = "";
+var lengthOfLongestSubstring = (s) => {
+  let text = '';
   let max = 0;
   for (let i = 0; i < s.length; i++) {
     let x = text.indexOf(s[i]);
@@ -46,7 +48,7 @@ const lengthOfLongestSubstring = (s) => {
 };
 var lengthOfLongestSubstring2 = function (s) {
   let maxStr = 0;
-  let currStr = "";
+  let currStr = '';
   for (const letter of s) {
     const repeatIndex = currStr.indexOf(letter);
     if (repeatIndex !== -1) {
@@ -60,7 +62,7 @@ var lengthOfLongestSubstring2 = function (s) {
   return maxStr;
 };
 
-let s = "bbtablud";
-s = "abcabcbb";
+let s = 'bbtablud';
+s = 'abcabcbb';
 console.log(s);
 console.log(lengthOfLongestSubstring2(s));
