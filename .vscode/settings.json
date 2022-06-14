@@ -3,6 +3,8 @@
     "array",
     "strings",
     "hash-table",
+    "queue",
+    "stack",
     "linked-list",
     "trees",
     "sorting-searching",
