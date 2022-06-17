@@ -1,5 +1,4 @@
 // https://leetcode.com/problems/symmetric-tree/
-// 101. Symmetric Tree
 const { TreeNode, createTree, inOrder } = require('../../../_utils/tree');
 /**
  * Definition for a binary tree node.
@@ -15,18 +14,23 @@ const { TreeNode, createTree, inOrder } = require('../../../_utils/tree');
  */
 var isSymmetric = function (root) {
   if (root === null) return false;
+  const queue = [];
+  queue.push([root.left, root.right]);
 
-  const symmetricCheck = (left, right) => {
-    if (left === null && right === null) return true;
+  while (queue.length) {
+    const [left, right] = queue.pop();
+
+    if (left === null && right === null) continue;
+
     if (left === null || right === null) return false;
-    if (left.val !== right.val) return false;
-    return (
-      symmetricCheck(left.left, right.right) &&
-      symmetricCheck(left.right, right.left)
-    );
-  };
 
-  return symmetricCheck(root.left, root.right);
+    if (left.val !== right.val) return false;
+
+    queue.push([left.left, right.right]);
+    queue.push([left.right, right.left]);
+  }
+
+  return true;
 };
 
 var root = createTree([1, 2, 2, 3, 4, 4, 3]);
