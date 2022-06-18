@@ -17,22 +17,8 @@ var createTree = function (list, index = 0) {
 };
 
 var printTree = function (root) {
-  const x = [root.val];
-
-  const add = (root) => {
-    if (root !== null) {
-      if (root.left || root.right) {
-        x.push(root.left?.val ? root.left.val : 'null');
-        x.push(root.right?.val ? root.right.val : 'null');
-      }
-
-      add(root.left);
-      add(root.right);
-    }
-  };
-  add(root);
-
-  console.log(x.join(' '));
+  const result = inOrder(root);
+  console.log(result.join(' '));
 };
 
 var inOrder = function (root) {

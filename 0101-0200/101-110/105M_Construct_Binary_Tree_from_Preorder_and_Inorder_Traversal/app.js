@@ -1,5 +1,5 @@
-// https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
-// 106. Construct Binary Tree from Inorder and Postorder Traversal
+// https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+// 105. Construct Binary Tree from Preorder and Inorder Traversal
 const { TreeNode, createTree, printTree } = require('../../../_utils/tree');
 /**
  * Definition for a binary tree node.
@@ -10,11 +10,11 @@ const { TreeNode, createTree, printTree } = require('../../../_utils/tree');
  * }
  */
 /**
+ * @param {number[]} preorder
  * @param {number[]} inorder
- * @param {number[]} postorder
  * @return {TreeNode}
  */
-var buildTree = function (inorder, postorder) {
+var buildTree = function (preorder, inorder) {
   const map = new Map();
   for (let i = 0; i < inorder.length; i++) {
     map.set(inorder[i], i);
@@ -23,12 +23,12 @@ var buildTree = function (inorder, postorder) {
   function createTree(left = 0, right = inorder.length - 1) {
     if (left > right) return null;
 
-    const val = postorder.pop();
+    const val = preorder.shift();
     const root = new TreeNode(val);
     const mid = map.get(val);
 
-    root.right = createTree(mid + 1, right);
     root.left = createTree(left, mid - 1);
+    root.right = createTree(mid + 1, right);
 
     return root;
   }
@@ -36,16 +36,16 @@ var buildTree = function (inorder, postorder) {
   return createTree();
 };
 
-var inorder = [9, 3, 15, 20, 7],
-  postorder = [9, 15, 7, 20, 3];
+var preorder = [3, 9, 20, 15, 7],
+  inorder = [9, 3, 15, 20, 7];
 var expected = createTree([3, 9, 20, null, null, 15, 7]);
-var result = buildTree(inorder, postorder);
+var result = buildTree(preorder, inorder);
 printTree(result);
 printTree(expected);
 
-var inorder = [-1],
-  postorder = [-1];
+var preorder = [-1],
+  inorder = [-1];
 var expected = createTree([-1]);
-var result = buildTree(inorder, postorder);
+var result = buildTree(preorder, inorder);
 printTree(result);
 printTree(expected);
