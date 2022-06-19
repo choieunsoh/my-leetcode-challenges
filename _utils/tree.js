@@ -5,15 +5,15 @@ function TreeNode(val, left, right) {
 }
 
 var createTree = function (list, index = 0) {
-  let tree = null;
-
-  if (index < list.length && list[index] !== null) {
-    tree = new TreeNode(list[index]);
-    tree.left = createTree(list, 2 * index + 1);
-    tree.right = createTree(list, 2 * index + 2);
+  if (index >= list.length || list[index] === null) {
+    return null;
   }
 
-  return tree;
+  const root = new TreeNode(list[index]);
+  root.left = createTree(list, 2 * index + 1);
+  root.right = createTree(list, 2 * index + 2);
+
+  return root;
 };
 
 const treeType = {
