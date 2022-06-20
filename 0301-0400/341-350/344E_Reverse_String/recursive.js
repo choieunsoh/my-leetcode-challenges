@@ -5,13 +5,12 @@
  * @return {void} Do not return anything, modify s in-place instead.
  */
 var reverseString = function (s) {
-  let l = 0;
-  let r = s.length - 1;
-  while (l < r) {
+  function reverse(l = 0, r = s.length - 1) {
+    if (l > r) return;
     [s[l], s[r]] = [s[r], s[l]];
-    l++;
-    r--;
+    reverse(++l, --r);
   }
+  reverse();
 };
 
 var compare = (a, b) => a.toString() === b.toString();
