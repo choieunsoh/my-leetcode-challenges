@@ -6,15 +6,14 @@
  */
 var fib = function (n) {
   if (n < 2) return n;
-  let one = 0;
-  let two = 1;
-  let three = 1;
+  let left = 0;
+  let right = 1;
   for (let i = 2; i <= n; i++) {
-    three = one + two;
-    one = two;
-    two = three;
+    const sum = left + right;
+    left = right;
+    right = sum;
   }
-  return three;
+  return right;
 };
 
 const numbers = [10, 10, 20, 30, 40, 50, 100, 200];
