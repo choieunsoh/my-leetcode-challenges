@@ -10,7 +10,7 @@ var twoSum = function (numbers, target) {
   let right = numbers.length - 1;
 
   while (left < right) {
-    let sum = numbers[left] + numbers[right];
+    const sum = numbers[left] + numbers[right];
     if (sum < target) {
       left += 1;
     } else if (sum > target) {
