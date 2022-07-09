@@ -9,9 +9,9 @@ var maxArea = (heights) => {
   let left = 0;
   let right = heights.length - 1;
 
-  const getArea = (l, r) => {
-    const minHeight = Math.min(heights[l], heights[r]);
-    const width = r - l;
+  const getArea = (left, right) => {
+    const minHeight = Math.min(heights[left], heights[right]);
+    const width = right - left;
     return width * minHeight;
   };
 
