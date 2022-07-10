@@ -14,6 +14,8 @@ const { ListNode, createList, toArray } = require('../../../_utils/list');
  */
 var deleteDuplicates = function (head) {
   let node = head;
+  if (!node) return null;
+
   while (node.next) {
     if (node.val === node.next.val) {
       const next = node.next.next;
