@@ -13,18 +13,18 @@ const { TreeNode, createTree } = require('../../../_utils/tree');
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isValidBST = function (root) {
-  let prevVal = Number.MIN_SAFE_INTEGER;
+var isValidBST = function (
+  root,
+  min = Number.MIN_SAFE_INTEGER,
+  max = Number.MAX_SAFE_INTEGER
+) {
+  if (!root) return true;
+  if (root.val <= min || root.val >= max) return false;
 
-  const inOrder = (node) => {
-    if (!node) return true;
-    if (!inOrder(node.left)) return false;
-    if (node.val <= prevVal) return false;
-    prevVal = node.val;
-    return inOrder(node.right);
-  };
-
-  return inOrder(root);
+  return (
+    isValidBST(root.left, min, root.val) &&
+    isValidBST(root.right, root.val, max)
+  );
 };
 
 var root = createTree([2, 1, 3]);
