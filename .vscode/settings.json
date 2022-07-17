@@ -13,6 +13,7 @@
     "design",
     "math",
     "others",
-    "sql"
+    "sql",
+    "trie"
   ]
 }
