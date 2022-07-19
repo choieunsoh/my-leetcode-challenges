@@ -11,8 +11,8 @@
 var pick = 0;
 var guess = function (num) {
   if (num === pick) return 0;
-  if (num < pick) return -1;
-  return 1;
+  if (num < pick) return 1;
+  return -1;
 };
 /**
  * @param {number} n
