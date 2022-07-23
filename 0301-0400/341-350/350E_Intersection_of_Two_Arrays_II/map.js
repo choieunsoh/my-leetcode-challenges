@@ -13,10 +13,10 @@ var intersect = function (nums1, nums2) {
 
   const result = [];
   for (let i = 0; i < nums2.length; i++) {
-    if (counter[nums2[i]] && counter[nums2[i]] > 0) {
-      result.push(nums2[i]);
-      counter[nums2[i]]--;
-    }
+    const num = nums2[i];
+    if (!counter[num]) continue;
+    result.push(num);
+    counter[num]--;
   }
 
   return result;
