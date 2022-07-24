@@ -15,6 +15,7 @@
     "others",
     "sql",
     "trie",
-    "binary-search"
+    "binary-search",
+    "binary-search-tree"
   ]
 }
