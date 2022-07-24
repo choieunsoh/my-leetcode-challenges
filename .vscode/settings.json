@@ -16,6 +16,12 @@
     "sql",
     "trie",
     "binary-search",
-    "binary-search-tree"
+    "binary-search-tree",
+    "n-ary-tree",
+    "graph",
+    "heap",
+    "system-design",
+    "machine-learning",
+    "decision-tree"
   ]
 }
