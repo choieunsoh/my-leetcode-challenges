@@ -21,7 +21,7 @@ var isPalindrome = function (head) {
   let slow = head;
   let fast = head;
 
-  while (fast && fast.next) {
+  while (slow.next && fast.next && fast.next.next) {
     slow = slow.next;
     fast = fast.next.next;
   }
@@ -43,20 +43,6 @@ var isPalindrome = function (head) {
   reverseList(bHead);
 
   return result;
-};
-var isPalindrome1 = function (head) {
-  let left = head;
-  let right = head;
-  right = reverseList(right);
-
-  while (left && right) {
-    if (left.val !== right.val) return false;
-
-    left = left.next;
-    right = right.next;
-  }
-
-  return true;
 };
 
 var head = createList([1, 2, 2, 1]);
