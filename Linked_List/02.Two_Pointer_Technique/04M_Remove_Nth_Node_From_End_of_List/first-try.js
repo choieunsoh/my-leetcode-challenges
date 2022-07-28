@@ -14,18 +14,36 @@ const { ListNode, createList, toArray } = require('../../../_utils/list');
  * @return {ListNode}
  */
 var removeNthFromEnd = function (head, n) {
-  let temp = new ListNode(0, head);
-  let slow = temp;
-  let fast = temp;
-  for (let i = 0; i <= n; i++) {
-    fast = fast.next;
+  const findIndex = (head) => {
+    let count = 0;
+    while (head) {
+      count++;
+      head = head.next;
+    }
+    return count + 1 - n;
+  };
+
+  const x = findIndex(head);
+  if (x === 1 && head.next === null) {
+    return null;
   }
-  while (fast) {
-    slow = slow.next;
-    fast = fast.next;
+
+  if (x === 1) {
+    head = head.next;
+    return head;
   }
-  slow.next = slow.next.next;
-  return temp.next;
+
+  let current = head;
+  let prev = head;
+  let index = 1;
+  while (current.next && index !== x) {
+    prev = current;
+    current = current.next;
+    index++;
+  }
+  prev.next = current.next;
+
+  return head;
 };
 
 var head = [1, 2, 3, 4, 5],
