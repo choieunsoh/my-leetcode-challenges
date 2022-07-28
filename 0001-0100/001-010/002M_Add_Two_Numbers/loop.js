@@ -12,23 +12,24 @@ const { ListNode, createList, toArray } = require('../../../_utils/list');
  *     }
  * }
  */
-var addTwoNumbers = (l1, l2, carry = 0) => {
-  if (l1 === null && l2 === null) {
-    return carry ? new ListNode(carry) : null;
-  } else {
-    const sum = (l1?.val ?? 0) + (l2?.val ?? 0) + carry;
-    if (sum > 9) {
-      return new ListNode(
-        sum % 10,
-        addTwoNumbers(l1?.next ?? null, l2?.next ?? null, 1)
-      );
-    } else {
-      return new ListNode(
-        sum % 10,
-        addTwoNumbers(l1?.next ?? null, l2?.next ?? null)
-      );
-    }
+var addTwoNumbers = (l1, l2) => {
+  const result = new ListNode();
+  let node = result;
+  let carry = 0;
+  while (l1 || l2) {
+    const a = l1?.val ?? 0;
+    const b = l2?.val ?? 0;
+    const sum = a + b + carry;
+    carry = sum > 9 ? 1 : 0;
+
+    node.next = new ListNode(sum % 10);
+    node = node.next;
+
+    if (l1) l1 = l1.next;
+    if (l2) l2 = l2.next;
   }
+  if (carry) node.next = new ListNode(carry);
+  return result.next;
 };
 
 var l1 = createList([9, 9, 9, 9, 9, 9, 9]);
