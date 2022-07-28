@@ -15,18 +15,19 @@ const { ListNode, createList, toArray } = require('../../../_utils/list');
  */
 var removeElements = function (head, val) {
   if (!head) return null;
-  let temp = new ListNode(0, head);
   let curr = head;
-  let prev = temp;
+  let prev = new ListNode(0, head);
   while (curr) {
     if (curr.val === val) {
       prev.next = curr.next;
+      if (curr === head) head = head.next;
     } else {
+      prev.next = curr;
       prev = curr;
     }
     curr = curr.next;
   }
-  return temp.next;
+  return head;
 };
 
 var head = [1, 2, 6, 3, 4, 5, 6],
