@@ -27,10 +27,22 @@ var printList = function (list) {
   const x = toArray(list);
   console.log(x.join(' '));
 };
+var reverseList = function (head) {
+  let prev = null;
+  let curr = head;
+  while (curr) {
+    let next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+  }
 
+  return prev;
+};
 module.exports = {
   ListNode,
   createList,
   toArray,
   printList,
+  reverseList,
 };

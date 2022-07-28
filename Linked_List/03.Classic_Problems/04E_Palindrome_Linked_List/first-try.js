@@ -18,33 +18,6 @@ const {
  * @return {boolean}
  */
 var isPalindrome = function (head) {
-  let slow = head;
-  let fast = head;
-
-  while (fast && fast.next) {
-    slow = slow.next;
-    fast = fast.next.next;
-  }
-
-  let a = head;
-  let bHead = reverseList(slow.next);
-  let b = bHead;
-
-  let result = true;
-  while (a && b) {
-    if (a.val !== b.val) {
-      result = false;
-      break;
-    }
-    a = a.next;
-    b = b.next;
-  }
-
-  reverseList(bHead);
-
-  return result;
-};
-var isPalindrome1 = function (head) {
   let left = head;
   let right = head;
   right = reverseList(right);
