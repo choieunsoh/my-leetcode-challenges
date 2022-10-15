@@ -5,7 +5,7 @@
  * @param {number} target
  * @return {number[]}
  */
-const twoSum = (nums, target) => {
+var twoSum = (nums, target) => {
   const seen = {};
   for (let i = 0; i < nums.length; i++) {
     const remain = target - nums[i];
