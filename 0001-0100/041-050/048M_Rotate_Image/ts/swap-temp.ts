@@ -1,40 +1,31 @@
 // 48. Rotate Image
 // https://leetcode.com/problems/rotate-image/
 /**
- * @param {number[][]} matrix
- * @return {void} Do not return anything, modify matrix in-place instead.
+ Do not return anything, modify matrix in-place instead.
  */
-var rotate = function (matrix) {
-  let left = 0,
-    right = matrix.length - 1;
-
+var rotate = function (matrix: number[][]): void {
+  let left = 0;
+  let right = matrix.length - 1;
   while (left < right) {
-    let top = left,
-      bottom = right;
-
+    let top = left;
+    let bottom = right;
     for (let i = 0; i < right - left; i++) {
       const topLeft = matrix[top][left + i];
-
-      // move bottom left to top left
       matrix[top][left + i] = matrix[bottom - i][left];
-      //move bottom right to bottom left
       matrix[bottom - i][left] = matrix[bottom][right - i];
-      // move top right to bottom right
       matrix[bottom][right - i] = matrix[top + i][right];
-      // move to top left to top right
       matrix[top + i][right] = topLeft;
     }
-
-    left += 1;
-    right -= 1;
+    left++;
+    right--;
   }
 };
 
-var compare = function (a, b) {
+var compareMatrix = function (a: number[][], b: number[][]) {
   return a.flat().join(' ') === b.flat().join(' ');
 };
 
-var print = function (matrix) {
+var printMatrix = function (matrix: number[][]) {
   matrix.forEach((rows) => console.log(rows.join(' ')));
 };
 
@@ -49,8 +40,8 @@ var expect = [
   [9, 6, 3],
 ];
 rotate(matrix);
-print(matrix);
-console.log(compare(expect, matrix));
+printMatrix(matrix);
+console.log(compareMatrix(expect, matrix));
 
 matrix = [
   [5, 1, 9, 11],
@@ -65,5 +56,5 @@ expect = [
   [16, 7, 10, 11],
 ];
 rotate(matrix);
-print(matrix);
-console.log(compare(expect, matrix));
+printMatrix(matrix);
+console.log(compareMatrix(expect, matrix));

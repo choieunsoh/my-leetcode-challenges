@@ -1,21 +1,19 @@
+// 48. Rotate Image
+// https://leetcode.com/problems/rotate-image/
 /**
  * @param {number[][]} matrix
  * @return {void} Do not return anything, modify matrix in-place instead.
  */
 var rotate = function (matrix) {
-  // reverse
-  matrix.forEach((rows) => rows.reverse());
-
   // transpose
-  const n = matrix.length - 1;
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n - i; j++) {
-      [matrix[i][j], matrix[n - j][n - i]] = [
-        matrix[n - j][n - i],
-        matrix[i][j],
-      ];
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = i; j < matrix[i].length; j++) {
+      [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]];
     }
   }
+
+  // reverse
+  matrix.forEach((row) => row.reverse());
 };
 
 var compare = function (a, b) {

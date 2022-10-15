@@ -1,10 +1,12 @@
+// 48. Rotate Image
+// https://leetcode.com/problems/rotate-image/
 /**
  * @param {number[][]} matrix
  * @return {void} Do not return anything, modify matrix in-place instead.
  */
 var rotate = function (matrix) {
   // reverse
-  matrix.forEach((rows) => rows.reverse());
+  matrix.forEach((row) => row.reverse());
 
   // transpose
   for (let i = 0; i < matrix.length; i++) {
@@ -28,9 +30,9 @@ var matrix = [
   [7, 8, 9],
 ];
 var expect = [
-  [7, 4, 1],
-  [8, 5, 2],
-  [9, 6, 3],
+  [3, 6, 9],
+  [2, 5, 8],
+  [1, 4, 7],
 ];
 rotate(matrix);
 print(matrix);
@@ -43,10 +45,10 @@ matrix = [
   [15, 14, 12, 16],
 ];
 expect = [
-  [15, 13, 2, 5],
-  [14, 3, 4, 1],
-  [12, 6, 8, 9],
-  [16, 7, 10, 11],
+  [11, 10, 7, 16],
+  [9, 8, 6, 12],
+  [1, 4, 3, 14],
+  [5, 2, 13, 15],
 ];
 rotate(matrix);
 print(matrix);
