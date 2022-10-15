@@ -1,17 +1,20 @@
 // 41. First Missing Positive
 // https://leetcode.com/problems/first-missing-positive/
 var firstMissingPositive = function (nums: number[]): number {
-  const seen = new Set<number>();
   const N = nums.length;
   for (let i = 0; i < N; i++) {
     if (nums[i] > 0 && nums[i] <= N) {
-      seen.add(nums[i]);
+      const pos = nums[i] - 1;
+      if (nums[i] !== nums[pos]) {
+        [nums[i], nums[pos]] = [nums[pos], nums[i]];
+        i--;
+      }
     }
   }
-  for (let i = 1; i <= seen.size; i++) {
-    if (!seen.has(i)) return i;
+  for (let i = 0; i < N; i++) {
+    if (nums[i] !== i + 1) return i + 1;
   }
-  return seen.size + 1;
+  return N + 1;
 };
 
 var nums = [2, 1];
