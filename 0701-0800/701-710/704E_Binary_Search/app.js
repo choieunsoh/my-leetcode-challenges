@@ -5,7 +5,7 @@
  * @param {number} target
  * @return {number}
  */
-const search = (nums, target, left = 0, right = nums.length - 1) => {
+var search = (nums, target, left = 0, right = nums.length - 1) => {
   if (nums?.length === 0 || left > right) return -1;
   if (nums.length === 1) return nums[0] === target ? 0 : -1;
 
