@@ -8,9 +8,9 @@ var canFinish = function (
   const courses = new Map<number, number[]>();
   for (let i = 0; i < prerequisites.length; i++) {
     const [courseId, preCourseId] = prerequisites[i];
-    if (!courses.has(courseId)) {
-      courses.set(courseId, [preCourseId]);
-    }
+    const preCourses = courses.get(courseId) ?? [];
+    preCourses.push(preCourseId);
+    courses.set(courseId, preCourses);
   }
 
   function isCycle(courseId: number): boolean {
@@ -61,5 +61,17 @@ var numCourses = 5,
     [3, 2],
   ];
 var expected = true;
+var result = canFinish(numCourses, prerequisites);
+console.log(result, expected, result === expected);
+
+var numCourses = 4,
+  prerequisites = [
+    [2, 0],
+    [1, 0],
+    [3, 1],
+    [3, 2],
+    [1, 3],
+  ];
+var expected = false;
 var result = canFinish(numCourses, prerequisites);
 console.log(result, expected, result === expected);
