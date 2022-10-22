@@ -17,6 +17,7 @@ var canFinish = function (numCourses, prerequisites) {
 
   function isCycling(courseId) {
     if (visited[courseId]) return true;
+    if (visited[courseId] === false) return false;
 
     visited[courseId] = true;
     const preCourses = courses[courseId] ?? [];
@@ -25,7 +26,6 @@ var canFinish = function (numCourses, prerequisites) {
     }
 
     visited[courseId] = false;
-    courses[courseId] = [];
 
     return false;
   }
