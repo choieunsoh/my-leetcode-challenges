@@ -23,6 +23,7 @@
     "system-design",
     "machine-learning",
     "decision-tree",
-    "bfs+dfs"
+    "bfs+dfs",
+    "backtracking"
   ]
 }
