@@ -1,11 +1,6 @@
 // https://leetcode.com/problems/insert-into-a-binary-search-tree/
 // 701. Insert into a Binary Search Tree
-const {
-  TreeNode,
-  createTree,
-  inOrder,
-  levelOrder,
-} = require('../../../_utils/tree');
+const { TreeNode, createTree, inOrder } = require('../../../_utils/tree');
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {

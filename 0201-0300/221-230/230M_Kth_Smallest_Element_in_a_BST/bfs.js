@@ -1,6 +1,6 @@
 // 230. Kth Smallest Element in a BST
 // https://leetcode.com/problems/kth-smallest-element-in-a-bst/
-const { TreeNode, createTree, levelOrder } = require('../../../_utils/tree');
+const { TreeNode, createTree } = require('../../../_utils/tree');
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {

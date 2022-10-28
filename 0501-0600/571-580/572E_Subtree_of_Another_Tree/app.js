@@ -1,6 +1,6 @@
 // 572. Subtree of Another Tree
 // https://leetcode.com/problems/subtree-of-another-tree/
-const { TreeNode, createTree, levelOrder } = require('../../../_utils/tree');
+const { TreeNode, createTree } = require('../../../_utils/tree');
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
