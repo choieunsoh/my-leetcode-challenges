@@ -37,22 +37,34 @@ var lowestCommonAncestor = function (root, p, q) {
 };
 
 var root = [3, 5, 1, 6, 2, 0, 8, null, null, 7, 4],
-  p = 5,
-  q = 1,
+  p = [5, 6, 2, null, null, 6, 4],
+  q = [1, 0, 8],
   expected = 3;
-var result = lowestCommonAncestor(createTree(root), p, q);
-console.log(result.val, expected);
+var result = lowestCommonAncestor(
+  createTree(root),
+  createTree(p),
+  createTree(q)
+);
+console.log(result?.val, expected);
 
 var root = [3, 5, 1, 6, 2, 0, 8, null, null, 7, 4],
-  p = 5,
-  q = 4,
+  p = [5, 6, 2, null, null, 6, 4],
+  q = [4],
   expected = 5;
-var result = lowestCommonAncestor(createTree(root), p, q);
-console.log(result.val, expected);
+var result = lowestCommonAncestor(
+  createTree(root),
+  createTree(p),
+  createTree(q)
+);
+console.log(result?.val, expected);
 
 var root = [1, 2],
-  p = 1,
-  q = 2,
+  p = [1, 2],
+  q = [2],
   expected = 1;
-var result = lowestCommonAncestor(createTree(root), p, q);
-console.log(result.val, expected);
+var result = lowestCommonAncestor(
+  createTree(root),
+  createTree(p),
+  createTree(q)
+);
+console.log(result?.val, expected);
