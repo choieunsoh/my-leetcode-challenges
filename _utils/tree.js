@@ -77,19 +77,21 @@ var postOrder = function (root) {
 
 var levelOrder = function (root) {
   const result = [];
+  if (!root) return result;
 
-  // root > left > right
   const queue = [root];
   while (queue.length) {
     const node = queue.shift();
     if (node) {
       result.push(node.val);
-      !node.next && result.push('#');
-      node.left && queue.push(node.left);
-      node.right && queue.push(node.right);
+      if (node.left || node.right) {
+        queue.push(node.left);
+        queue.push(node.right);
+      }
+    } else {
+      result.push(null);
     }
   }
-
   return result;
 };
 
