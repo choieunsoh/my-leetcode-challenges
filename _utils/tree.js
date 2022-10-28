@@ -88,7 +88,7 @@ var levelOrder = function (root) {
         queue.push(node.left);
         queue.push(node.right);
       }
-    } else {
+    } else if (queue.length) {
       result.push(null);
     }
   }
