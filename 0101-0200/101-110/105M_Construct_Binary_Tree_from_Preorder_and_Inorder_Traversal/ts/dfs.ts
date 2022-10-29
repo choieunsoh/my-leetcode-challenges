@@ -1,41 +1,40 @@
 // https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
 // 105. Construct Binary Tree from Preorder and Inorder Traversal
-const {
-  TreeNode,
-  createTree,
-  printTree,
-  levelOrder,
-} = require('../../../_utils/tree');
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { TreeNode, createTree, levelOrder } from '../../../../_utils/tree';
 /**
  * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
+ * class TreeNode {
+ *     val: number
+ *     left: TreeNode | null
+ *     right: TreeNode | null
+ *     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.left = (left===undefined ? null : left)
+ *         this.right = (right===undefined ? null : right)
+ *     }
  * }
  */
-/**
- * @param {number[]} preorder
- * @param {number[]} inorder
- * @return {TreeNode}
- */
-var buildTree = function (preorder, inorder) {
-  const map = new Map();
+
+var buildTree = function (
+  preorder: number[],
+  inorder: number[]
+): TreeNode | null {
+  const map = new Map<number, number>();
   for (let i = 0; i < inorder.length; i++) {
     map.set(inorder[i], i);
   }
 
-  function createTree(left = 0, right = inorder.length - 1) {
+  function createTree(left = 0, right = preorder.length - 1): TreeNode | null {
     if (left > right) return null;
 
-    const val = preorder.shift();
-    const root = new TreeNode(val);
-    const mid = map.get(val);
-
-    root.left = createTree(left, mid - 1);
-    root.right = createTree(mid + 1, right);
-
-    return root;
+    const value = preorder.shift();
+    const tree = new TreeNode(value);
+    const mid = map.get(value ?? 0) ?? 0;
+    tree.left = createTree(left, mid - 1);
+    tree.right = createTree(mid + 1, right);
+    return tree;
   }
 
   return createTree();
@@ -45,15 +44,19 @@ var preorder = [3, 9, 20, 15, 7],
   inorder = [9, 3, 15, 20, 7];
 var expected = createTree([3, 9, 20, null, null, 15, 7]);
 var result = buildTree(preorder, inorder);
-printTree(result);
-printTree(expected);
+console.log(
+  levelOrder(result),
+  levelOrder(result).join() === levelOrder(expected).join()
+);
 
 var preorder = [-1],
   inorder = [-1];
 var expected = createTree([-1]);
 var result = buildTree(preorder, inorder);
-printTree(result);
-printTree(expected);
+console.log(
+  levelOrder(result),
+  levelOrder(result).join() === levelOrder(expected).join()
+);
 
 var preorder = [
     -77, 24, -74, 84, 93, 28, 83, 6, 95, 58, 59, 66, 22, -3, -66, -68, -22, 3,
