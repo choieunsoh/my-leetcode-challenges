@@ -24,6 +24,7 @@
     "machine-learning",
     "decision-tree",
     "bfs+dfs",
-    "backtracking"
+    "backtracking",
+    "greedy"
   ]
 }
