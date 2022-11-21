@@ -26,5 +26,21 @@
     "bfs+dfs",
     "backtracking",
     "greedy"
-  ]
+  ],
+  "search.exclude": {
+    "package-lock.json": true,
+    "yarn.lock": true
+  },
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.trimTrailingWhitespace": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.format": true,
+    "source.organizeImports": true,
+    "source.sortMembers": true,
+    "source.formatDocument": true,
+    "source.addMissingImports": true
+  }
 }
