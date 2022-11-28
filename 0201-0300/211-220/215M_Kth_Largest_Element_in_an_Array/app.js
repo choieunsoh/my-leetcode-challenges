@@ -1,14 +1,13 @@
 // 215. Kth Largest Element in an Array
 // https://leetcode.com/problems/kth-largest-element-in-an-array/
-const { MinHeap, TinyQueue } = require('../../../_utils/heap');
+const { MaxHeap } = require('../../../_utils/heap');
 /**
  * @param {number[]} nums
  * @param {number} k
  * @return {number}
  */
 var findKthLargest = function (nums, k) {
-  const heap = new TinyQueue(nums, (a, b) => b - a);
-  console.log(heap);
+  const heap = new MaxHeap(nums);
   let index = 0;
   while (index++ < k - 1) {
     heap.pop();

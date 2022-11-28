@@ -1,77 +1,6 @@
-class HeapItem {
-  constructor(item, priority = item) {
-    this.item = item;
-    this.priority = priority;
-  }
-}
-
-class MinHeap {
-  constructor() {
-    this.heap = [];
-  }
-
-  push(item, priority = item) {
-    this.heap.push(new HeapItem(item, priority));
-    this.bubble_up();
-  }
-
-  pop() {
-    const element = this.heap[0];
-    this.heap[0] = this.heap[this.size() - 1];
-    this.heap.pop();
-    this.bubble_down();
-    return element;
-  }
-
-  peek() {
-    return this.heap[0];
-  }
-
-  size() {
-    return this.heap.length;
-  }
-
-  bubble_up() {
-    let index = this.heap.length - 1;
-    while (index > 0) {
-      const element = this.heap[index];
-      const parentIndex = Math.floor((index - 1) / 2);
-      const parent = this.heap[parentIndex];
-
-      if (parent.priority <= element.priority) break;
-
-      this.heap[index] = parent;
-      this.heap[parentIndex] = element;
-      index = parentIndex;
-    }
-  }
-
-  bubble_down() {
-    let index = 0;
-    let min = index;
-    const n = this.heap.length;
-
-    while (index < n) {
-      const left = 2 * index + 1;
-      const right = left + 1;
-
-      if (left < n && this.heap[left].priority < this.heap[min].priority) {
-        min = left;
-      }
-      if (right < n && this.heap[right].priority < this.heap[min].priority) {
-        min = right;
-      }
-
-      if (min === index) break;
-      [this.heap[min], this.heap[index]] = [this.heap[index], this.heap[min]];
-      index = min;
-    }
-  }
-}
-
 // https://github.com/mourner/tinyqueue/blob/master/index.js
 class TinyQueue {
-  constructor(data = [], compare = defaultCompare) {
+  constructor(data = [], compare = (a, b) => a - b) {
     this.data = data;
     this.length = this.data.length;
     this.compare = compare;
@@ -145,12 +74,15 @@ class TinyQueue {
   }
 }
 
-function defaultCompare(a, b) {
-  return a < b ? -1 : a > b ? 1 : 0;
+class MinHeap extends TinyQueue {}
+class MaxHeap extends TinyQueue {
+  constructor(data = [], compare = (a, b) => b - a) {
+    super(data, compare);
+  }
 }
 
 module.exports = {
-  HeapItem,
-  MinHeap,
   TinyQueue,
+  MinHeap,
+  MaxHeap,
 };
