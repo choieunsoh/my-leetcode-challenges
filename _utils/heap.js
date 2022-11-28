@@ -74,7 +74,11 @@ class TinyQueue {
   }
 }
 
-class MinHeap extends TinyQueue {}
+class MinHeap extends TinyQueue {
+  constructor(data = [], compare = (a, b) => a - b) {
+    super(data, compare);
+  }
+}
 class MaxHeap extends TinyQueue {
   constructor(data = [], compare = (a, b) => b - a) {
     super(data, compare);
