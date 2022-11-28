@@ -15,13 +15,17 @@ var createList = function (list) {
   }
   return head;
 };
-var printList = function (list) {
-  const x = [];
+var toArray = function (list) {
+  const array = [];
   while (list) {
-    x.push(list.val);
+    array.push(list.val);
     list = list.next;
   }
-  console.log(x.join(' '));
+  return array;
+};
+var printList = function (list) {
+  const array = toArray(list);
+  console.log(array.join(' '));
 };
 var reverseList = function (head) {
   let prev = null;
@@ -63,6 +67,7 @@ module.exports = {
   countList,
   createList,
   mergeTwoLists,
+  toArray,
   printList,
   reverseList,
 };
