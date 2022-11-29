@@ -11,7 +11,7 @@ class Heap {
       this._up(i);
     }
   }
-  peak() {
+  peek() {
     return this.data[0];
   }
   push(item) {

@@ -10,7 +10,7 @@ class MaxHeap {
       this._down(i);
     }
   }
-  peak() {
+  peek() {
     return this.data[0];
   }
   push(item) {
