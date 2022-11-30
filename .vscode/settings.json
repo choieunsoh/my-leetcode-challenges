@@ -25,7 +25,8 @@
     "decision-tree",
     "bfs+dfs",
     "backtracking",
-    "greedy"
+    "greedy",
+    "sliding window"
   ],
   "search.exclude": {
     "package-lock.json": true,
