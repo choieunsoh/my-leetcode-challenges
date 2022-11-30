@@ -62,7 +62,7 @@ var lengthOfLongestSubstring2 = function (s) {
   return maxStr;
 };
 
-let s = 'bbtablud';
+var s = 'bbtablud';
 s = 'abcabcbb';
 console.log(s);
 console.log(lengthOfLongestSubstring2(s));
