@@ -1,6 +1,6 @@
 // 5. Longest Palindromic Substring
 // https://leetcode.com/problems/longest-palindromic-substring/
-var longestPalindrome = function (s) {
+var longestPalindrome = function (s: string): string {
   if (!s) return '';
   if (s.length === 1) return s;
 
@@ -8,17 +8,17 @@ var longestPalindrome = function (s) {
   let start = 0;
   for (let i = 0; i < s.length; i++) {
     let left = i - 1;
-    while (left >= 0 && s[left] === s[i]) left--;
+    while (left >= 0 && s[i] === s[left]) left--;
 
     let right = i + 1;
-    while (right < s.length && s[right] === s[i]) right++;
+    while (right < s.length && s[i] === s[right]) right++;
 
     while (left >= 0 && right < s.length && s[left] === s[right]) {
       left--;
       right++;
     }
 
-    let length = right - left - 1;
+    const length = right - (left + 1);
     if (length > maxLength) {
       maxLength = length;
       start = left + 1;
