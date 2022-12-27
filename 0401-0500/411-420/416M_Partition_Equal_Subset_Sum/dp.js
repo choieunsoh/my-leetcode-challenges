@@ -12,9 +12,9 @@ var canPartition = function (nums) {
   const dp = Array(total + 1).fill(false);
   dp[0] = true;
 
-  for (let i = 1; i <= nums.length; i++) {
-    const num = nums[i - 1];
-    for (let sum = 1; sum <= total; sum++) {
+  for (let i = 0; i < nums.length; i++) {
+    const num = nums[i];
+    for (let sum = total; sum >= 1; sum--) {
       if (sum >= num) {
         dp[sum] ||= dp[sum - num];
       }
@@ -30,6 +30,11 @@ var result = canPartition(nums);
 console.log(result, result === expected);
 
 var nums = [1, 2, 3, 5];
+var expected = false;
+var result = canPartition(nums);
+console.log(result, result === expected);
+
+var nums = [1, 2, 5];
 var expected = false;
 var result = canPartition(nums);
 console.log(result, result === expected);
