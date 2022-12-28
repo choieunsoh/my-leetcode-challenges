@@ -11,12 +11,11 @@ class Trie {
     this.root = new TrieNode();
   }
   insert(word, index = 0) {
-    word += '#';
     for (let i = 0; i < word.length; i++) {
       let node = this.root;
       node.index = index;
-      for (let j = i; j < 2 * word.length - 1; j++) {
-        const char = word.charAt(j % word.length);
+      const modifiedWord = `${word.substring(i)}#${word}`;
+      for (const char of modifiedWord) {
         if (!node.children.has(char)) {
           node.children.set(char, new TrieNode());
         }
