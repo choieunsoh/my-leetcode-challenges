@@ -63,8 +63,8 @@ var palindromePairs = function (words) {
       if (!node) return null;
 
       if (node.isEnd && node.index !== index && i < word.length - 1) {
-        const validSuffix = isPalindrome(word, i + 1);
-        if (validSuffix) {
+        const validPalindrome = isPalindrome(word, i + 1);
+        if (validPalindrome) {
           result.push([index, node.index]);
         }
       }
@@ -74,8 +74,8 @@ var palindromePairs = function (words) {
   function findPalindromes(node, suffix, index) {
     // same word length
     if (node.isEnd && node.index !== index) {
-      const validSuffix = isPalindrome(suffix);
-      if (validSuffix) {
+      const validPalindrome = isPalindrome(suffix);
+      if (validPalindrome) {
         result.push([index, node.index]);
       }
     }
@@ -103,6 +103,18 @@ function compare(result, expected) {
     expected.sort((a, b) => (a > b ? 1 : -1)).join()
   );
 }
+
+var words = ['a', 'b', 'c', 'ab', 'ac', 'aa'];
+var expected = [
+  [3, 0],
+  [1, 3],
+  [4, 0],
+  [2, 4],
+  [5, 0],
+  [0, 5],
+];
+var result = palindromePairs(words);
+console.log(result, compare(result, expected));
 
 var words = ['a', 'abc', 'aba', ''];
 var expected = [
