@@ -26,7 +26,8 @@
     "bfs+dfs",
     "backtracking",
     "greedy",
-    "sliding window"
+    "sliding window",
+    "two-pointers"
   ],
   "search.exclude": {
     "package-lock.json": true,
