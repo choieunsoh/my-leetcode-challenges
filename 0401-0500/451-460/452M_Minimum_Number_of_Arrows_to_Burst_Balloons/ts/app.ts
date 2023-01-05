@@ -1,19 +1,17 @@
 // 452. Minimum Number of Arrows to Burst Balloons
 // https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/
-/**
- * @param {number[][]} points
- * @return {number}
- */
-var findMinArrowShots = function (points) {
-  let arrows = 1;
+var findMinArrowShots = function (points: number[][]): number {
   points.sort((a, b) => (a[1] === b[1] ? a[0] - b[0] : a[1] - b[1]));
-  let end = points[0][1];
+  let arrows = 1;
+  let [, end] = points[0];
   for (let i = 1; i < points.length; i++) {
-    if (points[i][0] > end) {
+    const [s, e] = points[i];
+    if (s > end) {
+      end = e;
       arrows++;
-      end = points[i][1];
     }
   }
+
   return arrows;
 };
 

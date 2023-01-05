@@ -27,7 +27,8 @@
     "backtracking",
     "greedy",
     "sliding window",
-    "two-pointers"
+    "two-pointers",
+    "intervals"
   ],
   "search.exclude": {
     "package-lock.json": true,
