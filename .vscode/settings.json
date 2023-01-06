@@ -28,7 +28,8 @@
     "greedy",
     "sliding window",
     "two-pointers",
-    "intervals"
+    "intervals",
+    "counting"
   ],
   "search.exclude": {
     "package-lock.json": true,
