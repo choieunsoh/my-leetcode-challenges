@@ -1,13 +1,11 @@
-// https://leetcode.com/problems/letter-combinations-of-a-phone-number/
 // 17. Letter Combinations of a Phone Number
+// https://leetcode.com/problems/letter-combinations-of-a-phone-number/
 /**
  * @param {string} digits
  * @return {string[]}
  */
 var letterCombinations = function (digits) {
   if (digits.length === 0) return [];
-  const result = [];
-
   const map = {
     2: 'abc',
     3: 'def',
@@ -19,19 +17,20 @@ var letterCombinations = function (digits) {
     9: 'wxyz',
   };
 
-  function backTracking(index = 0, input = '') {
-    if (index >= digits.length) {
-      result.push(input);
+  const result = [];
+  function dfs(index, word) {
+    if (index === digits.length) {
+      result.push(word.join(''));
       return;
     }
-
     const letters = map[digits[index]];
-    for (let i = 0; i < letters.length; i++) {
-      backTracking(index + 1, input + letters[i]);
+    for (const letter of letters) {
+      word.push(letter);
+      dfs(index + 1, word);
+      word.pop();
     }
   }
-
-  backTracking();
+  dfs(0, []);
   return result;
 };
 
