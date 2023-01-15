@@ -29,7 +29,8 @@
     "sliding window",
     "two-pointers",
     "intervals",
-    "counting"
+    "counting",
+    "union-find"
   ],
   "search.exclude": {
     "package-lock.json": true,
