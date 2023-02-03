@@ -1,75 +1,48 @@
-const convert = (s, numRows) => {
-  return convert2(s, numRows);
-};
+// 6. Zigzag Conversion
+// https://leetcode.com/problems/zigzag-conversion/
+/**
+ * @param {string} s
+ * @param {number} numRows
+ * @return {string}
+ */
+var convert = function (s, numRows) {
+  const n = s.length;
+  if (numRows === 1 || n <= numRows) return s;
 
-const convert1 = (s, numRows) => {
-  const len = s.length;
-  if (len <= numRows || numRows === 1) return s;
-
-  const n = numRows;
-  const m = 2 * n - 2;
-  const group = Math.ceil(len / m);
-  let result = [];
-  let k = 0;
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < group; j++) {
-      let x = i + m * j;
-      if (x < len) {
-        console.log(i, j, k, x, s[x]);
-        result[k] = s[x];
-      }
-
-      if (i > 0 && i < n - 1) {
-        let h = (j + 1) * m - i;
-        if (h < len) {
-          k++;
-          console.log(i, j, k, h, s[h]);
-          result[k] = s[h];
+  const charsInSection = 2 * (numRows - 1);
+  let result = '';
+  for (let row = 0; row < numRows; row++) {
+    let index = row;
+    while (index < n) {
+      result += s[index];
+      if (row !== 0 && row !== numRows - 1) {
+        const charsInBetween = charsInSection - 2 * row;
+        const betweenIndex = index + charsInBetween;
+        if (betweenIndex < n) {
+          result += s[betweenIndex];
         }
       }
-      k++;
-    }
-  }
-  return result.join("");
-};
-
-const convert2 = (s, numRows) => {
-  const len = s.length;
-  if (len <= numRows || numRows === 1) return s;
-
-  let result = [];
-  let line = 2 * numRows - 2;
-  let row = 0;
-  for (let i = 0; i < len; i++) {
-    result[row] = (result[row] || "") + s[i];
-    let x = i % line;
-    if (x < numRows - 1) {
-      row++;
-    } else {
-      row--;
+      index += charsInSection;
     }
   }
 
-  return result.join("");
+  return result;
 };
 
-let s = "PAYPALISHIRING";
-let numRows = 3;
-let expected = "PAHNAPLSIIGYIR";
-let result = convert(s, numRows);
-console.log(expected);
-console.log(result, expected === result, numRows);
+var s = 'PAYPALISHIRING',
+  numRows = 3;
+var expected = 'PAHNAPLSIIGYIR';
+var result = convert(s, numRows);
+console.log(result, expected === result);
 
-s = "PAYPALISHIRING";
-numRows = 4;
-expected = "PINALSIGYAHRPI";
-result = convert(s, numRows);
-console.log(expected);
-console.log(result, expected === result, numRows);
+var s = 'PAYPALISHIRING',
+  numRows = 4;
+var expected = 'PINALSIGYAHRPI';
+var result = convert(s, numRows);
+console.log(result, expected === result);
 
-s = "ABCDEF";
-numRows = 6;
-expected = "ABCDEF";
-result = convert(s, numRows);
-console.log(expected);
-console.log(result, expected === result, numRows);
+var s = 'ABCDEF',
+  numRows = 6;
+var expected = 'ABCDEF';
+var result = convert(s, numRows);
+console.log(result, expected === result);
