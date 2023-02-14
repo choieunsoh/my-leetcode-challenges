@@ -1,3 +1,4 @@
+// 41. First Missing Positive
 // https://leetcode.com/problems/first-missing-positive/
 /**
  * @param {number[]} nums
@@ -14,10 +15,11 @@ var firstMissingPositive = function (nums) {
   for (let i = 0; i < N; i++) {
     if (nums[i] <= 0 || nums[i] > N) nums[i] = 1;
   }
+
   for (let i = 0; i < N; i++) {
     nums[(nums[i] - 1) % N] += N;
   }
-  console.log(nums.join());
+
   for (let i = 0; i < N; i++) {
     if (nums[i] <= N) return i + 1;
   }
@@ -26,34 +28,56 @@ var firstMissingPositive = function (nums) {
 };
 
 var nums = [2, 1];
-console.log(firstMissingPositive(nums));
+var expected = 3;
+var result = firstMissingPositive(nums);
+console.log(result, result === expected);
 
 var nums = [1, 1];
-console.log(firstMissingPositive(nums));
+var expected = 2;
+var result = firstMissingPositive(nums);
+console.log(result, result === expected);
 
 var nums = [-2];
-console.log(firstMissingPositive(nums));
+var expected = 1;
+var result = firstMissingPositive(nums);
+console.log(result, result === expected);
 
 var nums = [0];
-console.log(firstMissingPositive(nums));
+var expected = 1;
+var result = firstMissingPositive(nums);
+console.log(result, result === expected);
 
 var nums = [2];
-console.log(firstMissingPositive(nums));
+var expected = 1;
+var result = firstMissingPositive(nums);
+console.log(result, result === expected);
 
 var nums = [1];
-console.log(firstMissingPositive(nums));
+var expected = 2;
+var result = firstMissingPositive(nums);
+console.log(result, result === expected);
 
 var nums = [7, 8, 9, 11, 12];
-console.log(firstMissingPositive(nums));
+var expected = 1;
+var result = firstMissingPositive(nums);
+console.log(result, result === expected);
 
 var nums = [1, 2, 0];
-console.log(firstMissingPositive(nums));
+var expected = 3;
+var result = firstMissingPositive(nums);
+console.log(result, result === expected);
 
 var nums = [3, 4, -1, 1];
-console.log(firstMissingPositive(nums));
+var expected = 2;
+var result = firstMissingPositive(nums);
+console.log(result, result === expected);
 
 var nums = [3, 2];
-console.log(firstMissingPositive(nums));
+var expected = 1;
+var result = firstMissingPositive(nums);
+console.log(result, result === expected);
 
 var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 20];
-console.log(firstMissingPositive(nums));
+var expected = 10;
+var result = firstMissingPositive(nums);
+console.log(result, result === expected);
