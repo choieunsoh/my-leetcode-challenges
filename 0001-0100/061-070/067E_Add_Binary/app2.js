@@ -6,16 +6,16 @@
  * @return {string}
  */
 var addBinary = function (a, b) {
-  let i = 1;
+  let i = a.length - 1;
+  let j = b.length - 1;
   let carry = 0;
   let result = '';
-  while (carry > 0 || a.length - i >= 0 || b.length - i >= 0) {
-    const A = +a.charAt(a.length - i) ?? 0;
-    const B = +b.charAt(b.length - i) ?? 0;
+  while (carry || i >= 0 || j >= 0) {
+    const A = +a.charAt(i--) ?? 0;
+    const B = +b.charAt(j--) ?? 0;
     const sum = carry + A + B;
-    carry = sum > 1 ? 1 : 0;
+    carry = sum >> 1;
     result = (sum & 1) + result;
-    i++;
   }
 
   return result;
