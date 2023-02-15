@@ -30,7 +30,8 @@
     "two-pointers",
     "intervals",
     "counting",
-    "union-find"
+    "union-find",
+    "prefix-sum"
   ],
   "search.exclude": {
     "package-lock.json": true,
