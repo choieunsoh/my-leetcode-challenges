@@ -1,19 +1,13 @@
 // 724. Find Pivot Index
 // https://leetcode.com/problems/find-pivot-index/
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var pivotIndex = function (nums) {
-  let sumLeft = 0;
-  let sumRight = nums.reduce((a, b) => a + b, 0);
-
+var pivotIndex = function (nums: number[]): number {
+  let leftSum = 0;
+  let rightSum = nums.reduce((sum, num) => sum + num, 0);
   for (let i = 0; i < nums.length; i++) {
-    sumRight -= nums[i];
-    if (sumLeft === sumRight) return i;
-    sumLeft += nums[i];
+    rightSum -= nums[i];
+    if (leftSum === rightSum) return i;
+    leftSum += nums[i];
   }
-
   return -1;
 };
 
