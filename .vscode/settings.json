@@ -31,7 +31,8 @@
     "intervals",
     "counting",
     "union-find",
-    "prefix-sum"
+    "prefix-sum",
+    "bit-manipulation"
   ],
   "search.exclude": {
     "package-lock.json": true,
