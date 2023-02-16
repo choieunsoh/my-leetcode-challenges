@@ -48,5 +48,6 @@
     "source.sortMembers": true,
     "source.formatDocument": true,
     "source.addMissingImports": true
-  }
+  },
+  "java.classPath": ["${workspaceFolder}/_utils/java"]
 }
