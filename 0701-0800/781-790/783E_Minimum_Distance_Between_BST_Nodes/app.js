@@ -19,19 +19,19 @@ var minDiffInBST = function (root) {
     if (!root) return;
 
     dfs(root.left);
-    if (root.val !== undefined) nodes.push(root.val);
+    nodes.push(root.val);
     dfs(root.right);
   }
 
   dfs(root);
 
-  let result = Number.MAX_VALUE;
+  let result = [];
   for (let i = 1; i < nodes.length; i++) {
     const diff = Math.abs(nodes[i - 1] - nodes[i]);
-    result = Math.min(result, diff);
+    result.push(diff);
   }
 
-  return result;
+  return Math.min(...result);
 };
 
 var root = buildTree([4, 2, 6, 1, 3]);
