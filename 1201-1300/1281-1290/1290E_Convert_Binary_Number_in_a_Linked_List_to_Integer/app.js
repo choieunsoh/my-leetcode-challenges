@@ -13,9 +13,9 @@ const { ListNode, createList, toArray } = require('../../../_utils/list');
  * @return {number}
  */
 var getDecimalValue = function (head) {
-  let value = head.val;
-  while (head.next) {
-    value = (value << 1) | head.next.val;
+  let value = 0;
+  while (head) {
+    value = (value << 1) | head.val;
     head = head.next;
   }
   return value;
@@ -28,5 +28,10 @@ console.log(result, result === expected);
 
 var head = createList([0]);
 var expected = 0;
+var result = getDecimalValue(head);
+console.log(result, result === expected);
+
+var head = createList([1, 0, 0, 0]);
+var expected = 8;
 var result = getDecimalValue(head);
 console.log(result, result === expected);
