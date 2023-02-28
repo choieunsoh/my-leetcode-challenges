@@ -1,35 +1,39 @@
 // 394. Decode String
 // https://leetcode.com/problems/decode-string/
-/**
- * @param {string} s
- * @return {string}
- */
-var decodeString = function (s) {
-  const stack = [];
+var decodeString = function (s: string): string {
+  const stack: string[] = [];
   for (let i = 0; i < s.length; i++) {
-    if (s[i] !== ']') {
-      stack.push(s[i]);
+    const ch = s.charAt(i);
+    if (ch !== ']') {
+      stack.push(ch);
       continue;
     }
 
     let str = '';
-    while (stack[stack.length - 1] !== '[') {
+    while (last() !== '[') {
       str = stack.pop() + str;
     }
     stack.pop();
 
-    let times = '';
-    while (stack.length && isNumber(stack[stack.length - 1])) {
-      times = stack.pop() + times;
+    let times = 0;
+    let base = 1;
+    while (stack.length && isNumber(last())) {
+      const num = Number(stack.pop());
+      times += base * num;
+      base *= 10;
     }
 
-    stack.push(str.repeat(+times));
+    stack.push(str.repeat(times));
   }
 
   if (stack.some(isNumber)) return '';
   return stack.join('');
 
-  function isNumber(ch) {
+  function last(): string {
+    if (stack.length) return stack[stack.length - 1];
+    return '';
+  }
+  function isNumber(ch: string): boolean {
     return ch.charCodeAt(0) >= 48 && ch.charCodeAt(0) <= 57;
   }
 };
