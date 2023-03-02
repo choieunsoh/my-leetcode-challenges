@@ -1,16 +1,16 @@
 // 119. Pascal's Triangle II
 // https://leetcode.com/problems/pascals-triangle-ii/
-/**
- * @param {number} rowIndex
- * @return {number[]}
- */
-var getRow = function (rowIndex) {
-  const row = new Array(rowIndex + 1);
-  row[0] = row[rowIndex] = 1;
-  for (let left = 1, right = rowIndex; left < rowIndex; left++, right--) {
-    row[left] = (row[left - 1] * right) / left;
+var getRow = function (rowIndex: number): number[] {
+  if (rowIndex === 0) return [1];
+  let result = [1];
+  for (let i = 1; i <= rowIndex; i++) {
+    const row = Array(i + 1).fill(1);
+    for (let j = 1; j < i; j++) {
+      row[j] = result[j - 1] + result[j];
+    }
+    result = row;
   }
-  return row;
+  return result;
 };
 
 var rowIndex = 3;
