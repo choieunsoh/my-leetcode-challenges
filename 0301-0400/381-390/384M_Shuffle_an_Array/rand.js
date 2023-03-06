@@ -19,7 +19,8 @@ Solution.prototype.reset = function () {
  * @return {number[]}
  */
 Solution.prototype.shuffle = function () {
-  this.nums.sort(() => Math.random() - 0.5);
+  const randomIndex = (Math.random() * this.nums.length) | 0;
+  [this.nums[0], this.nums[randomIndex]] = [this.nums[randomIndex], this.nums[0]];
   return this.nums;
 };
 
