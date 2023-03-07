@@ -1,5 +1,5 @@
-// https://leetcode.com/problems/guess-number-higher-or-lower/
 // 374. Guess Number Higher or Lower
+// https://leetcode.com/problems/guess-number-higher-or-lower/
 /**
  * Forward declaration of guess API.
  * @param {number} num   your guess
@@ -22,22 +22,26 @@ var guessNumber = function (n) {
   let left = 1;
   let right = n;
   while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
+    const mid = left + Math.floor((right - left) / 2);
     const result = guess(mid);
     if (result === 0) return mid;
-    result === 1 ? (right = mid - 1) : (left = mid + 1);
+    if (result === 1) left = mid + 1;
+    else right = mid - 1;
   }
   return -1;
 };
 
 var n = 10,
   pick = 6;
-console.log(n, guessNumber(n), pick);
+var result = guessNumber(n);
+console.log(result, result === pick);
 
 var n = 1,
   pick = 1;
-console.log(n, guessNumber(n), pick);
+var result = guessNumber(n);
+console.log(result, result === pick);
 
 var n = 2,
   pick = 1;
-console.log(n, guessNumber(n), pick);
+var result = guessNumber(n);
+console.log(result, result === pick);
