@@ -20,7 +20,7 @@ var reorderList = function (head) {
     fast = fast.next.next;
   }
 
-  let tail = reverseList(slow.next);
+  const tail = reverseList(slow.next);
   slow.next = null;
 
   mergeList(head, tail);
@@ -38,12 +38,10 @@ var reorderList = function (head) {
   }
 
   function mergeList(l1, l2) {
-    let l1Next = null;
-    let l2Next = null;
     while (l2) {
       // Store
-      l1Next = l1.next;
-      l2Next = l2.next;
+      const l1Next = l1.next;
+      const l2Next = l2.next;
       // Connect
       l1.next = l2;
       l2.next = l1Next;
