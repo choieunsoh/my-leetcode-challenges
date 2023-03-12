@@ -16,7 +16,7 @@ var MyLinkedList = function () {
  * @return {LinkedList}
  */
 MyLinkedList.prototype.getNode = function (index) {
-  if (this.size === 0 || index > this.size - 1 || index < 0) return null;
+  if (this.size === 0 || index >= this.size || index < 0) return null;
   let cur = this.head;
 
   for (let i = 0; i < index; i++) {
@@ -59,7 +59,7 @@ MyLinkedList.prototype.addAtHead = function (val) {
 MyLinkedList.prototype.addAtTail = function (val) {
   const newNode = new LinkedList(val);
 
-  if (!this.head) {
+  if (!this.tail) {
     this.head = newNode;
     this.tail = newNode;
   } else {
