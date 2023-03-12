@@ -13,23 +13,23 @@
  *     }
  * }
  */
-class Node {
+class Node138 {
   val: number;
-  next: Node | null;
-  random: Node | null;
-  constructor(val?: number, next?: Node, random?: Node) {
+  next: Node138 | null;
+  random: Node138 | null;
+  constructor(val?: number, next?: Node138, random?: Node138) {
     this.val = val === undefined ? 0 : val;
     this.next = next === undefined ? null : next;
     this.random = random === undefined ? null : random;
   }
 }
-var copyRandomList = function (head: Node | null): Node | null {
+var copyRandomList = function (head: Node138 | null): Node138 | null {
   if (!head) return null;
 
-  const map = new Map<Node | null, Node | null>();
-  let curr: Node | null = head;
+  const map = new Map<Node138 | null, Node138 | null>();
+  let curr: Node138 | null = head;
   while (curr) {
-    const copy = new Node(curr.val);
+    const copy = new Node138(curr.val);
     map.set(curr, copy);
     curr = curr.next;
   }
@@ -46,7 +46,7 @@ var copyRandomList = function (head: Node | null): Node | null {
   return map.get(head)!;
 };
 
-function toArray(head: Node | null) {
+function toArray(head: Node138 | null) {
   const result: (number | null)[][] = [];
   let curr = head;
   while (curr) {
@@ -70,11 +70,11 @@ var expected = [
   [10, 2],
   [1, 0],
 ];
-var n7 = new Node(7);
-var n13 = new Node(13);
-var n11 = new Node(11);
-var n10 = new Node(10);
-var n1 = new Node(1);
+var n7 = new Node138(7);
+var n13 = new Node138(13);
+var n11 = new Node138(11);
+var n10 = new Node138(10);
+var n1 = new Node138(1);
 n7.next = n13;
 n13.next = n11;
 n11.next = n10;
