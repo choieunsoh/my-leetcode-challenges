@@ -14,5 +14,13 @@ var evenOddBit = function (n) {
   }
   return result;
 };
-console.log(evenOddBit(17));
-console.log(evenOddBit(2));
+
+var n = 17;
+var expected = [2, 0];
+var result = evenOddBit(n);
+console.log(result, result.join() === expected.join());
+
+var n = 2;
+var expected = [0, 1];
+var result = evenOddBit(n);
+console.log(result, result.join() === expected.join());

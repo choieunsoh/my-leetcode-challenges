@@ -32,7 +32,8 @@
     "counting",
     "union-find",
     "prefix-sum",
-    "bit-manipulation"
+    "bit-manipulation",
+    "weekly-contest"
   ],
   "search.exclude": {
     "package-lock.json": true,
