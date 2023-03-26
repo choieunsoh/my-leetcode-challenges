@@ -1,7 +1,7 @@
 // sudoku2
 // LC-36: https://leetcode.com/problems/valid-sudoku/
 /**
- * @param {grid[][]} grid
+ * @param {string[][]} grid
  * @return {boolean}
  */
 function sudoku2(grid) {
