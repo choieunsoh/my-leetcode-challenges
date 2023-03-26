@@ -6,6 +6,11 @@
 //   this.next = null;
 // }
 //
+/**
+ * @param {ListNode} l
+ * @param {number} k
+ * @return {boolean}
+ */
 function removeKFromList(l, k) {
   if (!l) return null;
   let temp = new ListNode(0);
