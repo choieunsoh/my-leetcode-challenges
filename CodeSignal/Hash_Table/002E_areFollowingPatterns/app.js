@@ -1,4 +1,5 @@
 // areFollowingPatterns
+// LC-290: https://leetcode.com/problems/word-pattern/
 /**
  * @param {string[][]} strings
  * @param {string[][]} patterns
@@ -6,22 +7,18 @@
  */
 function areFollowingPatterns(strings, patterns) {
   const n = strings.length;
-  const words = new Map();
-  const seen = new Map();
+  const wordSet = new Set();
+  const patternMap = new Map();
   for (let i = 0; i < n; i++) {
     const word = strings[i];
     const pattern = patterns[i];
-    if (words.has(word)) {
-      const expectedPattern = words.get(word);
-      if (expectedPattern !== pattern) return false;
-    } else {
-      words.set(word, pattern);
-    }
-    if (seen.has(pattern)) {
-      const expectedWord = seen.get(pattern);
+    if (patternMap.has(pattern)) {
+      const expectedWord = patternMap.get(pattern);
       if (expectedWord !== word) return false;
     } else {
-      seen.set(pattern, word);
+      patternMap.set(pattern, word);
+      if (wordSet.has(word)) return false;
+      wordSet.add(word);
     }
   }
   return true;
