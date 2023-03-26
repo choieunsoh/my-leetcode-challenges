@@ -27,6 +27,10 @@ function isListPalindrome(l) {
   }
   return true;
 
+  /**
+   * @param {ListNode} head
+   * @return {ListNode}
+   */
   function reverse(head) {
     let prev = null;
     let curr = head;
