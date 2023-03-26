@@ -3,7 +3,7 @@
  * @param {string[][]} dishes
  * @return {string[][]}
  */
-function solution(dishes) {
+function groupingDishes(dishes) {
   const map = new Map();
   for (const [dish, ...ingredients] of dishes) {
     for (const ingredient of ingredients) {
@@ -39,7 +39,7 @@ var expected = [
   ['Sauce', 'Pizza', 'Quesadilla', 'Salad'],
   ['Tomato', 'Pizza', 'Salad', 'Sandwich'],
 ];
-var result = solution(dishes);
+var result = groupingDishes(dishes);
 console.log(result, result.join() === expected.join());
 
 var dishes = [
@@ -56,5 +56,5 @@ var expected = [
   ['Nuts', 'Fried Rice', 'Salad'],
   ['Onions', 'Fried Rice', 'Pasta'],
 ];
-var result = solution(dishes);
+var result = groupingDishes(dishes);
 console.log(result, result.join() === expected.join());

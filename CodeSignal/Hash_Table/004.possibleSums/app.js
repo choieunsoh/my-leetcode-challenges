@@ -4,7 +4,7 @@
  * @param {number[]} quantity
  * @return {number}
  */
-function solution(coins, quantity) {
+function possibleSums(coins, quantity) {
   let result = new Set();
   result.add(0);
   for (let i = 0; i < quantity.length; i++) {
@@ -24,5 +24,5 @@ function solution(coins, quantity) {
 var coins = [10, 50, 100],
   quantity = [1, 2, 1];
 var expected = 9;
-var result = solution(coins, quantity);
+var result = possibleSums(coins, quantity);
 console.log(result, result === expected);

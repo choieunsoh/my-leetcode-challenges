@@ -4,7 +4,7 @@
  * @param {string[][]} patterns
  * @return {boolean}
  */
-function solution(strings, patterns) {
+function areFollowingPatterns(strings, patterns) {
   const n = strings.length;
   const words = new Map();
   const seen = new Map();
@@ -30,11 +30,11 @@ function solution(strings, patterns) {
 var strings = ['cat', 'dog', 'dog'],
   patterns = ['a', 'b', 'b'];
 var expected = true;
-var result = solution(strings, patterns);
+var result = areFollowingPatterns(strings, patterns);
 console.log(result, result === expected);
 
 var strings = ['cat', 'dog', 'doggy'],
   patterns = ['a', 'b', 'b'];
 var expected = false;
-var result = solution(strings, patterns);
+var result = areFollowingPatterns(strings, patterns);
 console.log(result, result === expected);

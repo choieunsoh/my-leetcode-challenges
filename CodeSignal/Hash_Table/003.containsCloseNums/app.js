@@ -4,7 +4,7 @@
  * @param {number} k
  * @return {boolean}
  */
-function solution(nums, k) {
+function containsCloseNums(nums, k) {
   const map = new Map();
   for (let i = 0; i < nums.length; i++) {
     const num = nums[i];
@@ -20,11 +20,11 @@ function solution(nums, k) {
 var nums = [0, 1, 2, 3, 5, 2],
   k = 3;
 var expected = true;
-var result = solution(nums, k);
+var result = containsCloseNums(nums, k);
 console.log(result, result === expected);
 
 var nums = [0, 1, 2, 3, 5, 2],
   k = 2;
 var expected = false;
-var result = solution(nums, k);
+var result = containsCloseNums(nums, k);
 console.log(result, result === expected);
