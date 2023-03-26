@@ -8,14 +8,14 @@ let prime = [];
  */
 var closestPrimes = function (left, right) {
   const result = [-1, -1];
-  if (prime.length === 0) {
-    prime = createPrimeNumber(1e6 + 1);
+  if (isPrime.length === 0) {
+    isPrime = createPrimeNumber(1e6 + 1);
   }
 
   let min = Number.MAX_SAFE_INTEGER;
   let [one, two] = result;
   for (let i = left; i <= right; i++) {
-    if (!prime[i]) continue;
+    if (!isPrime[i]) continue;
     [one, two] = [two, i];
     if (one !== -1 && two !== -1) {
       if (two - one < min) {
