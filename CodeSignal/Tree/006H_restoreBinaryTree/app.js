@@ -18,7 +18,7 @@ function Tree(x) {
  * @param {number[]} preorder
  * @return {Tree}
  */
-function solution(inorder, preorder) {
+function restoreBinaryTree(inorder, preorder) {
   const map = new Map();
   for (let i = 0; i < inorder.length; i++) {
     map.set(inorder[i], i);
@@ -64,5 +64,5 @@ var expected = {
     },
   },
 };
-var result = solution(inorder, preorder);
+var result = restoreBinaryTree(inorder, preorder);
 console.log(result, JSON.stringify(result) === JSON.stringify(expected));
