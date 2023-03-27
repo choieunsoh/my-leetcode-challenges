@@ -8,6 +8,10 @@
 //   this.left = null;
 //   this.right = null;
 // }
+/**
+ * @param {Tree} t
+ * @return {boolean}
+ */
 function isTreeSymmetric(t) {
   if (!t) return true;
   return isSame(t.left, t.right);

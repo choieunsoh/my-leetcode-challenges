@@ -8,6 +8,11 @@
 //   this.left = null;
 //   this.right = null;
 // }
+/**
+ * @param {Tree} t
+ * @param {number} s
+ * @return {boolean}
+ */
 function hasPathWithGivenSum(t, s) {
   if (!t) return false;
   if (t.value === s && !t.left && !t.right) return true;
