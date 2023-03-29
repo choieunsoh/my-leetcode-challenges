@@ -1,6 +1,6 @@
 // 2523. Closest Prime Numbers in Range
 // https://leetcode.com/problems/closest-prime-numbers-in-range/
-let prime = [];
+let isPrime = [];
 /**
  * @param {number} left
  * @param {number} right

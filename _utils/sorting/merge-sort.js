@@ -1,24 +1,32 @@
-var bubbleSort = function (nums) {
-  if (nums.length === 1) return nums;
-  const mid = Math.floor(nums.length / 2);
-  const left = bubbleSort(nums.slice(0, mid));
-  const right = bubbleSort(nums.slice(mid));
-  merge(nums, left, right);
-  return nums;
-
-  function merge(result, left, right) {
-    let k = 0;
-    while (left.length && right.length) {
-      if (left[0] <= right[0]) {
-        result[k++] = left.shift();
-      } else {
-        result[k++] = right.shift();
-      }
-    }
-    while (left.length) result[k++] = left.shift();
-    while (right.length) result[k++] = right.shift();
+function mergeSort(array) {
+  if (array.length <= 1) {
+    return array;
   }
-};
+
+  const middle = Math.floor(array.length / 2);
+  const left = array.slice(0, middle);
+  const right = array.slice(middle);
+
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+function merge(left, right) {
+  let resultArray = [],
+    leftIndex = 0,
+    rightIndex = 0;
+
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      resultArray.push(left[leftIndex]);
+      leftIndex++;
+    } else {
+      resultArray.push(right[rightIndex]);
+      rightIndex++;
+    }
+  }
+
+  return resultArray.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+}
 
 var nums = [2, 5, 3, 1, 4];
 var expected = [1, 2, 3, 4, 5];
