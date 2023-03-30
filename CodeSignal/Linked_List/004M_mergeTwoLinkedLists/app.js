@@ -15,10 +15,10 @@ function mergeTwoLinkedLists(l1, l2) {
   if (!l1) return l2;
   if (!l2) return l1;
   if (l1.value < l2.value) {
-    l1.next = solution(l1.next, l2);
+    l1.next = mergeTwoLinkedLists(l1.next, l2);
     return l1;
   } else {
-    l2.next = solution(l1, l2.next);
+    l2.next = mergeTwoLinkedLists(l1, l2.next);
     return l2;
   }
 }
