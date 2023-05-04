@@ -33,7 +33,8 @@
     "union-find",
     "prefix-sum",
     "bit-manipulation",
-    "weekly-contest"
+    "weekly-contest",
+    "matrix"
   ],
   "search.exclude": {
     "package-lock.json": true,
