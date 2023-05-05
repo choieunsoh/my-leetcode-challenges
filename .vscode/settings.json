@@ -34,7 +34,8 @@
     "prefix-sum",
     "bit-manipulation",
     "weekly-contest",
-    "matrix"
+    "matrix",
+    "javascript"
   ],
   "search.exclude": {
     "package-lock.json": true,
