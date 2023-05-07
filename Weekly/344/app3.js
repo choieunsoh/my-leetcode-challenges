@@ -71,7 +71,7 @@ var expected = [
 ];
 var result = colorTheArray(n, queries);
 console.log(result, result.join() === expected.join());
-return;
+
 var n = 4,
   queries = [
     [0, 2],
