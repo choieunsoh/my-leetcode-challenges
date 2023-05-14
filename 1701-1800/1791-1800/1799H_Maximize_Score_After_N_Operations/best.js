@@ -5,28 +5,30 @@
  * @return {number}
  */
 var maxScore = function (nums) {
-  const memoSize = 1 << nums.length;
+  const n = nums.length / 2;
   const gcds = preComputeGCDs(nums);
-  const memo = new Array(memoSize).fill(-1);
-  return backtracking(0, 0);
+  const memo = new Map();
+  return dp(1, (1 << (2 * n)) - 1);
 
-  function backtracking(mask, pairsPicked) {
-    if (2 * pairsPicked === nums.length) return 0;
-    if (memo[mask] !== -1) return memo[mask];
-
-    let maxScore = 0;
-    for (let i = 0; i < nums.length; i++) {
-      for (let j = i + 1; j < nums.length; j++) {
-        if ((mask >> i) & 1 || (mask >> j) & 1) continue;
-
-        const newMask = mask | (1 << i) | (1 << j);
-        const currScore = (pairsPicked + 1) * gcds[i][j];
-        const remainingScore = backtracking(newMask, pairsPicked + 1);
-        maxScore = Math.max(maxScore, currScore + remainingScore);
+  function dp(i, mask) {
+    if (i > n) {
+      return 0;
+    }
+    if (memo.has(mask)) {
+      return memo.get(mask);
+    }
+    let score = 0;
+    for (let j = 0; j < 2 * n; j++) {
+      if ((mask & (1 << j)) !== 0) {
+        for (let k = j + 1; k < 2 * n; k++) {
+          if ((mask & (1 << k)) !== 0) {
+            score = Math.max(score, i * gcds[j][k] + dp(i + 1, mask ^ (1 << j) ^ (1 << k)));
+          }
+        }
       }
     }
-    memo[mask] = maxScore;
-    return memo[mask];
+    memo.set(mask, score);
+    return score;
   }
 
   function preComputeGCDs(nums) {
@@ -42,7 +44,10 @@ var maxScore = function (nums) {
   }
 
   function gcd(a, b) {
-    return b === 0 ? a : gcd(b, a % b);
+    if (a === 0) {
+      return b;
+    }
+    return gcd(b % a, a);
   }
 };
 
