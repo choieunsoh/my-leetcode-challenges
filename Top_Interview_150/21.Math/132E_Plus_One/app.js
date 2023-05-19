@@ -6,9 +6,10 @@
  */
 var plusOne = function (digits) {
   let carry = 1;
-  for (let i = digits.length - 1; i >= 0; i--) {
+  const n = digits.length;
+  for (let i = n - 1; i >= 0; i--) {
     digits[i] += carry;
-    carry = Math.floor(digits[i] / 10);
+    carry = (digits[i] / 10) | 0;
     digits[i] %= 10;
   }
   return carry === 1 ? [carry, ...digits] : digits;
