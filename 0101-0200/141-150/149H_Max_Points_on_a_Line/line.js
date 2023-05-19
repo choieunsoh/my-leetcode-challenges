@@ -5,13 +5,13 @@
  * @return {number}
  */
 var maxPoints = function (points) {
-  let max = 2;
-  const N = points.length;
-  if (N === 2) return max;
+  const n = points.length;
+  if (n < 3) return n;
 
-  for (let i = 0; i < N; i++) {
+  let max = 2;
+  for (let i = 0; i < n; i++) {
     const map = new Map();
-    for (let j = i + 1; j < N; j++) {
+    for (let j = i + 1; j < n; j++) {
       const key = equation(points[i], points[j]);
       const count = map.get(key) ?? 1;
       map.set(key, count + 1);
@@ -50,5 +50,10 @@ var points = [
   [1, 4],
 ];
 var expected = 4;
+var result = maxPoints(points);
+console.log(result, result === expected);
+
+var points = [[0, 0]];
+var expected = 1;
 var result = maxPoints(points);
 console.log(result, result === expected);

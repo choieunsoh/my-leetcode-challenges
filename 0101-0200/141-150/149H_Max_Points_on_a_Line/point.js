@@ -5,16 +5,16 @@
  * @return {number}
  */
 var maxPoints = function (points) {
-  let max = 2;
-  const N = points.length;
-  if (N === 2) return max;
+  const n = points.length;
+  if (n < 3) return n;
 
-  for (let i = 0; i < N; i++) {
+  let max = 2;
+  for (let i = 0; i < n; i++) {
     const [xi, yi] = points[i];
-    for (let j = i + 1; j < N; j++) {
+    for (let j = i + 1; j < n; j++) {
       const [xj, yj] = points[j];
       let count = 2;
-      for (let k = j + 1; k < N; k++) {
+      for (let k = j + 1; k < n; k++) {
         const [xk, yk] = points[k];
         const slopIJ = (yj - yi) * (xk - xi);
         const slopJK = (yk - yi) * (xj - xi);
@@ -45,5 +45,10 @@ var points = [
   [1, 4],
 ];
 var expected = 4;
+var result = maxPoints(points);
+console.log(result, result === expected);
+
+var points = [[0, 0]];
+var expected = 1;
 var result = maxPoints(points);
 console.log(result, result === expected);
