@@ -13,7 +13,7 @@ var isPalindrome = function (x) {
 
   while (num > 0) {
     mod = (num % 10) + mod * 10;
-    num = Math.floor(num / 10);
+    num = (num / 10) | 0;
   }
   return mod === x;
 };
