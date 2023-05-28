@@ -10,7 +10,7 @@ var longestPalindrome = function (s) {
 
   let maxLength = 1;
   let start = 0;
-  const dp = Array(s.length);
+  const dp = new Array(s.length);
   for (let j = 0; j < s.length; j++) {
     for (let i = 0; i <= j; i++) {
       if (i === j) {
