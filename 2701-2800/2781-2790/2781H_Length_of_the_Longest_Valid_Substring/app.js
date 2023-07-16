@@ -10,15 +10,15 @@ var longestValidSubstring = function (word, forbidden) {
   let result = 0;
   let max = 0;
   const banned = new Set(forbidden);
-  for (let i = 0; i < n; i++) {
-    const start = Math.max(i - 9, 0);
-    for (let j = start; j <= i; j++) {
-      const str = word.substring(j, i + 1);
+  for (let right = 0; right < n; right++) {
+    const start = Math.max(right - 9, 0);
+    for (let left = start; left <= right; left++) {
+      const str = word.substring(left, right + 1);
       if (banned.has(str)) {
-        max = Math.max(max, j + 1);
+        max = Math.max(max, left + 1);
       }
     }
-    result = Math.max(result, i - max + 1);
+    result = Math.max(result, right - max + 1);
   }
 
   return result;
