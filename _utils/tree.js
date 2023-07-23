@@ -100,6 +100,36 @@ var printPreOrderTree = function (root) {
   console.log(result.join(' '));
 };
 
+function toLevelOrderArray(tree) {
+  const result = [];
+  const q = [tree];
+  while (q.length) {
+    const node = q.shift();
+    if (!node) {
+      result.push(node);
+      continue;
+    }
+
+    result.push(node.val);
+    if (node.left) {
+      q.push(node.left);
+    } else {
+      q.push(null);
+    }
+    if (node.right) {
+      q.push(node.right);
+    } else {
+      q.push(null);
+    }
+  }
+
+  while (result[result.length - 1] === null) {
+    result.pop();
+  }
+
+  return result;
+}
+
 module.exports = {
   TreeNode,
   createTree,
@@ -108,4 +138,5 @@ module.exports = {
   preOrder,
   postOrder,
   levelOrder,
+  toLevelOrderArray,
 };
