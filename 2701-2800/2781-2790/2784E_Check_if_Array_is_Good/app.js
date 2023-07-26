@@ -6,9 +6,19 @@
  */
 var isGood = function (nums) {
   const n = nums.length - 1;
-  const target = (n * (n + 1)) / 2 + n;
-  const sum = nums.reduce((s, n) => s + n, 0);
-  return target === sum;
+  const counter = new Map();
+  for (const num of nums) {
+    const count = counter.get(num) ?? 0;
+    counter.set(num, count + 1);
+  }
+
+  const countN = counter.get(n) ?? 0;
+  if (countN !== 2) return false;
+
+  for (let i = 1; i < n; i++) {
+    if (!counter.has(i)) return false;
+  }
+  return true;
 };
 
 var nums = [1, 2, 3, 3];
@@ -32,6 +42,11 @@ var result = isGood(nums);
 console.log(result, result === expected);
 
 var nums = [9, 9];
+var expected = false;
+var result = isGood(nums);
+console.log(result, result === expected);
+
+var nums = [1, 4, 5, 4, 3, 3];
 var expected = false;
 var result = isGood(nums);
 console.log(result, result === expected);
