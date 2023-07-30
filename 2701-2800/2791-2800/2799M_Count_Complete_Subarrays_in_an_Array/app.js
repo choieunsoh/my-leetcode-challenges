@@ -12,7 +12,7 @@ var countCompleteSubarrays = function (nums) {
     const curr = new Set();
     for (let j = i; j < n; j++) {
       curr.add(nums[j]);
-      result += (curr.size / size) | 0;
+      if (curr.size === size) result++;
     }
   }
   return result;
