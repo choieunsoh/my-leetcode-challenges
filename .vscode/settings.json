@@ -35,7 +35,8 @@
     "bit-manipulation",
     "weekly-contest",
     "matrix",
-    "javascript"
+    "javascript",
+    "pandas"
   ],
   "search.exclude": {
     "package-lock.json": true,
