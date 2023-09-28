@@ -10,23 +10,22 @@ var sortArrayByParity = function (nums) {
   if (nums.length === 1) return nums;
 
   const n = nums.length;
-  let even = 0;
-  while (even < n && nums[even] % 2 === 0) {
-    even++;
-  }
+  let left = 0;
+  let right = n - 1;
 
-  for (let i = even + 1; i < nums.length; i++) {
-    if (nums[i] % 2 === 1) continue;
-
-    [nums[even], nums[i]] = [nums[i], nums[even]];
-    even++;
+  while (left < right) {
+    if (nums[left] % 2 > nums[right] % 2) {
+      [nums[left], nums[right]] = [nums[right], nums[left]];
+    }
+    if (nums[left] % 2 === 0) left++;
+    if (nums[right] % 2 === 1) right--;
   }
 
   return nums;
 };
 
 var nums = [3, 1, 2, 4];
-var expected = [2, 4, 3, 1];
+var expected = [4, 2, 1, 3];
 var result = sortArrayByParity(nums);
 console.log(result, result.join() === expected.join());
 
