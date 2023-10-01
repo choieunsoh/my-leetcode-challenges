@@ -1,22 +1,29 @@
-// https://leetcode.com/problems/reverse-words-in-a-string-iii/
 // 557. Reverse Words in a String III
-var reverse = (str) => {
-  let s = str.split('');
-  let l = 0;
-  let r = s.length - 1;
-  while (l < r) {
-    [s[r], s[l]] = [s[l], s[r]];
-    l++;
-    r--;
-  }
-  return s.join('');
-};
+// https://leetcode.com/problems/reverse-words-in-a-string-iii/
+// T.C.: O(n)
+// S.C.: O(n)
+/**
+ * @param {string} s
+ * @return {string}
+ */
 var reverseWords = function (s) {
-  let ss = s.split(' ');
-  for (let i = 0; i < ss.length; i++) {
-    ss[i] = reverse(ss[i]);
+  const str = s.split(' ');
+  for (let i = 0; i < str.length; i++) {
+    str[i] = reverse(str[i]);
   }
-  return ss.join(' ');
+  return str.join(' ');
+
+  function reverse(s) {
+    const str = s.split('');
+    let l = 0;
+    let r = str.length - 1;
+    while (l < r) {
+      [str[r], str[l]] = [str[l], str[r]];
+      l++;
+      r--;
+    }
+    return str.join('');
+  }
 };
 
 var s = "Let's take LeetCode contest";
