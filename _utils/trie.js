@@ -52,3 +52,18 @@ Trie.prototype.startsWith = function (prefix) {
 module.exports = {
   Trie,
 };
+
+/*
+  toJSON() {
+    const result = {
+      children: {},
+      word: this.word,
+      words: this.words,
+    };
+    for (const [char, childNode] of this.children) {
+      result.children[char] = childNode.toJSON();
+    }
+    return result;
+  }
+
+*/
