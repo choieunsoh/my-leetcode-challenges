@@ -1,11 +1,23 @@
-// https://leetcode.com/problems/reverse-words-in-a-string/
 // 151. Reverse Words in a String
+// https://leetcode.com/problems/reverse-words-in-a-string/
+// T.C.: O(n)
+// S.C.: O(1)
 /**
  * @param {string} s
  * @return {string}
  */
 var reverseWords = function (s) {
-  return s.split(' ').filter(Boolean).reverse().join(' ');
+  const result = [];
+  let i = s.length - 1;
+  while (i > -1) {
+    let word = '';
+    while (i > -1 && s[i] === ' ') i--;
+    while (i > -1 && s[i] !== ' ') {
+      word = s[i--] + word;
+    }
+    if (word) result.push(word);
+  }
+  return result.join(' ');
 };
 
 var s = 'the sky is blue';
