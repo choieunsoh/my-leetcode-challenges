@@ -1,17 +1,19 @@
 // 342. Power of Four
 // https://leetcode.com/problems/power-of-four/
-// T.C.: O(log n)
+// Bit manipulation
+// T.C.: O(1)
 // S.C.: O(1)
 /**
  * @param {number} n
  * @return {boolean}
  */
 var isPowerOfFour = function (n) {
-  while (n >= 4) {
-    if (n % 4 !== 0) return false;
-    n /= 4;
-  }
-  return n === 1;
+  // If n is power of two, then n & (n - 1) === 0.
+  // 0x55555555 is a hexametrical number.
+  // it is 1010101010101010101010101010101 in binary with a length of 32.
+  // We use it to make sure the 1 locates in the odd location.
+  const mask = 0x55555555;
+  return n > 0 && (n & (n - 1)) === 0 && (n & mask) === n;
 };
 
 var n = 16;
