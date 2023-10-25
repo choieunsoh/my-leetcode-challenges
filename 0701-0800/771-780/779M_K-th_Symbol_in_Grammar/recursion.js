@@ -1,7 +1,7 @@
 // 779. K-th Symbol in Grammar
 // https://leetcode.com/problems/k-th-symbol-in-grammar/
 // T.C.: O(n)
-// S.C.: O(n)
+// S.C.: O(1)
 /**
  * @param {number} n
  * @param {number} k
@@ -9,11 +9,14 @@
  */
 var kthGrammar = function (n, k) {
   if (n === 1) return 0;
-  const kParent = Math.ceil(k / 2);
+
   const prevRow = n - 1;
-  const prevValue = kthGrammar(prevRow, kParent);
-  if (k % 2 === 1) return prevValue;
-  return prevValue ? 0 : 1;
+  const halfNodes = (2 ** prevRow) >> 1;
+
+  if (k > halfNodes) {
+    return 1 - kthGrammar(prevRow, k - halfNodes);
+  }
+  return kthGrammar(prevRow, k);
 };
 
 var n = 1,
