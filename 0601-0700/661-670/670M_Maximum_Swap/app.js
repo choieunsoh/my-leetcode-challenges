@@ -17,8 +17,8 @@ var maximumSwap = function (num) {
       max = nums[i];
       maxIndex = i;
     } else if (nums[i] < max) {
-      leftIndex = maxIndex;
-      rightIndex = i;
+      rightIndex = maxIndex;
+      leftIndex = i;
     }
   }
 
@@ -35,6 +35,11 @@ var maximumSwap = function (num) {
 
 var num = 2736;
 var expected = 7236;
+var result = maximumSwap(num);
+console.log(result, result === expected);
+
+var num = 7736;
+var expected = 7763;
 var result = maximumSwap(num);
 console.log(result, result === expected);
 
