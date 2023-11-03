@@ -17,10 +17,12 @@ var circularArrayLoop = function (nums) {
     while (true) {
       const next = (n + ((curr + nums[curr]) % n)) % n;
       if (next === curr || nums[next] * nums[curr] < 0) break;
-      if (seen.has(curr)) return true;
+
       seen.add(curr);
-      curr = next;
+      if (seen.has(next)) return true;
+
       visited[next] = true;
+      curr = next;
     }
   }
   return false;
