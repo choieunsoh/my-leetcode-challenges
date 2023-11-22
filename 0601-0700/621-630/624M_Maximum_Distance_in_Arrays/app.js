@@ -8,13 +8,15 @@
  */
 var maxDistance = function (arrays) {
   let min = arrays[0][0];
-  let max = arrays[0].at(-1);
+  let max = arrays[0][arrays[0].length - 1];
   let result = 0;
   for (let i = 1; i < arrays.length; i++) {
     const arr = arrays[i];
-    result = Math.max(result, Math.abs(arr[0] - max), Math.abs(min - arr.at(-1)));
-    min = Math.min(min, arr[0]);
-    max = Math.max(max, arr.at(-1));
+    const a = arr[0];
+    const b = arr[arr.length - 1];
+    result = Math.max(result, Math.abs(a - max), Math.abs(min - b));
+    min = Math.min(min, a);
+    max = Math.max(max, b);
   }
   return result;
 };
