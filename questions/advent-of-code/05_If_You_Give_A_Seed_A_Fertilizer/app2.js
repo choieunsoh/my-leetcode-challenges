@@ -84,6 +84,7 @@ var ifYouGiveASeedAFertilizer = function (input) {
       const sourceEnd = source + range - 1;
       result.push([source, sourceEnd, offset]);
     }
+    result.sort((a, b) => a[0] - b[0]);
     return result;
   }
 };
@@ -122,8 +123,9 @@ temperature-to-humidity map:
 humidity-to-location map:
 60 56 37
 56 93 4`;
+var expected = 46;
 var result = ifYouGiveASeedAFertilizer(input);
-console.log(result);
+console.log(result, result === expected);
 
 var input = `seeds: 629551616 310303897 265998072 58091853 3217788227 563748665 2286940694 820803307 1966060902 108698829 190045874 3206262 4045963015 223661537 1544688274 293696584 1038807941 31756878 1224711373 133647424
 
@@ -309,5 +311,6 @@ humidity-to-location map:
 4277004585 324294413 17962711
 2221325873 1454293336 355744215`;
 var result = ifYouGiveASeedAFertilizer(input);
-console.log(result);
+var expected = 219529182;
+console.log(result, result === expected);
 console.timeEnd('day-5');
