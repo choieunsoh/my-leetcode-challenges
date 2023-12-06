@@ -26,29 +26,46 @@ var ifYouGiveASeedAFertilizer = function (input) {
       for (const [start, end, offset] of ranges) {
         const newPoints = [];
         for (const [a, b, completed] of points) {
+          // ignore completed map
           if (completed) {
             newPoints.push([a, b, true]);
             continue;
           }
+
+          // out of this range, both a and b need to process next range
           if ((a < start && b < start) || (a > end && b > end)) {
             newPoints.push([a, b]);
+            continue;
           }
+
+          // both a and b in this range
           if (a >= start && a <= end && b >= start && b <= end) {
             newPoints.push([a + offset, b + offset, true]);
+            continue;
           }
+
+          // a in this range, b need to process next range
           if (a >= start && a <= end && b > end) {
             newPoints.push([a + offset, end + offset, true]);
             newPoints.push([end + 1, b]);
+            continue;
           }
+
+          // a is upper bound of range, process a and [a+1, b] need to process next range
           if (a === end) {
             newPoints.push([a + offset, a + offset, true]);
             newPoints.push([a + 1, b]);
+            continue;
           }
+
+          // b is lower bound of range, process b and [a, b-1] need to process next range
           if (b === start) {
             newPoints.push([a, b - 1]);
             newPoints.push([b + offset, b + offset, true]);
           }
         }
+
+        // process next range
         if (newPoints.length > 0) {
           points = newPoints;
         }
@@ -67,11 +84,11 @@ var ifYouGiveASeedAFertilizer = function (input) {
       const sourceEnd = source + range - 1;
       result.push([source, sourceEnd, offset]);
     }
-    result.sort((a, b) => a[0] - b[0]);
     return result;
   }
 };
 
+console.time('day-5');
 var input = `seeds: 79 14 55 13
 
 seed-to-soil map:
@@ -293,3 +310,4 @@ humidity-to-location map:
 2221325873 1454293336 355744215`;
 var result = ifYouGiveASeedAFertilizer(input);
 console.log(result);
+console.timeEnd('day-5');
