@@ -36,7 +36,8 @@
     "weekly-contest",
     "matrix",
     "javascript",
-    "pandas"
+    "pandas",
+    "frontend"
   ],
   "search.exclude": {
     "package-lock.json": true,
