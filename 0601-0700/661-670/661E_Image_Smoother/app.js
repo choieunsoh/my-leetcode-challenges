@@ -20,10 +20,8 @@ var imageSmoother = function (img) {
       const j2 = Math.min(j + 1, n - 1);
       for (let a = i1; a <= i2; a++) {
         for (let b = j1; b <= j2; b++) {
-          if (a >= 0 && a < m && b >= 0 && b < n) {
-            sum += img[a][b];
-            count++;
-          }
+          sum += img[a][b];
+          count++;
         }
       }
       result[i][j] = Math.floor(sum / count);
