@@ -1,5 +1,7 @@
 // 10004. Simple Query Selector All
 // https://leetcode.com/problems/simple-query-selector-all/description/
+// T.C.: O(n)
+// S.C.: O(1)
 /**
  * @param {string} selector
  * @return {HTMLElement[]}

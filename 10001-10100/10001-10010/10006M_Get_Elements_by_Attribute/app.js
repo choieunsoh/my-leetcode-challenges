@@ -1,5 +1,7 @@
 // 10006. Get Elements by Attribute
 // https://leetcode.com/problems/get-elements-by-attribute/description/
+// T.C.: O(n)
+// S.C.: O(n)
 /**
  * @param {string} attributeValue
  * @return {HTMLElement[]}

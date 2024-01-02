@@ -1,5 +1,7 @@
 // 10007. Get Node Relationship
 // https://leetcode.com/problems/get-node-relationship/description/
+// T.C.: O(1)
+// S.C.: O(1)
 /**
  * @param {Node} node1
  * @param {Node} node2

@@ -2,6 +2,7 @@
 // https://leetcode.com/problems/path-to-node-in-dom-tree/description/
 // T.C.: O(H)
 // S.C.: O(H)
+// H: the height of the DOM tree from the given node to the root node.
 /**
  * @param {Node} node
  * @return {string[]}

@@ -1,5 +1,7 @@
 // 10002. Recognize Node Type
 // https://leetcode.com/problems/recognize-node-type/
+// T.C.: O(1)
+// S.C.: O(1)
 /**
  * @param {Node} node
  * @return {string}

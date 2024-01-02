@@ -1,5 +1,7 @@
 // 10005. Count Leaf Nodes
 // https://leetcode.com/problems/count-leaf-nodes/description/
+// T.C.: O(n)
+// S.C.: O(n)
 /**
  * @param {Node} node
  * @return {number}
