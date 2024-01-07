@@ -37,7 +37,8 @@
     "matrix",
     "javascript",
     "pandas",
-    "frontend"
+    "frontend",
+    "react"
   ],
   "search.exclude": {
     "package-lock.json": true,
