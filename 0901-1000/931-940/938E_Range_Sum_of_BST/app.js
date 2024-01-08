@@ -39,3 +39,46 @@ var root = [10, 5, 15, 3, 7, 13, 18, 1, null, 6],
 var expected = 23;
 var result = rangeSumBST(createTree(root), low, high);
 console.log(result, result === expected);
+
+var root = {
+    val: 10,
+    left: {
+      val: 5,
+      left: { val: 3 },
+      right: { val: 7 },
+    },
+    right: {
+      val: 15,
+      right: { val: 18 },
+    },
+  },
+  low = 7,
+  high = 15;
+var expected = 32;
+var result = rangeSumBST(root, low, high);
+console.log(result, result === expected);
+
+var root = {
+    val: 10,
+    left: {
+      val: 5,
+      left: {
+        val: 3,
+        left: { val: 1 },
+      },
+      right: {
+        val: 7,
+        left: { val: 6 },
+      },
+    },
+    right: {
+      val: 15,
+      left: { val: 13 },
+      right: { val: 18 },
+    },
+  },
+  low = 6,
+  high = 10;
+var expected = 23;
+var result = rangeSumBST(root, low, high);
+console.log(result, result === expected);
