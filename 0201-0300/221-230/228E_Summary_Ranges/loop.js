@@ -1,5 +1,7 @@
-// https://leetcode.com/problems/summary-ranges/
 // 228. Summary Ranges
+// https://leetcode.com/problems/summary-ranges/
+// T.C.: O(n)
+// S.C.: O(1)
 /**
  * @param {number[]} nums
  * @return {string[]}
@@ -18,6 +20,7 @@ var summaryRanges = function (nums) {
     } else {
       result.push(`${start}->${nums[index]}`);
     }
+    index++;
   }
   return result;
 };

@@ -8,16 +8,26 @@
  */
 var summaryRanges = function (nums) {
   if (nums.length === 0) return [];
-  const result = [];
-  for (let left = 0, right = 0; right < nums.length; right++) {
-    if (nums[right] !== nums[right + 1] - 1) {
-      if (left === right) {
-        result.push(`${nums[left]}`);
+  let result = [];
+  let start = nums[0];
+  let end = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] === end + 1) {
+      end = nums[i];
+    } else {
+      if (start === end) {
+        result.push(`${start}`);
       } else {
-        result.push(`${nums[left]}->${nums[right]}`);
+        result.push(`${start}->${end}`);
       }
-      left = right + 1;
+      start = nums[i];
+      end = nums[i];
     }
+  }
+  if (start === end) {
+    result.push(`${start}`);
+  } else {
+    result.push(`${start}->${end}`);
   }
   return result;
 };
