@@ -9,7 +9,7 @@
  * @param {TreeNode} root
  * @returns {TreeNode}
  */
-function sumTreeChildren(root) {
+function treeDiameter(root) {
   const newRoot = JSON.parse(JSON.stringify(root));
   let queue = [newRoot];
   while (queue.length) {
@@ -51,5 +51,5 @@ var expected = {
     value: 3,
   },
 };
-var result = sumTreeChildren(root);
+var result = treeDiameter(root);
 console.log(result, JSON.stringify(result) === JSON.stringify(expected));
