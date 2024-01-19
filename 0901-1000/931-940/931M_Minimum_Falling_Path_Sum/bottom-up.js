@@ -7,18 +7,15 @@
  * @return {number}
  */
 var minFallingPathSum = function (matrix) {
+  const MAX = Number.MAX_SAFE_INTEGER;
   const n = matrix.length;
-  const dp = Array.from({ length: n + 1 }, () => Array(n + 2).fill(0));
-  const last = dp[0].length - 1;
-  for (let r = 0; r < dp.length; r++) {
-    dp[r][0] = Number.MAX_SAFE_INTEGER;
-    dp[r][last] = Number.MAX_SAFE_INTEGER;
-  }
-
-  for (let r = n - 1; r >= 0; r--) {
-    for (let c = 0; c < n; c++) {
-      const min = Math.min(dp[r + 1][c], dp[r + 1][c + 1], dp[r + 1][c + 2]);
-      dp[r][c + 1] = matrix[r][c] + min;
+  const dp = Array.from({ length: n + 1 }, () => new Array(n).fill(0));
+  for (let row = n - 1; row >= 0; row--) {
+    for (let col = 0; col < n; col++) {
+      const left = dp[row + 1]?.[col - 1] ?? MAX;
+      const middle = dp[row + 1]?.[col];
+      const right = dp[row + 1]?.[col + 1] ?? MAX;
+      dp[row][col] = Math.min(left, middle, right) + matrix[row][col];
     }
   }
   return Math.min(...dp[0]);
