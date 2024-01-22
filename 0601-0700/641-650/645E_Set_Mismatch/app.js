@@ -1,5 +1,7 @@
-// https://leetcode.com/problems/set-mismatch/
 // 645. Set Mismatch
+// https://leetcode.com/problems/set-mismatch/
+// T.C.: O(n)
+// S.C.: O(n)
 /**
  * @param {number[]} nums
  * @return {number[]}
