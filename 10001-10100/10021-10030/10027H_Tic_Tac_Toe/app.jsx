@@ -1,5 +1,7 @@
 // 10027. Tic Tac Toe
 // https://leetcode.com/problems/tic-tac-toe/description/
+// T.C.: O(1)
+// S.C.: O(1)
 import React from 'react';
 
 function calculateWinner(board) {

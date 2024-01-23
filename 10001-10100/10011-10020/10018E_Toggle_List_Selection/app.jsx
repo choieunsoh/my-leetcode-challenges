@@ -1,5 +1,7 @@
 // 10018. Toggle List Selection
 // https://leetcode.com/problems/toggle-list-selection/description/
+// T.C.: O(n)
+// S.C.: O(n)
 import React from 'react';
 
 /**

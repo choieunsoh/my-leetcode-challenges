@@ -1,5 +1,7 @@
 // 10026. Mortgage Calculator
 // https://leetcode.com/problems/mortgage-calculator/description/
+// T.C.: O(1)
+// S.C.: O(1)
 import React from 'react';
 
 const calcMortgage = (loan, interest, term) => {

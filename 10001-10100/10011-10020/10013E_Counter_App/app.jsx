@@ -1,5 +1,7 @@
 // 10013. Counter App
 // https://leetcode.com/problems/counter-app/description/
+// T.C.: O(1)
+// S.C.: O(1)
 import React from 'react';
 
 /**

@@ -1,5 +1,7 @@
 // 10025. Tabs
 // https://leetcode.com/problems/tabs/description/
+// T.C.: O(n)
+// S.C.: O(1)
 
 import React from 'react';
 

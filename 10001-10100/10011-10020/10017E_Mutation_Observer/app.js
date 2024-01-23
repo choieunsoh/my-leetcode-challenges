@@ -1,5 +1,7 @@
 // 10017. Mutation Observer
 // https://leetcode.com/problems/mutation-observer/description/
+// T.C.: O(1)
+// S.C.: O(1)
 /**
  * @param {Node} node
  * @param {Function} callback

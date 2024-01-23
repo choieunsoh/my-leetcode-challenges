@@ -1,5 +1,8 @@
 // 10023. Sign Up Form Validation
 // https://leetcode.com/problems/sign-up-form-validation/description/
+// T.C.: O(1)
+// S.C.: O(1)
+import React from 'react';
 
 /**
  * @return {JSX.Element}

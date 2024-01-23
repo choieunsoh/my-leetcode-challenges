@@ -1,5 +1,7 @@
 // 10024. HTML Form Submission
 // https://leetcode.com/problems/html-form-submission/description/
+// T.C.: O(1)
+// S.C.: O(1)
 
 import React from 'react';
 

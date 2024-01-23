@@ -1,5 +1,7 @@
 // 10016. Auto Focus Switch
 // https://leetcode.com/problems/auto-focus-switch/description/
+// T.C.: O(n)
+// S.C.: O(n)
 import React from 'react';
 
 /**

@@ -1,5 +1,7 @@
 // 10014. Phone Number Input
 // https://leetcode.com/problems/phone-number-input/description/
+// T.C.: O(1)
+// S.C.: O(1)
 import React from 'react';
 
 /**
