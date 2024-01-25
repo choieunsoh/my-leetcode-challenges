@@ -1,28 +1,24 @@
 // 1143. Longest Common Subsequence
 // https://leetcode.com/problems/longest-common-subsequence/
 // T.C.: O(m*n)
-// S.C.: O(n)
+// S.C.: O(m*n)
 /**
  * @param {string} text1
  * @param {string} text2
  * @return {number}
  */
 var longestCommonSubsequence = function (text1, text2) {
-  const n1 = text1.length;
-  const n2 = text2.length;
-  let dp = Array(n2 + 1).fill(0);
-  for (let i = 1; i <= n1; i++) {
-    const curr = Array(n2 + 1).fill(0);
-    for (let j = 1; j <= n2; j++) {
-      if (text1[i - 1] === text2[j - 1]) {
-        curr[j] = dp[j - 1] + 1;
+  const memo = Array.from({ length: text1.length + 1 }, () => new Array(text2.length + 1).fill(0));
+  for (let p1 = text1.length - 1; p1 >= 0; p1--) {
+    for (let p2 = text2.length - 1; p2 >= 0; p2--) {
+      if (text1.charAt(p1) === text2.charAt(p2)) {
+        memo[p1][p2] = 1 + memo[p1 + 1][p2 + 1];
       } else {
-        curr[j] = Math.max(dp[j], curr[j - 1]);
+        memo[p1][p2] = Math.max(memo[p1 + 1][p2], memo[p1][p2 + 1]);
       }
     }
-    dp = curr;
   }
-  return dp[n2];
+  return memo[0][0];
 };
 
 var text1 = 'abcde',

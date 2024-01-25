@@ -8,21 +8,19 @@
  * @return {number}
  */
 var longestCommonSubsequence = function (text1, text2) {
-  const n1 = text1.length;
-  const n2 = text2.length;
-  let dp = Array(n2 + 1).fill(0);
-  for (let i = 1; i <= n1; i++) {
-    const curr = Array(n2 + 1).fill(0);
-    for (let j = 1; j <= n2; j++) {
-      if (text1[i - 1] === text2[j - 1]) {
-        curr[j] = dp[j - 1] + 1;
+  let memo = new Array(text2.length + 1).fill(0);
+  for (let p1 = text1.length - 1; p1 >= 0; p1--) {
+    const curr = new Array(text2.length + 1).fill(0);
+    for (let p2 = text2.length - 1; p2 >= 0; p2--) {
+      if (text1.charAt(p1) === text2.charAt(p2)) {
+        curr[p2] = 1 + memo[p2 + 1];
       } else {
-        curr[j] = Math.max(dp[j], curr[j - 1]);
+        curr[p2] = Math.max(memo[p2], curr[p2 + 1]);
       }
     }
-    dp = curr;
+    memo = curr;
   }
-  return dp[n2];
+  return memo[0];
 };
 
 var text1 = 'abcde',

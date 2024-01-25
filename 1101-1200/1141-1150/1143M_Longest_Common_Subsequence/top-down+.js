@@ -1,28 +1,36 @@
 // 1143. Longest Common Subsequence
 // https://leetcode.com/problems/longest-common-subsequence/
 // T.C.: O(m*n)
-// S.C.: O(n)
+// S.C.: O(m*n)
 /**
  * @param {string} text1
  * @param {string} text2
  * @return {number}
  */
 var longestCommonSubsequence = function (text1, text2) {
-  const n1 = text1.length;
-  const n2 = text2.length;
-  let dp = Array(n2 + 1).fill(0);
-  for (let i = 1; i <= n1; i++) {
-    const curr = Array(n2 + 1).fill(0);
-    for (let j = 1; j <= n2; j++) {
-      if (text1[i - 1] === text2[j - 1]) {
-        curr[j] = dp[j - 1] + 1;
-      } else {
-        curr[j] = Math.max(dp[j], curr[j - 1]);
-      }
+  const memo = Array.from({ length: text1.length + 1 }, () => new Array(text2.length + 1));
+  return lcs(0, 0);
+
+  function lcs(p1, p2) {
+    if (p1 === text1.length || p2 === text2.length) {
+      return 0;
     }
-    dp = curr;
+
+    if (memo[p1][p2] !== undefined) {
+      return memo[p1][p2];
+    }
+
+    let best = 0;
+    if (text1.charAt(p1) === text2.charAt(p2)) {
+      // case 1: The first letter of each string is the same.
+      best = 1 + lcs(p1 + 1, p2 + 1);
+    } else {
+      // case 2: The first letter of each string is different.
+      best = Math.max(lcs(p1, p2 + 1), lcs(p1 + 1, p2));
+    }
+
+    return (memo[p1][p2] = best);
   }
-  return dp[n2];
 };
 
 var text1 = 'abcde',
