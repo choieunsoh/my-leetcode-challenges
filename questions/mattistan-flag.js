@@ -13,27 +13,32 @@
  */
 var independentNationFlag = function (n) {
   const size = n * 2 + 3;
+  const lastIndex = size - 1;
   const mid = (size / 2) | 0;
-  const borders = [0, mid, size - 1];
-  for (let i = 0; i < size; i++) {
+  const borders = new Set([0, mid, size - 1]);
+  for (let row = 0; row < size; row++) {
     let line = '';
-    for (let j = 0; j < size; j++) {
-      if (borders.includes(i) && borders.includes(j)) {
+    for (let col = 0; col < size; col++) {
+      const rowIsBorder = borders.has(row);
+      const colIsBorder = borders.has(col);
+      if (rowIsBorder && colIsBorder) {
         line += '+';
         continue;
       }
 
-      if (i === j) {
+      const isDiagonal = row === col;
+      if (isDiagonal) {
         line += '\\';
         continue;
       }
 
-      if (size - 1 === i + j) {
+      const isAntiDiagonal = row + col === lastIndex;
+      if (isAntiDiagonal) {
         line += '/';
         continue;
       }
 
-      line += borders.includes(j) ? '|' : borders.includes(i) ? '-' : ' ';
+      line += colIsBorder ? '|' : rowIsBorder ? '-' : ' ';
     }
     console.log(line);
   }
