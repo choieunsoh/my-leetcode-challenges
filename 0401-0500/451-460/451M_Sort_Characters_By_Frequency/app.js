@@ -1,5 +1,7 @@
 // 451. Sort Characters By Frequency
 // https://leetcode.com/problems/sort-characters-by-frequency/
+// T.C.: O(n log n)
+// S.C.: O(n)
 class Heap {
   constructor(items = []) {
     this.data = items;

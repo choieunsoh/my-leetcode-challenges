@@ -1,5 +1,7 @@
 // 451. Sort Characters By Frequency
 // https://leetcode.com/problems/sort-characters-by-frequency/
+// T.C.: O(n log n) or O(n + k log k)
+// S.C.: O(n)
 /**
  * @param {string} s
  * @return {string}
@@ -10,9 +12,7 @@ var frequencySort = function (s) {
     const count = map.get(s[i]) ?? 0;
     map.set(s[i], count + 1);
   }
-  const result = [...map.entries()].sort((a, b) =>
-    a[1] === b[1] ? a[0].charCodeAt(0) - b[0].charCodeAt(0) : b[1] - a[1]
-  );
+  const result = [...map.entries()].sort((a, b) => b[1] - a[1] || a[0].charCodeAt() - b[0].charCodeAt());
   return result.reduce((str, [char, count]) => str + char.repeat(count), '');
 };
 
