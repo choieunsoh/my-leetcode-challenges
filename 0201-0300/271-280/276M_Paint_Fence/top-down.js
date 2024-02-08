@@ -1,24 +1,27 @@
 // 276. Paint Fence
 // https://leetcode.com/problems/paint-fence/
-// T.C.: O(N)
-// S.C.: O(1)
+// T.C.: O(n)
+// S.C.: O(n)
 /**
  * @param {number} n
  * @param {number} k
  * @return {number}
  */
 var numWays = function (n, k) {
-  if (n === 1) return k;
+  const memo = new Array(n);
+  return totalWays(n, k, memo);
 
-  let twoPostsBack = k;
-  let onePostBack = k * k;
+  function totalWays(i, k, memo) {
+    if (i === 1) return k;
+    if (i === 2) return k * k;
 
-  for (let i = 3; i <= n; i++) {
-    const curr = (k - 1) * (onePostBack + twoPostsBack);
-    [twoPostsBack, onePostBack] = [onePostBack, curr];
+    if (memo[i] !== undefined) return memo[i];
+
+    const paintDifferentColor = (k - 1) * totalWays(i - 1, k, memo);
+    const paintSameColor = (k - 1) * totalWays(i - 2, k, memo);
+    const ways = paintDifferentColor + paintSameColor;
+    return (memo[i] = ways);
   }
-
-  return onePostBack;
 };
 
 var n = 3,
