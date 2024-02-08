@@ -1,21 +1,32 @@
 // 279. Perfect Squares
 // https://leetcode.com/problems/perfect-squares/
-// T.C.: O(n * sqrt(n))
-// S.C.: O(n)
+// T.C.: O(sqrt(n))
+// S.C.: O(1)
 /**
  * @param {number} n
  * @return {number}
  */
 var numSquares = function (n) {
-  const dp = Array(n + 1).fill(n);
-  dp[0] = 0;
-  for (let num = 1; num * num <= n; num++) {
-    const square = num * num;
-    for (let curr = square; curr <= n; curr++) {
-      dp[curr] = Math.min(dp[curr], dp[curr - square] + 1);
+  const sqrtN = Math.sqrt(n);
+
+  if (sqrtN % 1 === 0) {
+    return 1;
+  }
+
+  while (n % 4 === 0) {
+    n /= 4;
+  }
+  if (n % 8 === 7) {
+    return 4;
+  }
+
+  for (let i = 1; i < sqrtN; i++) {
+    if (Math.sqrt(n - i * i) % 1 === 0) {
+      return 2;
     }
   }
-  return dp[n];
+
+  return 3;
 };
 
 var n = 12,

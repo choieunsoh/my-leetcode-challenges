@@ -1,5 +1,7 @@
-// https://leetcode.com/problems/perfect-squares/
 // 279. Perfect Squares
+// https://leetcode.com/problems/perfect-squares/
+// T.C.: O(sqrt(n))
+// S.C.: O(sqrt(n) ^ h)
 /**
  * @param {number} n
  * @return {number}
@@ -24,6 +26,9 @@ var numSquares = function (n) {
         if (next === 0) {
           return count;
         }
+        if (next < 0) {
+          break;
+        }
         if (next > 0 && !visited.has(next)) {
           queue.push(next);
           visited.add(next);
@@ -38,11 +43,13 @@ var numSquares = function (n) {
 
 var n = 12,
   expected = 3;
-console.log(numSquares(n), expected);
+var result = numSquares(n);
+console.log(result, result === expected);
 
 var n = 13,
   expected = 2;
-console.log(numSquares(n), expected);
+var result = numSquares(n);
+console.log(result, result === expected);
 
 for (let n = 1; n <= 100; n++) {
   console.log(n, numSquares(n));
