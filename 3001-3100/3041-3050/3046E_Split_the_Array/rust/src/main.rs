@@ -9,7 +9,7 @@ struct Solution;
 
 impl Solution {
     pub fn is_possible_to_split(nums: Vec<i32>) -> bool {
-        let mut freq: [i32; 101] = [0; 101];
+        let mut freq: [u8; 101] = [0; 101];
         for num in nums {
             freq[num as usize] += 1;
             if freq[num as usize] > 2 {
