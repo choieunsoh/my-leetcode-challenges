@@ -1,5 +1,7 @@
-// https://leetcode.com/problems/diameter-of-binary-tree/
 // 543. Diameter of Binary Tree
+// https://leetcode.com/problems/diameter-of-binary-tree/
+// T.C.: O(n)
+// S.C.: O(n)
 const { TreeNode, createTree } = require('../../../_utils/tree');
 /**
  * Definition for a binary tree node.
