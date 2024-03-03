@@ -1,5 +1,7 @@
-// https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 // 19. Remove Nth Node From End of List
+// https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+// T.C.: O(n)
+// S.C.: O(1)
 const { ListNode, createList, toArray } = require('../../../_utils/list');
 /**
  * Definition for singly-linked list.
