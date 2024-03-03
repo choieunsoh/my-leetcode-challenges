@@ -1,6 +1,7 @@
 .vscode/**/*
 **/bin/*
 **/obj/*
+**/output/*
 **/node_modules/**/*
 STEP.md
 
