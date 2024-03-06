@@ -1,5 +1,7 @@
 // 141. Linked List Cycle
 // https://leetcode.com/problems/linked-list-cycle/
+// T.C.: O(n)
+// S.C.: O(1)
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { ListNode, createList } from '../../../../_utils/list';
