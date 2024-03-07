@@ -62,6 +62,9 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "jinxdash.prettier-rust"
   },
+  "[csharp]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp"
+  },
   "files.associations": {
     "ostream": "cpp",
     "array": "cpp",

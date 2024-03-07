@@ -1,5 +1,7 @@
-// https://leetcode.com/problems/middle-of-the-linked-list/
 // 876. Middle of The Linked List
+// https://leetcode.com/problems/middle-of-the-linked-list/
+// T.C.: O(n)
+// S.C.: O(1)
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { ListNode, createList, toArray } from '../../../../_utils/list';

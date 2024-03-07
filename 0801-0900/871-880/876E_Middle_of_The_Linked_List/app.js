@@ -1,5 +1,7 @@
-// https://leetcode.com/problems/middle-of-the-linked-list/
 // 876. Middle of The Linked List
+// https://leetcode.com/problems/middle-of-the-linked-list/
+// T.C.: O(n)
+// S.C.: O(1)
 const { LinkedList, createList, toArray } = require('../../../_utils/list');
 /**
  * Definition for singly-linked list.
