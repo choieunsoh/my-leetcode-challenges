@@ -91,5 +91,10 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "ms-python.autopep8"
+  },
+  "[go]": {
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "golang.go"
   }
 }
