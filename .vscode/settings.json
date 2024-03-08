@@ -78,7 +78,8 @@
     "initializer_list": "cpp",
     "iostream": "cpp",
     "iterator": "cpp",
-    "algorithm": "cpp"
+    "algorithm": "cpp",
+    "new": "cpp"
   },
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
   "java.format.settings.profile": "GoogleStyle",
