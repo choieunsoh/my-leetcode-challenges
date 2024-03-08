@@ -63,6 +63,8 @@
     "editor.defaultFormatter": "jinxdash.prettier-rust"
   },
   "[csharp]": {
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
     "editor.defaultFormatter": "ms-dotnettools.csharp"
   },
   "files.associations": {
@@ -75,6 +77,19 @@
     "string_view": "cpp",
     "initializer_list": "cpp",
     "iostream": "cpp",
-    "iterator": "cpp"
+    "iterator": "cpp",
+    "algorithm": "cpp"
+  },
+  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+  "java.format.settings.profile": "GoogleStyle",
+  "[java]": {
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "mwpb.java-prettier-formatter"
+  },
+  "[python]": {
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.autopep8"
   }
 }
