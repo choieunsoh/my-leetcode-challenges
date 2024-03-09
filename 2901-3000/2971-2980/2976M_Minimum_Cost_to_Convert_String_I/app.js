@@ -1,8 +1,8 @@
 // 2976. Minimum Cost to Convert String I
 // https://leetcode.com/problems/minimum-cost-to-convert-string-i/description/
 // Floyd Warshall's Algorithm
-// T.C.: O(n)
-// S.C.: O(1)
+// T.C: O(V^3)
+// S.C: O(V^2)
 /**
  * @param {string} source
  * @param {string} target
