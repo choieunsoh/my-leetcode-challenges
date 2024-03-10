@@ -1,5 +1,7 @@
-// https://leetcode.com/problems/intersection-of-two-arrays/
 // 349. Intersection of Two Arrays
+// https://leetcode.com/problems/intersection-of-two-arrays/
+// T.C.: O(n * m)
+// S.C.: O(n)
 /**
  * @param {number[]} nums1
  * @param {number[]} nums2

@@ -2,16 +2,11 @@
 // https://leetcode.com/problems/intersection-of-two-arrays/
 // T.C.: O(n + m)
 // S.C.: O(n)
-/**
- * @param {number[]} nums1
- * @param {number[]} nums2
- * @return {number[]}
- */
-var intersection = function (nums1, nums2) {
+var intersection = function (nums1: number[], nums2: number[]): number[] {
   if (nums2.length > nums1.length) return intersection(nums2, nums1);
 
-  const result = new Set();
-  const nums = new Set(nums1);
+  const result = new Set<number>();
+  const nums = new Set<number>(nums1);
   for (const num of nums2) {
     if (nums.has(num)) {
       result.add(num);

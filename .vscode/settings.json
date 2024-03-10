@@ -79,7 +79,9 @@
     "iostream": "cpp",
     "iterator": "cpp",
     "algorithm": "cpp",
-    "new": "cpp"
+    "new": "cpp",
+    "*.tcc": "cpp",
+    "unordered_set": "cpp"
   },
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
   "java.format.settings.profile": "GoogleStyle",
