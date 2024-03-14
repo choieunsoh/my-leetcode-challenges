@@ -13,14 +13,14 @@ var numSubarraysWithSum = function (nums, goal) {
   let right = 0;
   let leftSum = 0;
   let rightSum = 0;
-  for (let i = 0; i < nums.length; i++) {
-    leftSum += nums[i];
-    while (left < i && leftSum > goal) {
+  for (let end = 0; end < nums.length; end++) {
+    leftSum += nums[end];
+    while (left < end && leftSum > goal) {
       leftSum -= nums[left++];
     }
 
-    rightSum += nums[i];
-    while (right < i && (rightSum > goal || (rightSum === goal && nums[right] === 0))) {
+    rightSum += nums[end];
+    while (right < end && (rightSum > goal || (rightSum === goal && nums[right] === 0))) {
       rightSum -= nums[right++];
     }
 
