@@ -2,21 +2,17 @@
 // https://leetcode.com/problems/contiguous-array/
 // T.C.: O(n)
 // S.C.: O(n)
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var findMaxLength = function (nums) {
-  const map = new Map();
+var findMaxLength = function (nums: number[]): number {
+  const map = new Map<number, number>();
   let result = 0;
   let count = 0;
   map.set(count, -1);
-  for (let i = 0; i < nums.length; i++) {
-    count += nums[i] === 1 ? 1 : -1;
+  for (let index = 0; index < nums.length; index++) {
+    count += nums[index] === 1 ? 1 : -1;
     if (!map.has(count)) {
-      map.set(count, i);
+      map.set(count, index);
     } else {
-      result = Math.max(result, i - map.get(count));
+      result = Math.max(result, index - map.get(count)!);
     }
   }
   return result;
