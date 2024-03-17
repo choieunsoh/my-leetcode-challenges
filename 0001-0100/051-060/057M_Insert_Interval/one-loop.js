@@ -1,5 +1,7 @@
 // 57. Insert Interval
 // https://leetcode.com/problems/insert-interval/
+// T.C.: O(n)
+// S.C.: O(1)
 /**
  * @param {number[][]} intervals
  * @param {number[]} newInterval
