@@ -1,5 +1,7 @@
 // 452. Minimum Number of Arrows to Burst Balloons
 // https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/
+// T.C.: O(N * log(N))
+// S.C.: O(N)
 /**
  * @param {number[][]} points
  * @return {number}
