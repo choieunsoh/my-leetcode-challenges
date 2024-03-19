@@ -1,5 +1,7 @@
 // 621. Task Scheduler
 // https://leetcode.com/problems/task-scheduler/
+// T.C.: O(n)
+// S.C.: O(1)
 /**
  * @param {character[]} tasks
  * @param {number} n
