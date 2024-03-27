@@ -1,5 +1,7 @@
 // 713. Subarray Product Less Than K
 // https://leetcode.com/problems/subarray-product-less-than-k/
+// T.C.: O(n)
+// S.C.: O(1)
 var numSubarrayProductLessThanK = function (nums: number[], k: number): number {
   if (k <= 1) return 0;
   let count = 0;

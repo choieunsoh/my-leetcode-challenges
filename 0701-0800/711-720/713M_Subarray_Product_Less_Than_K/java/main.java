@@ -1,6 +1,9 @@
 // 713. Subarray Product Less Than K
 // https://leetcode.com/problems/subarray-product-less-than-k/
+// T.C.: O(n)
+// S.C.: O(1)
 class Solution {
+
   public int numSubarrayProductLessThanK(int[] nums, int k) {
     if (k <= 1) return 0;
     int result = 0;

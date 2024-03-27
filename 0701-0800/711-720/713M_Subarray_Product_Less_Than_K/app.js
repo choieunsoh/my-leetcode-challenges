@@ -1,5 +1,7 @@
 // 713. Subarray Product Less Than K
 // https://leetcode.com/problems/subarray-product-less-than-k/
+// T.C.: O(n)
+// S.C.: O(1)
 /**
  * @param {number[]} nums
  * @param {number} k
