@@ -1,5 +1,7 @@
 // 2958. Length of Longest Subarray With at Most K Frequency
 // https://leetcode.com/problems/length-of-longest-subarray-with-at-most-k-frequency/description/
+// T.C.: O(n)
+// S.C.: O(n)
 
 import java.util.HashMap;
 import java.util.Map;
