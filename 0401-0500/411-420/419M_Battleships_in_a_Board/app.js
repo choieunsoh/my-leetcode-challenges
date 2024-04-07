@@ -24,11 +24,9 @@ var countBattleships = function (board) {
     if (row < 0 || col < 0 || row >= rows || col >= cols) return;
     if (board[row][col] === '.') return;
     board[row][col] = '+';
-    if (board[row - 1]?.[col] === 'X' || board[row + 1]?.[col] === 'X') {
-      dfs(row - 1, col);
+    if (board[row + 1]?.[col] === 'X') {
       dfs(row + 1, col);
-    } else if (board[row][col - 1] === 'X' || board[row][col + 1] === 'X') {
-      dfs(row, col - 1);
+    } else if (board[row][col + 1] === 'X') {
       dfs(row, col + 1);
     }
   }
