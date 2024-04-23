@@ -1,5 +1,7 @@
 // 310. Minimum Height Trees
 // https://leetcode.com/problems/minimum-height-trees/
+// T.C.: O(n)
+// S.C.: O(n)
 /**
  * @param {number} n
  * @param {number[][]} edges
@@ -8,42 +10,31 @@
 var findMinHeightTrees = function (n, edges) {
   if (n === 1) return [0];
 
-  const trees = new Map();
-  const inDegree = new Map();
-  for (let i = 0; i < edges.length; i++) {
-    const [a, b] = edges[i];
-    const edgeA = trees.has(a) ? trees.get(a) : [];
-    edgeA.push(b);
-    trees.set(a, edgeA);
-
-    const edgeB = trees.has(b) ? trees.get(b) : [];
-    edgeB.push(a);
-    trees.set(b, edgeB);
-
-    inDegree.set(a, (inDegree.get(a) ?? 0) + 1);
-    inDegree.set(b, (inDegree.get(b) ?? 0) + 1);
+  const graph = Array.from({ length: n }, () => []);
+  const inDegree = new Array(n).fill(0);
+  for (const [u, v] of edges) {
+    graph[u].push(v);
+    graph[v].push(u);
+    inDegree[u]++;
+    inDegree[v]++;
   }
 
-  const queue = [];
-  for (const [vertex, edgeCount] of inDegree) {
-    if (edgeCount === 1) queue.push(vertex);
+  let queue = [];
+  for (let i = 0; i < n; i++) {
+    if (inDegree[i] === 1) queue.push(i);
   }
 
-  while (n > 2) {
-    const size = queue.length;
-    n -= size;
-    for (let i = 0; i < size; i++) {
-      const node = queue.shift();
-      if (trees.has(node)) {
-        const nodes = trees.get(node);
-        for (let j = 0; j < nodes.length; j++) {
-          const vertex = nodes[j];
-          const count = inDegree.get(vertex) - 1;
-          inDegree.set(vertex, count);
-          if (count === 1) queue.push(vertex);
-        }
+  let remaining = n;
+  while (remaining > 2) {
+    remaining -= queue.length;
+    const newQueue = [];
+    for (const node of queue) {
+      for (const neighbor of graph[node]) {
+        inDegree[neighbor]--;
+        if (inDegree[neighbor] === 1) newQueue.push(neighbor);
       }
     }
+    queue = newQueue;
   }
 
   return queue;
@@ -56,10 +47,7 @@ var n = 1,
   ];
 var expected = [0];
 var result = findMinHeightTrees(n, edges);
-console.log(
-  result,
-  result.sort((a, b) => a - b).join() === expected.sort((a, b) => a - b).join()
-);
+console.log(result, result.sort((a, b) => a - b).join() === expected.sort((a, b) => a - b).join());
 
 var n = 4,
   edges = [
@@ -69,10 +57,7 @@ var n = 4,
   ];
 var expected = [1];
 var result = findMinHeightTrees(n, edges);
-console.log(
-  result,
-  result.sort((a, b) => a - b).join() === expected.sort((a, b) => a - b).join()
-);
+console.log(result, result.sort((a, b) => a - b).join() === expected.sort((a, b) => a - b).join());
 
 var n = 6,
   edges = [
@@ -84,7 +69,4 @@ var n = 6,
   ];
 var expected = [3, 4];
 var result = findMinHeightTrees(n, edges);
-console.log(
-  result,
-  result.sort((a, b) => a - b).join() === expected.sort((a, b) => a - b).join()
-);
+console.log(result, result.sort((a, b) => a - b).join() === expected.sort((a, b) => a - b).join());
