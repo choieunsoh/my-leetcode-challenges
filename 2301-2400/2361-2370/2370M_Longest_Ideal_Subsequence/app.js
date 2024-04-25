@@ -16,9 +16,9 @@ var longestIdealString = function (s, k) {
   for (let i = 0; i < n; i++) {
     const currChar = s.charCodeAt(i) - a;
     let best = 0;
-    for (let nextChar = 0; nextChar < 26; nextChar++) {
-      if (Math.abs(currChar - nextChar) <= k) {
-        best = Math.max(best, dp[nextChar]);
+    for (let prevChar = 0; prevChar < 26; prevChar++) {
+      if (Math.abs(currChar - prevChar) <= k) {
+        best = Math.max(best, dp[prevChar]);
       }
     }
 
