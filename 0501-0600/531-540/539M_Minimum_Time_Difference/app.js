@@ -20,7 +20,7 @@ var findMinDifference = function (timePoints) {
     const prevTime = timeInMinutes[i - 1];
     const currTime = timeInMinutes[i];
     const diff = currTime - prevTime;
-    result = Math.min(result, diff, ONE_DAY - diff);
+    result = Math.min(result, diff);
   }
   return result;
 };
