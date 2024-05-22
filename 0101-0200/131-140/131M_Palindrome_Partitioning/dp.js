@@ -1,12 +1,14 @@
 // 131. Palindrome Partitioning
 // https://leetcode.com/problems/palindrome-partitioning/
 // T.C.: O(N * 2^N)
-// S.C.: O(N)
+// S.C.: O(N^2)
 /**
  * @param {string} s
  * @return {string[][]}
  */
 var partition = function (s) {
+  const n = s.length;
+  const dp = Array.from({ length: n }, () => new Array(n));
   const result = [];
   backtracking(0, []);
   return result;
@@ -17,24 +19,16 @@ var partition = function (s) {
       return;
     }
 
-    for (let i = start; i < s.length; i++) {
-      const word = s.substring(start, i + 1);
-      if (!isPalindrome(word)) continue;
-
-      parts.push(word);
-      console.log(start, i, word, parts);
-      backtracking(i + 1, parts);
-      parts.pop();
+    for (let end = start; end < n; end++) {
+      if (s[start] === s[end] && (end - start <= 2 || dp[start + 1][end - 1])) {
+        dp[start][end] = true;
+        const word = s.substring(start, end + 1);
+        parts.push(word);
+        console.log(start, end, word, parts);
+        backtracking(end + 1, parts);
+        parts.pop();
+      }
     }
-  }
-
-  function isPalindrome(word, left = 0, right = word.length - 1) {
-    while (left < right) {
-      if (word[left] !== word[right]) return false;
-      left++;
-      right--;
-    }
-    return true;
   }
 };
 
