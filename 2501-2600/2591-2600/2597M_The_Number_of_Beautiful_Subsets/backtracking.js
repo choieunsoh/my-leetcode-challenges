@@ -1,29 +1,29 @@
 // 2597. The Number of Beautiful Subsets
 // https://leetcode.com/problems/the-number-of-beautiful-subsets/
+// T.C.: O(2^n)
+// S.C.: O(n)
 /**
  * @param {number[]} nums
  * @param {number} k
  * @return {number}
  */
 var beautifulSubsets = function (nums, k) {
-  let result = 0;
-  dfs([], nums);
-  return result;
+  nums.sort((a, b) => a - b);
+  return countBeautifulSubsets(new Set(), 0) - 1;
 
-  function dfs(curr, nums) {
-    for (let i = 0; i < nums.length; i++) {
-      let valid = true;
-      for (const num of curr) {
-        if (Math.abs(num - nums[i]) === k) {
-          valid = false;
-          break;
-        }
-      }
-      if (valid) {
-        result++;
-        dfs([...curr, nums[i]], nums.slice(i + 1));
-      }
+  function countBeautifulSubsets(seen, index) {
+    if (index === nums.length) return 1;
+
+    const skipCount = countBeautifulSubsets(seen, index + 1);
+    let takeCount = 0;
+
+    if (!seen.has(nums[index] - k)) {
+      seen.add(nums[index]);
+      takeCount = countBeautifulSubsets(seen, index + 1);
+      seen.delete(nums[index]);
     }
+
+    return skipCount + takeCount;
   }
 };
 
