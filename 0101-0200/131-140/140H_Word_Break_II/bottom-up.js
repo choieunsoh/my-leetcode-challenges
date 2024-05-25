@@ -8,26 +8,26 @@
  * @return {string[]}
  */
 var wordBreak = function (s, wordDict) {
-  const result = [];
   const words = new Set(wordDict);
-  dfs(0, []);
-  return result;
-
-  function dfs(start, sentences) {
-    if (start === s.length) {
-      result.push(sentences.join(' '));
-      return;
-    }
-
+  const dp = new Map();
+  for (let start = s.length; start >= 0; start--) {
+    const sentences = [];
     for (let end = start; end < s.length; end++) {
       const word = s.substring(start, end + 1);
       if (words.has(word)) {
-        sentences.push(word);
-        dfs(end + 1, sentences);
-        sentences.pop();
+        if (end === s.length - 1) {
+          sentences.push(word);
+        } else {
+          const nextWords = dp.get(end + 1) ?? [];
+          for (const nextWord of nextWords) {
+            sentences.push(word + ' ' + nextWord);
+          }
+        }
       }
     }
+    dp.set(start, sentences);
   }
+  return dp.get(0) ?? [];
 };
 
 var s = 'catsanddog',

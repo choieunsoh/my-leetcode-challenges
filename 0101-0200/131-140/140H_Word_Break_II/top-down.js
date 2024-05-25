@@ -8,25 +8,34 @@
  * @return {string[]}
  */
 var wordBreak = function (s, wordDict) {
-  const result = [];
   const words = new Set(wordDict);
-  dfs(0, []);
-  return result;
+  const memo = new Map();
+  return dfs(s);
 
-  function dfs(start, sentences) {
-    if (start === s.length) {
-      result.push(sentences.join(' '));
-      return;
+  function dfs(remainingStr) {
+    if (memo.has(remainingStr)) {
+      return memo.get(remainingStr);
     }
 
-    for (let end = start; end < s.length; end++) {
-      const word = s.substring(start, end + 1);
+    if (remainingStr === '') {
+      return [''];
+    }
+
+    const result = [];
+    for (let i = 1; i <= remainingStr.length; i++) {
+      const word = remainingStr.substring(0, i);
       if (words.has(word)) {
-        sentences.push(word);
-        dfs(end + 1, sentences);
-        sentences.pop();
+        const nextRemainingStr = remainingStr.substring(i);
+        const nextWords = dfs(nextRemainingStr);
+        for (const nextWord of nextWords) {
+          const sentence = nextWord !== '' ? word + ' ' + nextWord : word;
+          result.push(sentence);
+        }
       }
     }
+
+    memo.set(remainingStr, result);
+    return result;
   }
 };
 
