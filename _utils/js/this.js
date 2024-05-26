@@ -8,7 +8,6 @@ const logger = (function () {
   };
 })();
 
-// Closure
 logger.title('JavaScript this', false);
 
 logger.title('1. this Inside Global Scope');
@@ -117,25 +116,7 @@ const person3 = {
 
 person3.greet();
 
-logger.title('7. this Inside Function with Strict Mode');
-//'use strict'
-this.name = 'Jack';
-function greet() {
-  // this refers to undefined
-  console.log(this);
-}
-greet(); // undefined
-
-//'use strict';
-this.name = 'Jack';
-
-function greet() {
-  console.log(this.name);
-}
-
-greet.call(this); // Jack
-
-logger.title('8. this Inside IIFE');
+logger.title('7. this Inside IIFE');
 (function () {
   this.name = 'Jack';
   console.log(this);
