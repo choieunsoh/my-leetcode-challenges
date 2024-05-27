@@ -33,7 +33,7 @@ logger.title('Local Scope');
   try {
     console.log(insideFnScope); // Error
   } catch (err) {
-    logger.error(err.message);
+    logger.error(err);
   }
 }
 
