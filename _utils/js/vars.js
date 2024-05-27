@@ -1,6 +1,6 @@
 const logger = require('./logger');
 
-logger.title('Variables', false);
+logger.topic('Variables');
 
 logger.title('Global Scope');
 {
@@ -33,7 +33,7 @@ logger.title('Local Scope');
   try {
     console.log(insideFnScope); // Error
   } catch (err) {
-    console.log(err.message);
+    logger.error(err.message);
   }
 }
 
