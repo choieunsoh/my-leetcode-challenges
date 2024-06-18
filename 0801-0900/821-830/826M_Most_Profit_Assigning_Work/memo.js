@@ -1,7 +1,7 @@
 // 826. Most Profit Assigning Work
 // https://leetcode.com/problems/most-profit-assigning-work/
-// T.C.: O(n log n + m log m)
-// S.C.: O(n)
+// T.C.: O(n + m + maxAbility)
+// S.C.: O(maxAbility)
 /**
  * @param {number[]} difficulty
  * @param {number[]} profit
@@ -10,37 +10,23 @@
  */
 var maxProfitAssignment = function (difficulty, profit, worker) {
   const n = difficulty.length;
-  const jobs = difficulty.map((diff, i) => [diff, profit[i]]);
-  jobs.sort((a, b) => a[0] - b[0]);
-  for (let i = 1; i < n; i++) {
-    jobs[i][1] = Math.max(jobs[i][1], jobs[i - 1][1]);
-  }
-
-  let result = 0;
-  for (const ability of worker) {
-    const index = binarySearch(ability);
-    if (index === -1) continue;
-    const [, gain] = jobs[index];
-    result += gain;
-  }
-  return result;
-
-  function binarySearch(target) {
-    let index = -1;
-    let left = 0;
-    let right = n - 1;
-    while (left <= right) {
-      const mid = (left + right) >> 1;
-      const [diff] = jobs[mid];
-      if (diff <= target) {
-        index = mid;
-        left = mid + 1;
-      } else {
-        right = mid - 1;
-      }
+  const maxAbility = Math.max(...worker);
+  const jobs = new Array(maxAbility + 1).fill(0);
+  for (let i = 0; i < n; i++) {
+    if (difficulty[i] <= maxAbility) {
+      jobs[difficulty[i]] = Math.max(jobs[difficulty[i]], profit[i]);
     }
-    return index;
   }
+
+  for (let i = 1; i <= maxAbility; i++) {
+    jobs[i] = Math.max(jobs[i], jobs[i - 1]);
+  }
+
+  let netProfit = 0;
+  for (const ability of worker) {
+    netProfit += jobs[ability];
+  }
+  return netProfit;
 };
 
 var difficulty = [2, 4, 6, 8, 10],

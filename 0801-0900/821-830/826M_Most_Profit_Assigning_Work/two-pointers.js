@@ -12,35 +12,19 @@ var maxProfitAssignment = function (difficulty, profit, worker) {
   const n = difficulty.length;
   const jobs = difficulty.map((diff, i) => [diff, profit[i]]);
   jobs.sort((a, b) => a[0] - b[0]);
-  for (let i = 1; i < n; i++) {
-    jobs[i][1] = Math.max(jobs[i][1], jobs[i - 1][1]);
-  }
+  worker.sort((a, b) => a - b);
 
   let result = 0;
+  let maxProfit = 0;
+  let index = 0;
   for (const ability of worker) {
-    const index = binarySearch(ability);
-    if (index === -1) continue;
-    const [, gain] = jobs[index];
-    result += gain;
+    while (index < n && ability >= jobs[index][0]) {
+      maxProfit = Math.max(maxProfit, jobs[index][1]);
+      index++;
+    }
+    result += maxProfit;
   }
   return result;
-
-  function binarySearch(target) {
-    let index = -1;
-    let left = 0;
-    let right = n - 1;
-    while (left <= right) {
-      const mid = (left + right) >> 1;
-      const [diff] = jobs[mid];
-      if (diff <= target) {
-        index = mid;
-        left = mid + 1;
-      } else {
-        right = mid - 1;
-      }
-    }
-    return index;
-  }
 };
 
 var difficulty = [2, 4, 6, 8, 10],
