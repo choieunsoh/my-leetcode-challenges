@@ -48,7 +48,11 @@ function numberOfWays(roads) {
   }
 
   function isEquidistance(a, b, c) {
-    return distance(a, b) === distance(b, c) && distance(b, c) === distance(c, a);
+    const distanceAB = distance(a, b);
+    const distanceBC = distance(b, c);
+    if (distanceAB !== distanceBC) return false;
+    const distanceCA = distance(c, a);
+    return distanceBC === distanceCA;
   }
 }
 
