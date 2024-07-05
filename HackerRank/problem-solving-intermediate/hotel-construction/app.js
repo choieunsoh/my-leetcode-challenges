@@ -1,8 +1,7 @@
 // T.C.: O(n^3*m)
 // S.C.: O(n+m)
 /**
- * @param {string} newName
- * @param {string} oldName
+ * @param {number[][]} roads
  * @return {number}
  */
 function numberOfWays(roads) {
