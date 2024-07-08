@@ -1,6 +1,6 @@
 // 1823. Find the Winner of the Circular Game
 // https://leetcode.com/problems/find-the-winner-of-the-circular-game/
-// T.C.: O(n)
+// T.C.: O(n ^ 2)
 // S.C.: O(n)
 /**
  * @param {number} n
@@ -8,11 +8,14 @@
  * @return {number}
  */
 var findTheWinner = function (n, k) {
-  let index = 0;
-  for (let friends = 2; friends <= n; friends++) {
-    index = (index + k) % friends;
+  let index = -1;
+  const friends = Array.from({ length: n }, (_, i) => i + 1);
+  while (friends.length > 1) {
+    index = (index + k) % friends.length;
+    friends.splice(index--, 1);
   }
-  return index + 1;
+
+  return friends[0];
 };
 
 var n = 5,

@@ -8,11 +8,13 @@
  * @return {number}
  */
 var findTheWinner = function (n, k) {
-  let index = 0;
-  for (let friends = 2; friends <= n; friends++) {
-    index = (index + k) % friends;
+  return findWinnerIndex(n, k) + 1;
+
+  function findWinnerIndex(n, k) {
+    if (n === 1) return 0;
+
+    return (findWinnerIndex(n - 1, k) + k) % n;
   }
-  return index + 1;
 };
 
 var n = 5,
