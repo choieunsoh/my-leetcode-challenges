@@ -15,7 +15,6 @@ var secondMinimum = function (n, edges, time, change) {
     graph[u].push(v);
     graph[v].push(u);
   }
-  console.log(graph);
 
   const distFirstVisit = new Array(n + 1).fill(-1);
   const distSecondVisit = new Array(n + 1).fill(-1);
@@ -27,13 +26,10 @@ var secondMinimum = function (n, edges, time, change) {
     for (const [node, freq] of queue) {
       let timeTaken = freq == 1 ? distFirstVisit[node] : distSecondVisit[node];
       const changeCount = (timeTaken / change) | 0;
-      console.log([node, freq], timeTaken, changeCount);
       if (changeCount % 2 === 1) {
         timeTaken = change * (changeCount + 1) + time;
-        console.log('A', timeTaken);
       } else {
         timeTaken += time;
-        console.log('B', timeTaken);
       }
 
       for (const neighbor of graph[node]) {
