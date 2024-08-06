@@ -1,6 +1,6 @@
 # My LeetCode Challenges
 
-Welcome to the My LeetCode Challenges repository! This repository contains solutions to various LeetCode problems, organized by question number. The solutions are implemented in multiple programming languages, including JavaScript, TypeScript, C++, Java, Rust, and C#.
+Welcome to the My LeetCode Challenges repository! This repository contains solutions to over 1,400 LeetCode problems, organized by question number. The solutions are implemented in multiple programming languages, including JavaScript, TypeScript, C++, Java, Rust, C#, and Python.
 
 ## Structure
 
@@ -20,6 +20,7 @@ The solutions are written in the following languages:
 - **Java**
 - **Rust**
 - **C#**
+- **Python**
 
 ## How to Use
 
@@ -33,5 +34,3 @@ The solutions are written in the following languages:
 For any questions or suggestions, please open an issue or contact the repository maintainer.
 
 Happy coding!
-
----
