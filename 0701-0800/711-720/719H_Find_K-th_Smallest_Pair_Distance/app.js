@@ -1,5 +1,7 @@
 // 719. Find K-th Smallest Pair Distance
 // https://leetcode.com/problems/find-k-th-smallest-pair-distance
+// T.C.: O(n log n + n log M)
+// S.C.: O(n)
 /**
  * @param {number[]} nums
  * @param {number} k
@@ -12,8 +14,8 @@ var smallestDistancePair = function (nums, k) {
   let right = nums[nums.length - 1] - nums[0];
   while (left <= right) {
     const mid = Math.floor((left + right) / 2);
-    const dist = distance(mid);
-    if (dist >= k) {
+    const count = countPairsWithMaxDistance(mid);
+    if (count >= k) {
       result = mid;
       right = mid - 1;
     } else {
@@ -22,7 +24,7 @@ var smallestDistancePair = function (nums, k) {
   }
   return result;
 
-  function distance(mid) {
+  function countPairsWithMaxDistance(mid) {
     let left = 0;
     let count = 0;
     for (let right = 0; right < nums.length; right++) {
