@@ -1,25 +1,30 @@
 // 264. Ugly Number II
 // https://leetcode.com/problems/ugly-number-ii/
-// T.C.: O(n)
-// S.C.: O(n)
+// T.C.: O(n log m)
+// S.C.: O(m)
+const { MinPriorityQueue } = require('@datastructures-js/priority-queue');
 /**
  * @param {number} n
  * @return {number}
  */
 var nthUglyNumber = function (n) {
-  const dp = Array(n).fill(0);
-  dp[0] = 1;
-  let [two, three, five] = [0, 0, 0];
-  for (let i = 1; i < n; i++) {
-    const xTwo = dp[two] * 2;
-    const xThree = dp[three] * 3;
-    const xFive = dp[five] * 5;
-    dp[i] = Math.min(xTwo, xThree, xFive);
-    if (dp[i] === xTwo) two++;
-    if (dp[i] === xThree) three++;
-    if (dp[i] === xFive) five++;
+  const uglySet = new Set([1]);
+  const uglyHeap = new MinPriorityQueue();
+  uglyHeap.enqueue(1);
+  let currentUgly = 1;
+  for (let i = 0; i < n; i++) {
+    currentUgly = uglyHeap.dequeue();
+    appendUglyNumber(currentUgly * 2);
+    appendUglyNumber(currentUgly * 3);
+    appendUglyNumber(currentUgly * 5);
   }
-  return dp[n - 1];
+  return currentUgly;
+
+  function appendUglyNumber(num) {
+    if (uglySet.has(num)) return;
+    uglySet.add(num);
+    uglyHeap.enqueue(num);
+  }
 };
 
 var n = 10;
