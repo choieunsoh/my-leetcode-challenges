@@ -11,6 +11,19 @@ function isPrime(n) {
   return true;
 }
 
+function primeFactors(num) {
+  const factors = [];
+  let divisor = 2;
+  while (num > 1) {
+    while (num % divisor === 0) {
+      factors.push(divisor);
+      num /= divisor;
+    }
+    divisor++;
+  }
+  return factors;
+}
+
 // Test the function with 1000000007
 console.log(isPrime(2)); // Output: true
 console.log(isPrime(3)); // Output: true
@@ -21,3 +34,7 @@ console.log(isPrime(1000000009)); // Output: true (another large prime number)
 console.log(isPrime(1000000010)); // Output: false (not a prime number)
 console.log(isPrime(100000003)); // Output: false
 console.log(isPrime(1000003)); // Output: true
+
+for (let num = 2; num <= 100; num++) {
+  console.log(num, primeFactors(num));
+}
