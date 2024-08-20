@@ -1,5 +1,7 @@
 // 1140. Stone Game II
 // https://leetcode.com/problems/stone-game-ii/
+// T.C.: O(n^3)
+// S.C.: O(n^2)
 /**
  * @param {number[]} piles
  * @return {number}
