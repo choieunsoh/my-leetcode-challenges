@@ -1,29 +1,47 @@
 // 664. Strange Printer
 // https://leetcode.com/problems/strange-printer/
+// T.C.: O(n^3)
+// S.C.: O(n^2)
 /**
  * @param {string} s
  * @return {number}
  */
 var strangePrinter = function (s) {
+  s = removeDuplicates(s);
   const n = s.length;
-  const dp = Array.from({ length: n }, () => new Array(n).fill(0));
-  for (let i = 0; i < n; i++) {
-    dp[i][i] = 1;
+  const memo = Array.from({ length: n }, () => new Array(n));
+  return minimumTurns(0, n - 1);
+
+  function minimumTurns(start, end) {
+    if (start > end) {
+      return 0;
+    }
+
+    if (memo[start][end] !== undefined) {
+      return memo[start][end];
+    }
+
+    let minTurns = 1 + minimumTurns(start + 1, end);
+    for (let k = start + 1; k <= end; k++) {
+      if (s.charAt(start) !== s.charAt(k)) continue;
+
+      const turnsWithMatch = minimumTurns(start, k - 1) + minimumTurns(k + 1, end);
+      minTurns = Math.min(minTurns, turnsWithMatch);
+    }
+    return (memo[start][end] = minTurns);
   }
-  return solve(0, n - 1);
 
-  function solve(left, right) {
-    if (dp[left][right]) return dp[left][right];
-
-    dp[left][right] = n;
-    for (let i = left; i < right; i++) {
-      dp[left][right] = Math.min(dp[left][right], solve(left, i) + solve(i + 1, right));
+  function removeDuplicates(s) {
+    let result = '';
+    let i = 0;
+    while (i < s.length) {
+      const currentChar = s.charAt(i);
+      result += currentChar;
+      while (i < s.length && s.charAt(i) === currentChar) {
+        i++;
+      }
     }
-
-    if (s[left] === s[right]) {
-      dp[left][right]--;
-    }
-    return dp[left][right];
+    return result;
   }
 };
 

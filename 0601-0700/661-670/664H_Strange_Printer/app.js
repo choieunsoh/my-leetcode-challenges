@@ -1,5 +1,7 @@
 // 664. Strange Printer
 // https://leetcode.com/problems/strange-printer/
+// T.C.: O(n^3)
+// S.C.: O(n^2)
 /**
  * @param {string} s
  * @return {number}
