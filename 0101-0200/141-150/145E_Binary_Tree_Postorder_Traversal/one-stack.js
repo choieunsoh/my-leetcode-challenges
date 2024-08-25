@@ -16,16 +16,33 @@ const { TreeNode, createTree } = require('../../../_utils/tree');
  * @return {number[]}
  */
 var postorderTraversal = function (root) {
-  function postorder(node) {
-    if (!node) return;
-
-    postorder(node.left);
-    postorder(node.right);
-    result.push(node.val);
+  const result = [];
+  if (root === null) {
+    return result;
   }
 
-  const result = [];
-  postorder(root);
+  const traverseStack = [];
+  let previousNode = null;
+
+  while (root || traverseStack.length) {
+    if (root) {
+      traverseStack.push(root);
+      root = root.left;
+      continue;
+    }
+
+    root = traverseStack.at(-1);
+    if (root.right === null || root.right === previousNode) {
+      result.push(root.val);
+      traverseStack.pop();
+      previousNode = root;
+      root = null;
+      continue;
+    }
+
+    root = root.right;
+  }
+
   return result;
 };
 

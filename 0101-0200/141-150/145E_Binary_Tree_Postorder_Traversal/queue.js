@@ -1,5 +1,7 @@
-// https://leetcode.com/problems/binary-tree-postorder-traversal/
 // 145. Binary Tree Postorder Traversal
+// https://leetcode.com/problems/binary-tree-postorder-traversal/
+// T.C.: O(n)
+// S.C.: O(n)
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
@@ -15,21 +17,26 @@ const { TreeNode, createTree } = require('../../../_utils/tree');
  */
 var postorderTraversal = function (root) {
   const result = [];
-  const stack1 = [root];
-  const stack2 = [];
-
-  while (stack1.length) {
-    const node = stack1.pop();
-    stack2.push(node);
-
-    node.left && stack1.push(node.left);
-    node.right && stack1.push(node.right);
+  if (root === null) {
+    return result;
   }
 
-  while (stack2.length) {
-    result.push(stack2.pop().val);
+  const traverseStack = [];
+  let currentNode = root;
+
+  while (currentNode || traverseStack.length) {
+    if (currentNode) {
+      result.push(currentNode.val);
+      traverseStack.push(currentNode);
+      currentNode = currentNode.right;
+      continue;
+    }
+
+    currentNode = traverseStack.pop();
+    currentNode = currentNode.left;
   }
 
+  result.reverse();
   return result;
 };
 
