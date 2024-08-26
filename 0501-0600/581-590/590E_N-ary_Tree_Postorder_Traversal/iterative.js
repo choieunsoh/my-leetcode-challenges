@@ -15,18 +15,24 @@
  * @return {number[]}
  */
 var postorder = function (root) {
-  if (root === null) return [];
+  const result = [];
+  if (root === null) return result;
 
-  function dfs(node) {
-    if (!node) return;
-    for (var i = 0; i < node.children.length; i++) {
-      dfs(node.children[i]);
+  const stack = [{ node: root, visited: false }];
+  while (stack.length) {
+    const { node: currentNode, visited } = stack.pop();
+    if (visited) {
+      result.push(currentNode.val);
+    } else {
+      stack.push({ node: currentNode, visited: true });
+
+      for (let i = currentNode.children.length - 1; i >= 0; i--) {
+        const child = currentNode.children[i];
+        stack.push({ node: child, visited: false });
+      }
     }
-    result.push(node.val);
   }
 
-  const result = [];
-  dfs(root);
   return result;
 };
 
