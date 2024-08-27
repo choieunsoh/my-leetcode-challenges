@@ -1,6 +1,6 @@
 {
-  "dependencies": {
-    "@datastructures-js/priority-queue": "^6.1.4",
-    "prettier": "^2.8.3"
+  "devDependencies": {
+    "@datastructures-js/priority-queue": "5.4.0",
+    "prettier": "^3.3.3"
   }
 }
