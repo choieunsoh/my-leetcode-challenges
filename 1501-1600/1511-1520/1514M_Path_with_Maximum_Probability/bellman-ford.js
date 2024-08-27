@@ -1,7 +1,7 @@
 // 1514. Path with Maximum Probability
 // https://leetcode.com/problems/path-with-maximum-probability/
 // T.C.: O(n*m)
-// S.C.: O(n+m)
+// S.C.: O(n)
 /**
  * @param {number} n
  * @param {number[][]} edges
@@ -11,31 +11,28 @@
  * @return {number}
  */
 var maxProbability = function (n, edges, succProb, start, end) {
-  const adj = Array.from({ length: n }, () => []);
-  for (let i = 0; i < edges.length; i++) {
-    const [u, v] = edges[i];
-    const prob = succProb[i];
-    adj[u].push([v, prob]);
-    adj[v].push([u, prob]);
-  }
-
   const maxProb = new Array(n).fill(0);
   maxProb[start] = 1;
-  let queue = [start];
-  while (queue.length) {
-    const nextQueue = [];
-    for (const currNode of queue) {
-      for (const [nextNode, pathProb] of adj[currNode]) {
-        const nextProb = maxProb[currNode] * pathProb;
-        if (nextProb > maxProb[nextNode]) {
-          maxProb[nextNode] = nextProb;
-          nextQueue.push(nextNode);
-        }
+  for (let i = 0; i < n - 1; i++) {
+    let hasUpdate = false;
+    for (let j = 0; j < edges.length; j++) {
+      const [u, v] = edges[j];
+      const prob = succProb[j];
+      if (maxProb[u] * prob > maxProb[v]) {
+        maxProb[v] = maxProb[u] * prob;
+        hasUpdate = true;
+      }
+      if (maxProb[v] * prob > maxProb[u]) {
+        maxProb[u] = maxProb[v] * prob;
+        hasUpdate = true;
+      }
+      if (!hasUpdate) {
+        break;
       }
     }
-    queue = nextQueue;
   }
 
+  console.log(maxProb);
   return maxProb[end];
 };
 

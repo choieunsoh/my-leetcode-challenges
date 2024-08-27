@@ -1,7 +1,8 @@
 // 1514. Path with Maximum Probability
 // https://leetcode.com/problems/path-with-maximum-probability/
-// T.C.: O(n*m)
+// T.C.: O(n*m log n)
 // S.C.: O(n+m)
+const { MaxPriorityQueue } = require('@datastructures-js/priority-queue');
 /**
  * @param {number} n
  * @param {number[][]} edges
@@ -21,22 +22,26 @@ var maxProbability = function (n, edges, succProb, start, end) {
 
   const maxProb = new Array(n).fill(0);
   maxProb[start] = 1;
-  let queue = [start];
-  while (queue.length) {
-    const nextQueue = [];
-    for (const currNode of queue) {
-      for (const [nextNode, pathProb] of adj[currNode]) {
-        const nextProb = maxProb[currNode] * pathProb;
-        if (nextProb > maxProb[nextNode]) {
-          maxProb[nextNode] = nextProb;
-          nextQueue.push(nextNode);
-        }
+
+  const pq = new MaxPriorityQueue();
+  pq.enqueue([1, start], 1);
+  while (!pq.isEmpty()) {
+    const [currProb, currNode] = pq.dequeue().element;
+
+    if (currNode === end) {
+      return currProb;
+    }
+
+    for (const [nextNode, pathProb] of adj[currNode]) {
+      const nextProb = currProb * pathProb;
+      if (nextProb > maxProb[nextNode]) {
+        maxProb[nextNode] = nextProb;
+        pq.enqueue([nextProb, nextNode], nextProb);
       }
     }
-    queue = nextQueue;
   }
 
-  return maxProb[end];
+  return 0;
 };
 
 var n = 3,
