@@ -1,5 +1,7 @@
 // 1905. Count Sub Islands
 // https://leetcode.com/problems/count-sub-islands/
+// T.C.: O(m * n)
+// S.C.: O(m * n)
 /**
  * @param {number[][]} grid1
  * @param {number[][]} grid2
