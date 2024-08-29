@@ -1,28 +1,39 @@
 // 947. Most Stones Removed with Same Row or Column
 // https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/
 // T.C.: O(n^2)
-// S.C.: O(n)
+// S.C.: O(n^2)
 /**
  * @param {number[][]} stones
  * @return {number}
  */
 var removeStones = function (stones) {
-  let result = stones.length;
-  const visited = new Set();
-  for (const [x, y] of stones) {
-    const key = 1e4 * x + y;
-    if (visited.has(key)) continue;
-    dfs(x, y);
-    result--;
-  }
-  return result;
+  const n = stones.length;
+  let numberOfRemovedStones = n;
 
-  function dfs(row, column) {
-    const key = 1e4 * row + column;
-    if (visited.has(key)) return;
-    visited.add(key);
-    for (const [x, y] of stones) {
-      if (x === row || y === column) dfs(x, y);
+  const graph = Array.from({ length: n }, () => []);
+  for (let u = 0; u < n; u++) {
+    for (let v = u + 1; v < n; v++) {
+      if (stones[u][0] === stones[v][0] || stones[u][1] === stones[v][1]) {
+        graph[u].push(v);
+        graph[v].push(u);
+      }
+    }
+  }
+
+  const visited = new Array(n).fill(false);
+  for (let stone = 0; stone < n; stone++) {
+    if (visited[stone]) continue;
+    dfs(stone);
+    numberOfRemovedStones--;
+  }
+
+  return numberOfRemovedStones;
+
+  function dfs(stone, row, column) {
+    visited[stone] = true;
+    for (const neighbor of graph[stone]) {
+      if (visited[neighbor]) continue;
+      dfs(neighbor);
     }
   }
 };

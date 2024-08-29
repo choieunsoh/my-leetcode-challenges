@@ -1,31 +1,43 @@
 // 947. Most Stones Removed with Same Row or Column
 // https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/
-// T.C.: O(n^2)
+// T.C.: O(n^2 * a(n))
 // S.C.: O(n)
 /**
  * @param {number[][]} stones
  * @return {number}
  */
 var removeStones = function (stones) {
-  let result = stones.length;
-  const visited = new Set();
-  for (const [x, y] of stones) {
-    const key = 1e4 * x + y;
-    if (visited.has(key)) continue;
-    dfs(x, y);
-    result--;
-  }
-  return result;
-
-  function dfs(row, column) {
-    const key = 1e4 * row + column;
-    if (visited.has(key)) return;
-    visited.add(key);
-    for (const [x, y] of stones) {
-      if (x === row || y === column) dfs(x, y);
+  const n = stones.length;
+  const uf = new UnionFind(n);
+  for (let u = 0; u < n; u++) {
+    for (let v = u + 1; v < n; v++) {
+      if (stones[u][0] === stones[v][0] || stones[u][1] === stones[v][1]) {
+        uf.union(u, v);
+      }
     }
   }
+
+  return n - uf.components;
 };
+
+class UnionFind {
+  constructor(n) {
+    this.parent = new Array(n).fill(-1);
+    this.components = n;
+  }
+  find(x) {
+    if (this.parent[x] === -1) return x;
+    return (this.parent[x] = this.find(this.parent[x]));
+  }
+  union(x, y) {
+    const rootX = this.find(x);
+    const rootY = this.find(y);
+    if (rootX === rootY) return;
+
+    this.parent[rootX] = rootY;
+    this.components--;
+  }
+}
 
 var stones = [
   [0, 0],
