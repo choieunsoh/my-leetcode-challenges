@@ -1,5 +1,7 @@
 // 2699. Modify Graph Edge Weights
 // https://leetcode.com/problems/modify-graph-edge-weights/
+// T.C.: O(E*(V+E)logV)
+// S.C.: O(V+E)
 const { MinPriorityQueue } = require('@datastructures-js/priority-queue');
 /**
  * @param {number} n
@@ -9,53 +11,76 @@ const { MinPriorityQueue } = require('@datastructures-js/priority-queue');
  * @param {number} target
  * @return {number[][]}
  */
-var modifiedGraphEdges = function (n, edges, start, dest, target) {
-  const canModify = [];
-  const graph = buildGraph(edges);
+var modifiedGraphEdges = function (n, edges, source, destination, target) {
+  const INF = 2e9;
 
-  const d = dijkstra(graph, start); // first run
-  if (d[dest] === target) return buildResult(graph);
-  if (d[dest] < target) return [];
-
-  for (const [u, v] of canModify) {
-    graph[u].set(v, 1);
-    graph[v].set(u, 1); // change each edge 2e9 -> 1, run current scenario
-    const d = dijkstra(graph, start);
-    if (d[dest] <= target) {
-      // current_dis < target, answer is current scenario
-      const gap = target - d[dest];
-      const pre = graph[u].get(v);
-      const update = pre + gap;
-      graph[u].set(v, update);
-      graph[v].set(u, update);
-      return buildResult(graph);
+  // Step 1: Build the graph, excluding edges with -1 weights
+  const graph = Array.from({ length: n }, () => []);
+  for (const [u, v, w] of edges) {
+    if (w !== -1) {
+      graph[u].push([v, w]);
+      graph[v].push([u, w]);
     }
   }
-  return [];
+
+  // Step 2: Compute the initial shortest distance from source to destination
+  const currentShortestDistance = dijkstra(source, destination);
+  if (currentShortestDistance < target) {
+    return [];
+  }
+
+  let matchesTarget = currentShortestDistance === target;
+
+  // Step 3: Iterate through each edge to adjust its weight if necessary
+  for (const edge of edges) {
+    // Skip edges with already known weights
+    if (edge[2] !== -1) continue;
+
+    // Set edge weight to a large value if current distance matches target, else set to 1
+    edge[2] = matchesTarget ? INF : 1;
+    const [u, v, w] = edge;
+    graph[u].push([v, w]);
+    graph[v].push([u, w]);
+
+    // Step 4: If current shortest distance does not match target
+    if (!matchesTarget) {
+      // Compute the new shortest distance with the updated edge weight
+      const newDistance = dijkstra(source, destination);
+
+      // If the new distance is within the target range, update edge weight to match target
+      if (newDistance <= target) {
+        matchesTarget = true;
+        edge[2] += target - newDistance;
+      }
+    }
+  }
+
+  // Return modified edges if the target distance is achieved, otherwise return an
+  // empty result
+  return matchesTarget ? edges : [];
 
   function compare(x, y) {
     return x[0] - y[0] || x[1] - y[1];
   }
 
-  function dijkstra(graph, start) {
-    const n = graph.length;
-    const dis = Array(n).fill(Number.MAX_SAFE_INTEGER);
-    const pq = new MinPriorityQueue({ compare });
-    dis[start] = 0;
-    pq.enqueue([0, start]);
-    while (pq.size()) {
-      const [d, curr] = pq.dequeue();
-      if (d > dis[curr]) continue;
+  function dijkstra(source, destination) {
+    const minDistance = new Array(n).fill(INF);
+    minDistance[source] = 0;
 
-      for (const [child, cost] of graph[curr]) {
-        const toChildCost = d + cost;
-        if (toChildCost < dis[child]) {
-          dis[child] = toChildCost;
-          pq.enqueue([toChildCost, child]);
+    const pq = new MinPriorityQueue({ compare });
+    pq.enqueue([0, source]);
+    while (pq.size()) {
+      const [d, u] = pq.dequeue();
+      if (d > minDistance[u]) continue;
+
+      for (const [v, weight] of graph[u]) {
+        if (d + weight < minDistance[v]) {
+          minDistance[v] = d + weight;
+          pq.enqueue([minDistance[v], v]);
         }
       }
     }
-    return dis; // min distance: start -> all other nodes
+    return minDistance[destination];
   }
 
   function buildResult(graph) {
@@ -99,10 +124,10 @@ var n = 5,
   destination = 1,
   target = 5;
 var expected = [
-  [0, 2, 1],
+  [4, 1, 1],
+  [2, 0, 1],
   [0, 3, 1],
-  [1, 4, 1],
-  [3, 4, 3],
+  [4, 3, 3],
 ];
 var result = modifiedGraphEdges(n, edges, source, destination, target);
 console.log(result, result.join() === expected.join());
@@ -130,10 +155,10 @@ var n = 4,
   destination = 2,
   target = 6;
 var expected = [
-  [0, 1, 4],
-  [0, 3, 1],
+  [1, 0, 4],
   [1, 2, 3],
   [2, 3, 5],
+  [0, 3, 1],
 ];
 var result = modifiedGraphEdges(n, edges, source, destination, target);
 console.log(result, result.join() === expected.join());
@@ -151,12 +176,12 @@ var n = 5,
   destination = 2,
   target = 15;
 var expected = [
-  [0, 3, 2],
-  [0, 4, 14],
-  [0, 1, 10],
   [1, 4, 1],
-  [1, 3, 10],
   [2, 4, 4],
+  [3, 0, 2],
+  [0, 4, 14],
+  [1, 3, 10],
+  [1, 0, 10],
 ];
 var result = modifiedGraphEdges(n, edges, source, destination, target);
 console.log(result, result.join() === expected.join());
