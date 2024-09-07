@@ -1,7 +1,8 @@
 // 1367. Linked List in Binary Tree
 // https://leetcode.com/problems/linked-list-in-binary-tree/
-// T.C.: O(n * m)
+// T.C.: O(n + m)
 // S.C.: O(n + m)
+// Knuth-Morris-Pratt (KMP) Algorithm
 const { TreeNode, buildTree } = require('../../../_utils/lc-tree-node');
 const { ListNode, createList } = require('../../../_utils/list');
 /**
@@ -25,22 +26,41 @@ const { ListNode, createList } = require('../../../_utils/list');
  * @return {boolean}
  */
 var isSubPath = function (head, root) {
-  return dfsTree(head, root);
+  // Build the pattern and prefix table from the linked list
+  let patternIndex = 0;
+  const pattern = [head.val];
+  const prefixTable = [patternIndex];
+  head = head.next;
 
-  function dfsTree(head, root) {
-    if (!root) return false;
-    if (dfsList(head, root)) return true;
-    if (dfsTree(head, root.left)) return true;
-    if (dfsTree(head, root.right)) return true;
-    return false;
+  while (head) {
+    while (patternIndex > 0 && head.val !== pattern[patternIndex]) {
+      patternIndex = prefixTable[patternIndex - 1];
+    }
+    patternIndex += head.val === pattern[patternIndex] ? 1 : 0;
+    pattern.push(head.val);
+    prefixTable.push(patternIndex);
+    head = head.next;
   }
 
-  function dfsList(head, root) {
-    if (!head) return true;
-    if (!root || head.val !== root.val) return false;
-    if (dfsList(head.next, root.left)) return true;
-    if (dfsList(head.next, root.right)) return true;
-    return false;
+  // Perform DFS to search for the pattern in the tree
+  return searchInTree(root, 0, pattern, prefixTable);
+
+  function searchInTree(node, patternIndex, pattern, prefixTable) {
+    if (!node) return false;
+
+    while (patternIndex > 0 && node.val !== pattern[patternIndex]) {
+      patternIndex = prefixTable[patternIndex - 1];
+    }
+    patternIndex += node.val === pattern[patternIndex] ? 1 : 0;
+
+    // Check if the pattern is fully matched
+    if (patternIndex === pattern.length) return true;
+
+    // Recursively search left and right subtrees
+    return (
+      searchInTree(node.left, patternIndex, pattern, prefixTable) ||
+      searchInTree(node.right, patternIndex, pattern, prefixTable)
+    );
   }
 };
 

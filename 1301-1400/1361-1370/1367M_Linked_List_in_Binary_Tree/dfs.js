@@ -25,21 +25,19 @@ const { ListNode, createList } = require('../../../_utils/list');
  * @return {boolean}
  */
 var isSubPath = function (head, root) {
-  return dfsTree(head, root);
+  if (!root) return false;
+  if (dfs(head, root)) return true;
+  if (isSubPath(head, root.left)) return true;
+  if (isSubPath(head, root.right)) return true;
+  return false;
 
-  function dfsTree(head, root) {
-    if (!root) return false;
-    if (dfsList(head, root)) return true;
-    if (dfsTree(head, root.left)) return true;
-    if (dfsTree(head, root.right)) return true;
-    return false;
-  }
-
-  function dfsList(head, root) {
+  function dfs(head, root) {
     if (!head) return true;
-    if (!root || head.val !== root.val) return false;
-    if (dfsList(head.next, root.left)) return true;
-    if (dfsList(head.next, root.right)) return true;
+    if (!root) return false;
+    if (head.val !== root.val) return false;
+
+    if (dfs(head.next, root.left)) return true;
+    if (dfs(head.next, root.right)) return true;
     return false;
   }
 };
