@@ -6,5 +6,6 @@
 STEP.md
 
 **/rust/**/target/*
+**/kt/**/*.jar
 
 private/**/*
