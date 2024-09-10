@@ -1,5 +1,7 @@
 // 2807. Insert Greatest Common Divisors in Linked List
 // https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/
+// T.C.: O(n)
+// S.C.: O(1)
 const { ListNode, createList, toArray } = require('../../../_utils/list');
 /**
  * Definition for singly-linked list.
