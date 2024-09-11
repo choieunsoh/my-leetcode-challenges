@@ -1,6 +1,6 @@
 # My LeetCode Challenges
 
-Welcome to the My LeetCode Challenges repository! This repository contains solutions to over 1,400 LeetCode problems, organized by question number. The solutions are implemented in multiple programming languages, including JavaScript, TypeScript, C++, Java, Rust, C#, and Python.
+Welcome to the My LeetCode Challenges repository! This repository contains solutions to over 1,400 LeetCode problems, organized by question number. The solutions are implemented in multiple programming languages, including JavaScript, TypeScript, C++, Java, Rust, C#, Python, and Kotlin.
 
 ## Structure
 
@@ -14,13 +14,14 @@ The repository is structured as follows:
 
 The solutions are written in the following languages:
 
-- **JavaScript (JS)**
-- **TypeScript (TS)**
+- **JavaScript**
+- **TypeScript**
 - **C++**
 - **Java**
 - **Rust**
 - **C#**
 - **Python**
+- **Kotlin**
 
 ## How to Use
 
@@ -28,9 +29,5 @@ The solutions are written in the following languages:
 2. Choose the solution in the programming language you prefer.
 3. Read through the code and comments to understand the solution.
 4. Run the code in your local development environment to test and experiment with it.
-
-## Contact
-
-For any questions or suggestions, please open an issue or contact the repository maintainer.
 
 Happy coding!
