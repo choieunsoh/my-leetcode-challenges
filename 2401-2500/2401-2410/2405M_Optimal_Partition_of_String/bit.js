@@ -8,16 +8,15 @@
  */
 var partitionString = function (s) {
   const a = 'a'.charCodeAt(0);
-  const lastSeen = new Array(26).fill(-1);
-  let startIndex = 0;
   let count = 1;
+  let mask = 0;
   for (let i = 0; i < s.length; i++) {
-    const ch = s.charCodeAt(i) - a;
-    if (lastSeen[ch] >= startIndex) {
+    const ch = s.charCodeAt(i) - a + 1;
+    if (mask & (1 << ch)) {
       count++;
-      startIndex = i;
+      mask = 0;
     }
-    lastSeen[ch] = i;
+    mask |= 1 << ch;
   }
   return count;
 };
