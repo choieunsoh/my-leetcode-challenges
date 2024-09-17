@@ -1,5 +1,7 @@
-// https://leetcode.com/problems/uncommon-words-from-two-sentences/
 // 884. Uncommon Words from Two Sentences
+// https://leetcode.com/problems/uncommon-words-from-two-sentences/
+// T.C.: O(n+m)
+// S.C.: O(n+m)
 /**
  * @param {string} s1
  * @param {string} s2
@@ -17,6 +19,7 @@ var uncommonFromSentences = function (s1, s2) {
     const word = s2[i];
     words.set(word, (words.get(word) ?? 0) + 1);
   }
+
   const result = [];
   for (const [word, count] of words) {
     if (count === 1) result.push(word);
