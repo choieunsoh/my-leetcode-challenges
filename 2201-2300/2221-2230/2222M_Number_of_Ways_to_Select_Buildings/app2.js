@@ -7,28 +7,26 @@
  * @return {number}
  */
 var numberOfWays = function (s) {
-  const n = s.length;
-
+  let n0 = 0;
+  let n1 = 0;
   let n01 = 0;
   let n10 = 0;
+  let n010 = 0;
+  let n101 = 0;
 
-  let zeros = 0;
-  let ones = 0;
-  let ans = 0;
-
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < s.length; i++) {
     if (s[i] === '0') {
-      zeros++;
-      n01 += ones;
-      ans += n10;
+      n0++;
+      n10 += n1;
+      n010 += n01;
     }
     if (s[i] === '1') {
-      ones++;
-      n10 += zeros;
-      ans += n01;
+      n1++;
+      n01 += n0;
+      n101 += n10;
     }
   }
-  return ans;
+  return n010 + n101;
 };
 
 var s = '001101';
