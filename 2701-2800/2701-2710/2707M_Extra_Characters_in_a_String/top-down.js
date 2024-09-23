@@ -9,19 +9,23 @@
  */
 var minExtraChar = function (s, dictionary) {
   const n = s.length;
-  const dp = new Array(n + 1).fill(Number.MAX_SAFE_INTEGER);
-  dp[0] = 0;
-  for (let left = 0; left < n; left++) {
-    dp[left + 1] = Math.min(dp[left + 1], dp[left] + 1);
-    for (const word of dictionary) {
-      const right = left + word.length;
-      const substr = s.substring(left, right);
-      if (right <= n && substr === word) {
-        dp[right] = Math.min(dp[right], dp[left]);
+  const words = new Set(dictionary);
+  const memo = new Array(n);
+  return dp(0);
+
+  function dp(startIndex) {
+    if (startIndex === n) return 0;
+    if (memo[startIndex] !== undefined) return memo[startIndex];
+
+    let countExtraChar = 1 + dp(startIndex + 1);
+    for (let endIndex = startIndex; endIndex < n; endIndex++) {
+      const word = s.substring(startIndex, endIndex + 1);
+      if (words.has(word)) {
+        countExtraChar = Math.min(countExtraChar, dp(endIndex + 1));
       }
     }
+    return (memo[startIndex] = countExtraChar);
   }
-  return dp[n];
 };
 
 var s = 'leetscode',
