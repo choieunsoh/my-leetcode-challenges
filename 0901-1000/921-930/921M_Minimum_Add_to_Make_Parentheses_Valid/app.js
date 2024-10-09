@@ -1,26 +1,26 @@
 // 921. Minimum Add to Make Parentheses Valid
 // https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/
 // T.C.: O(n)
-// S.C.: O(n)
+// S.C.: O(1)
 /**
  * @param {string} s
  * @return {number}
  */
 var minAddToMakeValid = function (s) {
-  let left = 0;
-  let right = 0;
+  let openBrackets = 0;
+  let minAddsRequired = 0;
   for (const c of s) {
     if (c === ')') {
-      if (left === 0) {
-        right++;
+      if (openBrackets === 0) {
+        minAddsRequired++;
       } else {
-        left--;
+        openBrackets--;
       }
     } else {
-      left++;
+      openBrackets++;
     }
   }
-  return left + right;
+  return openBrackets + minAddsRequired;
 };
 
 var s = '())';
