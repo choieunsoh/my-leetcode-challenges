@@ -1,9 +1,9 @@
 // 2583. Kth Largest Sum in a Binary Tree
 // https://leetcode.com/problems/kth-largest-sum-in-a-binary-tree/
-// T.C.: O(log n * log k)
+// T.C.: O((log n)^2 + n log k)
 // S.C.: O(n)
 const { TreeNode, createTree, inOrder } = require('../../../_utils/tree');
-const { MinPriorityQueue } = require('@datastructures-js/priority-queue');
+const { MaxPriorityQueue } = require('@datastructures-js/priority-queue');
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
@@ -18,7 +18,7 @@ const { MinPriorityQueue } = require('@datastructures-js/priority-queue');
  * @return {number}
  */
 var kthLargestLevelSum = function (root, k) {
-  const pq = new MinPriorityQueue({ priority: (a) => a });
+  const pq = new MaxPriorityQueue({ priority: (a) => a });
   let q = [root];
   while (q.length) {
     const newQ = [];
@@ -29,15 +29,16 @@ var kthLargestLevelSum = function (root, k) {
       if (node.left) newQ.push(node.left);
       if (node.right) newQ.push(node.right);
     }
-
-    pq.enqueue(sum);
-    if (pq.size() > k) pq.dequeue();
-
     q = newQ;
+    pq.enqueue(sum);
   }
 
-  if (pq.size() < k) return -1;
-  return pq.front().element;
+  let result = -1;
+  if (pq.size() < k) return result;
+  for (let i = 0; i < k; i++) {
+    result = pq.dequeue().element;
+  }
+  return result;
 };
 
 var root = createTree([5, 8, 9, 2, 1, 3, 7, 4, 6]),
