@@ -16,40 +16,69 @@
  * @return {number[]}
  */
 var treeQueries = function (root, queries) {
-  const result = new Array(queries.length);
-  const leftHeights = new Map();
-  const rightHeights = new Map();
-  const removed = new Map();
+  const nodeIndexMap = new Map();
+  const subtreeSize = new Map();
+  const nodeDepths = [];
+  const maxDepthFromLeft = [];
+  const maxDepthFromRight = [];
 
-  calculateHeights(root, 0);
-  calculateRemovedHeights(root, 0);
+  // Perform DFS to populate nodeIndexMap and nodeDepths
+  dfs(root, 0);
 
+  const totalNodes = nodeDepths.length;
+
+  // Calculate subtree sizes
+  calculateSubtreeSize(root);
+
+  // Calculate maximum depths from left and right
+  maxDepthFromLeft.push(nodeDepths[0]);
+  maxDepthFromRight.push(nodeDepths[totalNodes - 1]);
+
+  for (let i = 1; i < totalNodes; i++) {
+    maxDepthFromLeft.push(Math.max(maxDepthFromLeft[i - 1], nodeDepths[i]));
+    maxDepthFromRight.push(Math.max(maxDepthFromRight[i - 1], nodeDepths[totalNodes - i - 1]));
+  }
+  maxDepthFromRight.reverse();
+
+  // Process queries
+  const results = new Array(queries.length);
   for (let i = 0; i < queries.length; i++) {
-    result[i] = removed.get(queries[i]);
-  }
-  return result;
+    const queryNode = queries[i];
+    const startIndex = nodeIndexMap.get(queryNode) - 1;
+    const endIndex = startIndex + 1 + subtreeSize.get(queryNode);
 
-  function calculateHeights(root, height) {
-    if (!root) return height - 1;
+    let maxDepth = maxDepthFromLeft[startIndex];
+    if (endIndex < totalNodes) {
+      maxDepth = Math.max(maxDepth, maxDepthFromRight[endIndex]);
+    }
 
-    const left = calculateHeights(root.left, height + 1);
-    leftHeights.set(root.val, left);
-
-    const right = calculateHeights(root.right, height + 1);
-    rightHeights.set(root.val, right);
-
-    return Math.max(left, right);
+    results[i] = maxDepth;
   }
 
-  function calculateRemovedHeights(root, height) {
-    if (!root) return;
-    removed.set(root.val, height);
+  return results;
 
-    const leftHeight = leftHeights.get(root.val);
-    const rightHeight = rightHeights.get(root.val);
+  // Depth-first search to populate nodeIndexMap and nodeDepths
+  function dfs(node, depth) {
+    if (!node) return;
 
-    calculateRemovedHeights(root.left, Math.max(height, rightHeight));
-    calculateRemovedHeights(root.right, Math.max(height, leftHeight));
+    nodeIndexMap.set(node.val, nodeDepths.length);
+    nodeDepths.push(depth);
+
+    dfs(node.left, depth + 1);
+    dfs(node.right, depth + 1);
+  }
+
+  // Calculate the size of subtree for each node
+  function calculateSubtreeSize(node) {
+    if (!node) return 0;
+
+    const leftSize = calculateSubtreeSize(node.left);
+    const rightSize = calculateSubtreeSize(node.right);
+
+    const totalSize = leftSize + rightSize + 1;
+    subtreeSize.set(node.val, totalSize);
+
+    return totalSize;
   }
 };
 

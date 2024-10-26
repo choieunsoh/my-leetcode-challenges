@@ -16,40 +16,34 @@
  * @return {number[]}
  */
 var treeQueries = function (root, queries) {
+  const resultMap = new Map();
+  const heightCache = new Map();
+  dfs(root, 0, 0);
+
   const result = new Array(queries.length);
-  const leftHeights = new Map();
-  const rightHeights = new Map();
-  const removed = new Map();
-
-  calculateHeights(root, 0);
-  calculateRemovedHeights(root, 0);
-
   for (let i = 0; i < queries.length; i++) {
-    result[i] = removed.get(queries[i]);
+    result[i] = resultMap.get(queries[i]);
   }
   return result;
 
-  function calculateHeights(root, height) {
-    if (!root) return height - 1;
+  function height(node) {
+    if (!node) return -1;
+    if (heightCache.has(node)) return heightCache.get(node);
 
-    const left = calculateHeights(root.left, height + 1);
-    leftHeights.set(root.val, left);
-
-    const right = calculateHeights(root.right, height + 1);
-    rightHeights.set(root.val, right);
-
-    return Math.max(left, right);
+    const leftHeight = height(node.left);
+    const rightHeight = height(node.right);
+    const maxHeight = Math.max(leftHeight, rightHeight) + 1;
+    heightCache.set(node, maxHeight);
+    return maxHeight;
   }
 
-  function calculateRemovedHeights(root, height) {
-    if (!root) return;
-    removed.set(root.val, height);
+  function dfs(node, depth, maxVal) {
+    if (!node) return;
 
-    const leftHeight = leftHeights.get(root.val);
-    const rightHeight = rightHeights.get(root.val);
+    resultMap.set(node.val, maxVal);
 
-    calculateRemovedHeights(root.left, Math.max(height, rightHeight));
-    calculateRemovedHeights(root.right, Math.max(height, leftHeight));
+    dfs(node.left, depth + 1, Math.max(maxVal, depth + 1 + height(node.right)));
+    dfs(node.right, depth + 1, Math.max(maxVal, depth + 1 + height(node.left)));
   }
 };
 

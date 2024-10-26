@@ -16,40 +16,54 @@
  * @return {number[]}
  */
 var treeQueries = function (root, queries) {
-  const result = new Array(queries.length);
-  const leftHeights = new Map();
-  const rightHeights = new Map();
-  const removed = new Map();
+  const nodeDepths = new Map();
+  const subtreeHeights = new Map();
+  const firstLargestHeight = new Map();
+  const secondLargestHeight = new Map();
 
-  calculateHeights(root, 0);
-  calculateRemovedHeights(root, 0);
+  // Perform DFS to calculate depths and heights
+  dfs(root, 0);
 
+  const results = new Array(queries.length);
+
+  // Process each query
   for (let i = 0; i < queries.length; i++) {
-    result[i] = removed.get(queries[i]);
-  }
-  return result;
+    const queryNode = queries[i];
+    const nodeLevel = nodeDepths.get(queryNode);
 
-  function calculateHeights(root, height) {
-    if (!root) return height - 1;
-
-    const left = calculateHeights(root.left, height + 1);
-    leftHeights.set(root.val, left);
-
-    const right = calculateHeights(root.right, height + 1);
-    rightHeights.set(root.val, right);
-
-    return Math.max(left, right);
+    // Calculate the height of the tree after removing the query node
+    if (subtreeHeights.get(queryNode) === firstLargestHeight.get(nodeLevel)) {
+      results[i] = nodeLevel + (secondLargestHeight.get(nodeLevel) || 0) - 1;
+    } else {
+      results[i] = nodeLevel + (firstLargestHeight.get(nodeLevel) || 0) - 1;
+    }
   }
 
-  function calculateRemovedHeights(root, height) {
-    if (!root) return;
-    removed.set(root.val, height);
+  return results;
 
-    const leftHeight = leftHeights.get(root.val);
-    const rightHeight = rightHeights.get(root.val);
+  // Depth-first search to calculate node depths and subtree heights
+  function dfs(node, level) {
+    if (!node) return 0;
 
-    calculateRemovedHeights(root.left, Math.max(height, rightHeight));
-    calculateRemovedHeights(root.right, Math.max(height, leftHeight));
+    nodeDepths.set(node.val, level);
+
+    // Calculate the height of the current subtree
+    const leftHeight = dfs(node.left, level + 1);
+    const rightHeight = dfs(node.right, level + 1);
+    const currentHeight = 1 + Math.max(leftHeight, rightHeight);
+
+    subtreeHeights.set(node.val, currentHeight);
+
+    // Update the largest and second largest heights at the current level
+    const currentFirstLargest = firstLargestHeight.get(level) || 0;
+    if (currentHeight > currentFirstLargest) {
+      secondLargestHeight.set(level, currentFirstLargest);
+      firstLargestHeight.set(level, currentHeight);
+    } else if (currentHeight > (secondLargestHeight.get(level) || 0)) {
+      secondLargestHeight.set(level, currentHeight);
+    }
+
+    return currentHeight;
   }
 };
 
