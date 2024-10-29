@@ -1,7 +1,7 @@
 // 265. Paint House II
 // https://leetcode.com/problems/paint-house-ii/
-// T.C.: O(n*k)
-// S.C.: O(1)
+// T.C.: O(n*k^2)
+// S.C.: O(n*k)
 /**
  * @param {number[][]} costs
  * @return {number}
@@ -12,26 +12,13 @@ var minCostII = function (costs) {
   const n = costs.length;
 
   for (let house = 1; house < n; house++) {
-    // Find the minimum and second minimum color in the PREVIOUS row.
-    let minColor = -1;
-    let secondMinColor = -1;
     for (let color = 0; color < k; color++) {
-      const cost = costs[house - 1][color];
-      if (minColor === -1 || cost < costs[house - 1][minColor]) {
-        secondMinColor = minColor;
-        minColor = color;
-      } else if (secondMinColor === -1 || cost < costs[house - 1][secondMinColor]) {
-        secondMinColor = color;
+      let min = Number.MAX_SAFE_INTEGER;
+      for (let previousColor = 0; previousColor < k; previousColor++) {
+        if (color === previousColor) continue;
+        min = Math.min(min, costs[house - 1][previousColor]);
       }
-    }
-
-    // And now calculate the new costs for the current row.
-    for (let color = 0; color < k; color++) {
-      if (color === minColor) {
-        costs[house][color] += costs[house - 1][secondMinColor];
-      } else {
-        costs[house][color] += costs[house - 1][minColor];
-      }
+      costs[house][color] += min;
     }
   }
 
