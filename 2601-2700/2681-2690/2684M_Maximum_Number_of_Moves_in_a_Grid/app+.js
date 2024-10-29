@@ -1,5 +1,7 @@
 // 2684. Maximum Number of Moves in a Grid
 // https://leetcode.com/problems/maximum-number-of-moves-in-a-grid/
+// T.C.: O(m*n)
+// S.C.: O(m*n)
 /**
  * @param {number[][]} grid
  * @return {number}

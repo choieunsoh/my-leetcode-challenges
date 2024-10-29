@@ -1,5 +1,7 @@
 // 2684. Maximum Number of Moves in a Grid
 // https://leetcode.com/problems/maximum-number-of-moves-in-a-grid/
+// T.C.: O(m*n)
+// S.C.: O(m*n)
 /**
  * @param {number[][]} grid
  * @return {number}
@@ -9,29 +11,30 @@ var maxMoves = function (grid) {
   const cols = grid[0].length;
   const seen = Array.from({ length: rows }, () => new Array(cols).fill(false));
   let maxMoves = -1;
-  let q = [];
+  let queue = [];
   for (let row = 0; row < rows; row++) {
-    q.push([row, 0]);
+    queue.push([row, 0]);
   }
-  while (q.length) {
-    const qq = [];
-    for (let i = 0; i < q.length; i++) {
-      const [r, c] = q[i];
+
+  while (queue.length) {
+    const nextQueue = [];
+    for (let i = 0; i < queue.length; i++) {
+      const [r, c] = queue[i];
       const curr = grid[r][c];
       if (r - 1 >= 0 && c + 1 < cols && grid[r - 1][c + 1] > curr && !seen[r - 1][c + 1]) {
-        qq.push([r - 1, c + 1]);
+        nextQueue.push([r - 1, c + 1]);
         seen[r - 1][c + 1] = true;
       }
       if (c + 1 < cols && grid[r][c + 1] > curr && !seen[r][c + 1]) {
-        qq.push([r, c + 1]);
+        nextQueue.push([r, c + 1]);
         seen[r][c + 1] = true;
       }
       if (r + 1 < rows && c + 1 < cols && grid[r + 1][c + 1] > curr && !seen[r + 1][c + 1]) {
-        qq.push([r + 1, c + 1]);
+        nextQueue.push([r + 1, c + 1]);
         seen[r + 1][c + 1] = true;
       }
     }
-    q = qq;
+    queue = nextQueue;
     maxMoves++;
   }
   return maxMoves;
