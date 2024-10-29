@@ -1,7 +1,7 @@
 // 270. Closest Binary Search Tree Value
 // https://leetcode.com/problems/closest-binary-search-tree-value/
-// T.C.: O(h)
-// S.C.: O(1)
+// T.C.: O(n)
+// S.C.: O(n)
 const { TreeNode, createTree, inOrder } = require('../../../_utils/tree');
 /**
  * Definition for a binary tree node.
@@ -17,21 +17,25 @@ const { TreeNode, createTree, inOrder } = require('../../../_utils/tree');
  * @return {number}
  */
 var closestValue = function (root, target) {
-  let result = root.val;
-  while (root) {
-    const currVal = root.val;
-    const currDiff = Math.abs(currVal - target);
-    const diff = Math.abs(result - target);
-    if (currDiff < diff || (currDiff === diff && currVal < result)) {
-      result = currVal;
-    }
-    if (currVal > target) {
-      root = root.left;
-    } else {
-      root = root.right;
+  const nums = [];
+  inorder(root, nums);
+
+  let result = 0;
+  let diff = Number.MAX_SAFE_INTEGER;
+  for (const num of nums) {
+    if (Math.abs(num - target) < diff) {
+      diff = Math.abs(num - target);
+      result = num;
     }
   }
   return result;
+
+  function inorder(root, nums) {
+    if (root == null) return;
+    inorder(root.left, nums);
+    nums.push(root.val);
+    inorder(root.right, nums);
+  }
 };
 
 var root = createTree([4, 2, 5, 1, 3]),
