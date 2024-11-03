@@ -1,6 +1,6 @@
 // 796. Rotate String
 // https://leetcode.com/problems/rotate-string/
-// T.C.: O(n)
+// T.C.: O(n^2)
 // S.C.: O(1)
 /**
  * @param {string} s
@@ -9,8 +9,20 @@
  */
 var rotateString = function (s, goal) {
   if (s.length !== goal.length) return false;
-  goal += goal;
-  return goal.includes(s);
+  const length = s.length;
+
+  // Try all possible rotations of the string
+  for (let rotationCount = 0; rotationCount < length; rotationCount++) {
+    // Perform one rotation
+    s = rotateOnce(s);
+    if (s === goal) return true;
+  }
+  return false;
+
+  function rotateOnce(arr) {
+    const firstChar = arr[0];
+    return arr.slice(1) + firstChar;
+  }
 };
 
 var s = 'abcde',
