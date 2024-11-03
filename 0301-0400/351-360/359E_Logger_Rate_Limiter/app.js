@@ -1,8 +1,9 @@
 // 359. Logger Rate Limiter
 // https://leetcode.com/problems/logger-rate-limiter/
-
+// T.C.: O(1)
+// S.C.: O(n)
 var Logger = function () {
-  this.map = new Map();
+  this.log = new Map();
 };
 
 /**
@@ -11,12 +12,18 @@ var Logger = function () {
  * @return {boolean}
  */
 Logger.prototype.shouldPrintMessage = function (timestamp, message) {
-  const map = this.map;
-  const nextTimestamp = (map.get(message) ?? -10) + 10;
-  if (timestamp >= nextTimestamp) {
-    map.set(message, timestamp);
+  const log = this.log;
+  if (!log.has(message)) {
+    log.set(message, timestamp);
     return true;
   }
+
+  const previousTimestamp = log.get(message);
+  if (timestamp - previousTimestamp >= 10) {
+    log.set(message, timestamp);
+    return true;
+  }
+
   return false;
 };
 
