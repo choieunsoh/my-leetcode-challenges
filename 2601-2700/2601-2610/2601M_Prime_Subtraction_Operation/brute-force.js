@@ -1,54 +1,34 @@
 // 2601. Prime Subtraction Operation
 // https://leetcode.com/problems/prime-subtraction-operation/
-// T.C.: O(n+log(log(m)))
-// S.C.: O(m)
-let isPrime = [];
+// T.C.: O(n*m*sqrt(m))
+// S.C.: O(1)
 /**
  * @param {number[]} nums
  * @return {boolean}
  */
 var primeSubOperation = function (nums) {
-  if (isPrime.length === 0) {
-    createPrimeNumbers(1000);
-  }
-
   const n = nums.length;
   for (let i = 0; i < n; i++) {
-    const num = nums[i];
-    const primes = getPrimeNumbers(num);
+    const num = i === 0 ? nums[i] : nums[i] - nums[i - 1];
+    if (num <= 0) return false;
 
-    let j = 0;
-    while (j < primes.length && nums[i] - primes[j] <= nums[i - 1]) {
-      j++;
+    let largestPrime = 0;
+    for (let j = num - 1; j >= 2; j--) {
+      if (isPrime(j)) {
+        largestPrime = j;
+        break;
+      }
     }
 
-    if (j < primes.length) {
-      nums[i] -= primes[j];
-    }
-  }
-
-  for (let i = 0; i < n - 1; i++) {
-    if (nums[i] >= nums[i + 1]) return false;
+    nums[i] -= largestPrime;
   }
   return true;
 
-  function getPrimeNumbers(num) {
-    const result = [];
-    for (let i = num - 1; i > 1; i--) {
-      if (isPrime[i]) result.push(i);
+  function isPrime(num) {
+    for (let i = 2; i * i <= num; i++) {
+      if (num % i === 0) return false;
     }
-    return result;
-  }
-
-  function createPrimeNumbers(n) {
-    isPrime = new Array(n + 1).fill(true);
-    isPrime[1] = false;
-    for (let i = 2; i * i < n; i++) {
-      if (!isPrime[i]) continue;
-      for (let j = i * i; j < n; j += i) {
-        isPrime[j] = false;
-      }
-    }
+    return true;
   }
 };
 
