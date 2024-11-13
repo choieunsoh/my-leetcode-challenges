@@ -1,5 +1,7 @@
 // 2563. Count the Number of Fair Pairs
 // https://leetcode.com/problems/count-the-number-of-fair-pairs/
+// T.C.: O(n log n)
+// S.C.: O(log n)
 /**
  * @param {number[]} nums
  * @param {number} lower
@@ -8,6 +10,15 @@
  */
 var countFairPairs = function (nums, lower, upper) {
   const n = nums.length;
+  let result = 0;
+  nums.sort((a, b) => a - b);
+  for (let i = 0; i < n - 1; i++) {
+    const lb = lowerBound(i + 1, n - 1, lower - nums[i]);
+    const ub = upperBound(i + 1, n - 1, upper - nums[i]);
+    result += ub - lb;
+  }
+  return result;
+
   function lowerBound(left, right, target) {
     while (left <= right) {
       const mid = (left + right) >> 1;
@@ -20,6 +31,7 @@ var countFairPairs = function (nums, lower, upper) {
     }
     return left;
   }
+
   function upperBound(left, right, target) {
     while (left <= right) {
       const mid = (left + right) >> 1;
@@ -32,15 +44,6 @@ var countFairPairs = function (nums, lower, upper) {
     }
     return left;
   }
-
-  let result = 0;
-  nums.sort((a, b) => a - b);
-  for (let i = 0; i < n - 1; i++) {
-    const lb = lowerBound(i + 1, n - 1, lower - nums[i]);
-    const ub = upperBound(i + 1, n - 1, upper - nums[i]);
-    result += ub - lb;
-  }
-  return result;
 };
 
 var nums = [0, 1, 7, 4, 4, 5],
