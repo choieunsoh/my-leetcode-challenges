@@ -8,14 +8,13 @@
  * @return {number}
  */
 var minimizedMaximum = function (n, quantities) {
-  const totalQty = quantities.reduce((sum, qty) => sum + qty, 0);
+  const maxQuantity = Math.max(...quantities);
   let result = 0;
   let left = 0;
-  let right = totalQty;
+  let right = maxQuantity;
   while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
-    const stores = numberOfStores(mid);
-    if (stores <= n) {
+    const mid = (left + right) >> 1;
+    if (canDistribute(mid)) {
       result = mid;
       right = mid - 1;
     } else {
@@ -24,12 +23,22 @@ var minimizedMaximum = function (n, quantities) {
   }
   return result;
 
-  function numberOfStores(qty) {
-    let stores = 0;
-    for (let i = 0; i < quantities.length; i++) {
-      stores += Math.ceil(quantities[i] / qty);
+  function canDistribute(qty) {
+    let j = 0;
+    let remaining = quantities[j];
+    for (let i = 0; i < n; i++) {
+      if (qty >= remaining) {
+        j++;
+        if (j === quantities.length) {
+          return true;
+        } else {
+          remaining = quantities[j];
+        }
+      } else {
+        remaining -= qty;
+      }
     }
-    return stores;
+    return false;
   }
 };
 
