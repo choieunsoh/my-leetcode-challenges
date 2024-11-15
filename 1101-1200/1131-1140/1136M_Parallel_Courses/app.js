@@ -1,5 +1,7 @@
 // 1136. Parallel Courses
 // https://leetcode.com/problems/parallel-courses/
+// T.C.: O(V + E)
+// S.C.: O(V + E)
 /**
  * @param {number} n
  * @param {number[][]} relations
