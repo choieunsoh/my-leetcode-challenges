@@ -8,6 +8,7 @@
  * @return {number}
  */
 var minKnightMoves = function (x, y) {
+  [x, y] = [Math.abs(x), Math.abs(y)];
   const dirs = [
     [-2, -1],
     [-2, 1],
@@ -24,8 +25,11 @@ var minKnightMoves = function (x, y) {
   while (queue.length) {
     const newQueue = [];
     for (const [row, col] of queue) {
+      if (row < -1 || col < -1) continue;
+
       const key = `${row},${col}`;
       if (visited.has(key)) continue;
+
       visited.add(key);
       if (row === x && col === y) return steps;
 
