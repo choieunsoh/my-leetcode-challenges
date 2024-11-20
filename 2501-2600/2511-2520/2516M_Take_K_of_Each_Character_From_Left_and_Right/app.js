@@ -1,7 +1,7 @@
 // 2516. Take K of Each Character From Left and Right
 // https://leetcode.com/problems/take-k-of-each-character-from-left-and-right/description/
-// T.C.: O()
-// S.C.: O()
+// T.C.: O(n)
+// S.C.: O(1)
 /**
  * @param {string} s
  * @param {number} k
