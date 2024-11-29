@@ -1,44 +1,47 @@
 // 2577. Minimum Time to Visit a Cell In a Grid
 // https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid/
+// T.C.: O(m*n log m*n)
+// S.C.: O(m*n)
 const { MinPriorityQueue } = require('@datastructures-js/priority-queue');
 /**
  * @param {number[][]} grid
  * @return {number}
  */
 var minimumTime = function (grid) {
-  const m = grid.length;
-  const n = grid[0].length;
   if (grid[0][1] > 1 && grid[1][0] > 1) return -1;
 
-  const dx = [-1, 0, 1, 0, -1];
-  const visited = Array.from({ length: m }, () => Array(n).fill(Number.MAX_VALUE));
+  const rows = grid.length;
+  const cols = grid[0].length;
+  const MAX = Number.MAX_SAFE_INTEGER;
+  const dir = [-1, 0, 1, 0, -1];
+  const visited = Array.from({ length: rows }, () => new Array(cols).fill(MAX));
   visited[0][0] = 0;
 
-  const pq = new MinPriorityQueue((a) => a[0]);
+  const pq = new MinPriorityQueue({ priority: (a) => a[0] });
   pq.enqueue([0, 0, 0]);
 
   while (!pq.isEmpty()) {
-    const [t, i, j] = pq.dequeue();
-    if (i === m - 1 && j === n - 1) return t;
+    const [time, row, col] = pq.dequeue().element;
+    if (row === rows - 1 && col === cols - 1) return time;
 
     for (let k = 0; k < 4; k++) {
-      const x = i + dx[k];
-      const y = j + dx[k + 1];
-      if (x < 0 || x >= m || y < 0 || y >= n || t + 1 >= visited[x][y]) continue;
+      const newRow = row + dir[k];
+      const newCol = col + dir[k + 1];
+      if (newRow < 0 || newRow >= rows || newCol < 0 || newCol >= cols || time + 1 >= visited[newRow][newCol]) continue;
 
-      let times = 0;
-      const next = grid[x][y];
-      const diff = next - t;
-      if (t + 1 > next) {
-        times = t + 1;
+      let newTime = 0;
+      const nextTime = grid[newRow][newCol];
+      const diff = nextTime - time;
+      if (time + 1 > nextTime) {
+        newTime = time + 1;
       } else if (diff & 1) {
-        times = next;
+        newTime = nextTime;
       } else {
-        times = next + 1;
+        newTime = nextTime + 1;
       }
 
-      pq.enqueue([times, x, y]);
-      visited[x][y] = times;
+      pq.enqueue([newTime, newRow, newCol]);
+      visited[newRow][newCol] = newTime;
     }
   }
 
