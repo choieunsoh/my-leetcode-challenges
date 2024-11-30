@@ -1,5 +1,7 @@
 // 358. Rearrange String k Distance Apart
 // https://leetcode.com/problems/rearrange-string-k-distance-apart/
+// T.C.: O(n)
+// S.C.: O(k)
 /**
  * @param {string} s
  * @param {number} k
