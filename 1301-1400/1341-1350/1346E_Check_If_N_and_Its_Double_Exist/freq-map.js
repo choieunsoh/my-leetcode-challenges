@@ -7,12 +7,22 @@
  * @return {boolean}
  */
 var checkIfExist = function (arr) {
-  const double = {};
-  for (let i = 0; i < arr.length; i++) {
-    double[arr[i] * 2] = i;
+  const map = new Map();
+
+  for (const num of arr) {
+    // Count occurrences of each number
+    map.set(num, (map.get(num) ?? 0) + 1);
   }
-  for (let i = 0; i < arr.length; i++) {
-    if (double[arr[i]] !== undefined && double[arr[i]] !== i) return true;
+
+  for (const num of arr) {
+    // Check for double
+    if (num !== 0 && map.has(2 * num)) {
+      return true;
+    }
+    // Handle zero case (ensure there are at least two zeros)
+    if (num === 0 && map.get(num) > 1) {
+      return true;
+    }
   }
   return false;
 };

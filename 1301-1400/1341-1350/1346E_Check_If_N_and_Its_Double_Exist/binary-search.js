@@ -1,20 +1,47 @@
 // 1346. Check If N and Its Double Exist
 // https://leetcode.com/problems/check-if-n-and-its-double-exist/
-// T.C.: O(n)
-// S.C.: O(n)
+// T.C.: O(n^2)
+// S.C.: O(1)
 /**
  * @param {number[]} arr
  * @return {boolean}
  */
 var checkIfExist = function (arr) {
-  const double = {};
+  // Step 1: Sort the array
+  arr.sort((a, b) => a - b);
+
   for (let i = 0; i < arr.length; i++) {
-    double[arr[i] * 2] = i;
+    // Step 2: Calculate the target (double of current number)
+    const target = 2 * arr[i];
+    // Step 3: Custom binary search for the target
+    const index = customBinarySearch(arr, target);
+    // If the target exists and is not the same index
+    if (index >= 0 && index !== i) {
+      return true;
+    }
   }
-  for (let i = 0; i < arr.length; i++) {
-    if (double[arr[i]] !== undefined && double[arr[i]] !== i) return true;
-  }
+  // No valid pair found
   return false;
+
+  function customBinarySearch(arr, target) {
+    let left = 0;
+    let right = arr.length - 1;
+
+    while (left <= right) {
+      // Avoid potential overflow
+      const mid = (left + right) >> 1;
+
+      if (arr[mid] === target) {
+        return mid;
+      } else if (arr[mid] < target) {
+        left = mid + 1;
+      } else {
+        right = mid - 1;
+      }
+    }
+
+    return -1; // Target not found
+  }
 };
 
 var arr = [10, 2, 5, 3];

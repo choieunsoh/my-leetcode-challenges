@@ -1,5 +1,7 @@
-// https://leetcode.com/problems/check-if-n-and-its-double-exist/
 // 1346. Check If N and Its Double Exist
+// https://leetcode.com/problems/check-if-n-and-its-double-exist/
+// T.C.: O(n)
+// S.C.: O(n)
 /**
  * @param {number[]} arr
  * @return {boolean}
@@ -39,6 +41,11 @@ var result = checkIfExist(arr);
 console.log(result, result === expected);
 
 var arr = [0, 1];
+var expected = false;
+var result = checkIfExist(arr);
+console.log(result, result === expected);
+
+var arr = [4, -7, 11, 4, 18];
 var expected = false;
 var result = checkIfExist(arr);
 console.log(result, result === expected);

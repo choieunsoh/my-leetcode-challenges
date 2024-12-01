@@ -7,12 +7,11 @@
  * @return {boolean}
  */
 var checkIfExist = function (arr) {
-  const double = {};
-  for (let i = 0; i < arr.length; i++) {
-    double[arr[i] * 2] = i;
-  }
-  for (let i = 0; i < arr.length; i++) {
-    if (double[arr[i]] !== undefined && double[arr[i]] !== i) return true;
+  const double = new Set();
+  for (const num of arr) {
+    if (double.has(2 * num)) return true;
+    if (num % 2 === 0 && double.has(num / 2)) return true;
+    double.add(num);
   }
   return false;
 };

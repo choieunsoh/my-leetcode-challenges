@@ -1,19 +1,22 @@
 // 1346. Check If N and Its Double Exist
 // https://leetcode.com/problems/check-if-n-and-its-double-exist/
-// T.C.: O(n)
-// S.C.: O(n)
+// T.C.: O(n^2)
+// S.C.: O(1)
 /**
  * @param {number[]} arr
  * @return {boolean}
  */
 var checkIfExist = function (arr) {
-  const double = {};
+  // Step 1: Iterate through all pairs of indices
   for (let i = 0; i < arr.length; i++) {
-    double[arr[i] * 2] = i;
+    for (let j = 0; j < arr.length; j++) {
+      // Step 2: Check the conditions
+      if (i !== j && arr[i] === 2 * arr[j]) {
+        return true;
+      }
+    }
   }
-  for (let i = 0; i < arr.length; i++) {
-    if (double[arr[i]] !== undefined && double[arr[i]] !== i) return true;
-  }
+  // No valid pair found
   return false;
 };
 
