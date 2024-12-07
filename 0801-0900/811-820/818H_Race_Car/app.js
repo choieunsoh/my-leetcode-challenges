@@ -1,7 +1,7 @@
 // 818. Race Car
 // https://leetcode.com/problems/race-car/description/
 // T.C.: O(n log n)
-// S.C.: O(n log n)
+// S.C.: O(n)
 /**
  * @param {number} target
  * @return {number}
