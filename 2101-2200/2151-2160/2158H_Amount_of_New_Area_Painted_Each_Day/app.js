@@ -8,7 +8,8 @@
  */
 var amountPainted = function (paint) {
   const result = new Array(paint.length).fill(0);
-  const paintedTill = new Array(50001).fill(0);
+  const max = Math.max(...paint.flat());
+  const paintedTill = new Array(max).fill(0);
 
   for (let i = 0; i < paint.length; i++) {
     let [start, end] = paint[i];
