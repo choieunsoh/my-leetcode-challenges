@@ -1,21 +1,27 @@
 // 2779. Maximum Beauty of an Array After Applying Operation
 // https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation/
+// T.C.: O(N + max(nums))
+// S.C.: O(max(nums))
 /**
  * @param {number[]} nums
  * @param {number} k
  * @return {number}
  */
 var maximumBeauty = function (nums, k) {
+  if (nums.length === 1) return 1;
+
   const max = Math.max(...nums);
-  const pref = new Array(max + k + 2).fill(0);
-  for (const x of nums) {
-    pref[Math.max(x - k, 0)]++;
-    pref[Math.min(x + k + 1, max + k)]--;
+  const prefixSum = new Array(max + k + 2).fill(0);
+  for (const num of nums) {
+    prefixSum[Math.max(num - k, 0)]++;
+    prefixSum[Math.min(num + k + 1, max + k)]--;
   }
-  for (let i = 1; i < pref.length; i++) {
-    pref[i] += pref[i - 1];
+
+  for (let i = 1; i < prefixSum.length; i++) {
+    prefixSum[i] += prefixSum[i - 1];
   }
-  return Math.max(...pref);
+
+  return Math.max(...prefixSum);
 };
 
 var nums = [4, 6, 1, 2],
@@ -51,5 +57,11 @@ console.log(result, result === expected);
 var nums = [51, 91, 92, 16, 65],
   k = 27;
 var expected = 4;
+var result = maximumBeauty(nums, k);
+console.log(result, result === expected);
+
+var nums = [100000],
+  k = 0;
+var expected = 1;
 var result = maximumBeauty(nums, k);
 console.log(result, result === expected);

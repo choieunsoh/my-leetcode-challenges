@@ -9,13 +9,30 @@
  */
 var maximumBeauty = function (nums, k) {
   nums.sort((a, b) => a - b);
-  let result = 0;
-  const n = nums.length;
-  for (let j = 0, i = 0; j < n; j++) {
-    while (nums[j] - nums[i] > k * 2) i++;
-    result = Math.max(result, j - i + 1);
+  let maxBeauty = 0;
+  for (let i = 0; i < nums.length; i++) {
+    // Find the farthest index where the value is within the range [nums[i], nums[i] + 2*k]
+    const upperBound = findUpperBound(nums, nums[i] + 2 * k);
+    // Update the maximum beauty based on the current range
+    maxBeauty = Math.max(maxBeauty, upperBound - i + 1);
   }
-  return result;
+  return maxBeauty;
+
+  function findUpperBound(nums, target) {
+    let left = 0;
+    let right = nums.length - 1;
+    let result = 0;
+    while (left <= right) {
+      const mid = left + ((right - left) >> 1);
+      if (nums[mid] <= target) {
+        result = mid;
+        left = mid + 1;
+      } else {
+        right = mid - 1;
+      }
+    }
+    return result;
+  }
 };
 
 var nums = [4, 6, 1, 2],
