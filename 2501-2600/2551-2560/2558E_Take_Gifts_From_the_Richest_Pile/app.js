@@ -1,5 +1,7 @@
 // 2558. Take Gifts From the Richest Pile
 // https://leetcode.com/problems/take-gifts-from-the-richest-pile/
+// T.C.: O(k * n)
+// S.C.: O(1)
 /**
  * @param {number[]} gifts
  * @param {number} k

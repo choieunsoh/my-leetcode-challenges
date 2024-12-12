@@ -1,25 +1,34 @@
 // 2558. Take Gifts From the Richest Pile
 // https://leetcode.com/problems/take-gifts-from-the-richest-pile/
-// T.C.: O(n + k log n)
+// T.C.: O(k * (n + log n))
 // S.C.: O(n)
-const { MaxPriorityQueue } = require('@datastructures-js/priority-queue');
 /**
  * @param {number[]} gifts
  * @param {number} k
  * @return {number}
  */
 var pickGifts = function (gifts, k) {
-  const pq = new MaxPriorityQueue();
-  for (const gift of gifts) {
-    pq.enqueue(gift);
-  }
-
+  gifts.sort((a, b) => a - b);
   for (let i = 0; i < k; i++) {
-    const gift = Math.sqrt(pq.dequeue()) | 0;
-    pq.enqueue(gift);
+    const newGift = (gifts.pop() ** 0.5) | 0;
+    const index = binarySearch(gifts, newGift);
+    gifts.splice(index, 0, newGift);
   }
+  return gifts.reduce((total, gift) => total + gift, 0);
 
-  return pq.toArray().reduce((total, gift) => total + gift, 0);
+  function binarySearch(nums, target) {
+    let left = 0;
+    let right = nums.length - 1;
+    while (left <= right) {
+      const mid = (left + right) >> 1;
+      if (nums[mid] < target) {
+        left = mid + 1;
+      } else {
+        right = mid - 1;
+      }
+    }
+    return left;
+  }
 };
 
 var gifts = [25, 64, 9, 4, 100],
