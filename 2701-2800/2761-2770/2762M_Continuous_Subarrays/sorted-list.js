@@ -1,5 +1,7 @@
 // 2762. Continuous Subarrays
 // https://leetcode.com/problems/continuous-subarrays/
+// T.C.: O(n log n)
+// S.C.: O(n)
 /**
  * @param {number[]} nums
  * @return {number}
