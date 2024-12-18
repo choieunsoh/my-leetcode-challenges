@@ -8,13 +8,11 @@
  */
 var finalPrices = function (prices) {
   const stack = [];
-  for (let i = prices.length - 1; i >= 0; i--) {
-    const price = prices[i];
-    while (stack.length && stack.at(-1) > price) stack.pop();
-    if (stack.length) {
-      prices[i] -= stack.at(-1);
+  for (let i = 0; i < prices.length; i++) {
+    while (stack.length && prices[stack[stack.length - 1]] >= prices[i]) {
+      prices[stack.pop()] -= prices[i];
     }
-    stack.push(price);
+    stack.push(i);
   }
   return prices;
 };

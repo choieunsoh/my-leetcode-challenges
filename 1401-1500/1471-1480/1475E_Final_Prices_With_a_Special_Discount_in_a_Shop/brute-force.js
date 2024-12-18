@@ -1,22 +1,23 @@
 // 1475. Final Prices With a Special Discount in a Shop
 // https://leetcode.com/problems/final-prices-with-a-special-discount-in-a-shop/
-// T.C.: O(n)
+// T.C.: O(n^2)
 // S.C.: O(n)
 /**
  * @param {number[]} prices
  * @return {number[]}
  */
 var finalPrices = function (prices) {
-  const stack = [];
-  for (let i = prices.length - 1; i >= 0; i--) {
-    const price = prices[i];
-    while (stack.length && stack.at(-1) > price) stack.pop();
-    if (stack.length) {
-      prices[i] -= stack.at(-1);
+  const n = prices.length;
+  const result = [...prices];
+  for (let i = 0; i < n; i++) {
+    for (let j = i + 1; j < n; j++) {
+      if (prices[j] <= prices[i]) {
+        result[i] = prices[i] - prices[j];
+        break;
+      }
     }
-    stack.push(price);
   }
-  return prices;
+  return result;
 };
 
 var prices = [8, 4, 6, 2, 3];
