@@ -10,13 +10,82 @@ const { TreeNode, createTree, inOrder } = require('../../../_utils/tree');
  *    this.children = children;
  * };
  */
-
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
 class Node {
-  constructor(val, children) {
+  constructor(val, children = []) {
     this.val = val;
-    this.children = children ?? [];
+    this.children = children;
   }
 }
+
+class Codec {
+  // Encodes an n-ary tree to a binary tree.
+  encode(root) {
+    if (!root) return null;
+
+    const newRoot = new TreeNode(root.val);
+    const queue = [[newRoot, root]];
+
+    while (queue.length > 0) {
+      const [bNode, nNode] = queue.shift();
+
+      let prevBNode = null;
+      let headBNode = null;
+
+      for (const nChild of nNode.children) {
+        const newBNode = new TreeNode(nChild.val);
+        if (!prevBNode) {
+          headBNode = newBNode;
+        } else {
+          prevBNode.right = newBNode;
+        }
+        prevBNode = newBNode;
+
+        queue.push([newBNode, nChild]);
+      }
+
+      bNode.left = headBNode;
+    }
+
+    return newRoot;
+  }
+
+  // Decodes your binary tree to an n-ary tree.
+  decode(root) {
+    if (!root) return null;
+
+    const newRoot = new Node(root.val);
+    const queue = [[newRoot, root]];
+
+    while (queue.length > 0) {
+      const [nNode, bNode] = queue.shift();
+
+      let sibling = bNode.left;
+
+      while (sibling) {
+        const nChild = new Node(sibling.val);
+        nNode.children.push(nChild);
+
+        queue.push([nChild, sibling]);
+        sibling = sibling.right;
+      }
+    }
+
+    return newRoot;
+  }
+}
+
+/*
+ * Your Codec object will be instantiated and called as such:
+ * codec = Codec()
+ * codec.decode(codec.encode(root))
+ */
 
 function createNAryTree(values) {
   if (!values || values.length === 0 || values[0] === null) return null;
@@ -49,65 +118,6 @@ function createNAryTree(values) {
   }
   return root.children[0];
 }
-
-/**
- * Definition for a binary tree node.
- * function TreeNode(val) {
- *     this.val = val;
- *     this.left = this.right = null;
- * }
- */
-
-class Codec {
-  constructor() {}
-
-  /**
-   * @param {Node|null} root
-   * @return {TreeNode|null}
-   */
-  // Encodes an n-ary tree to a binary tree.
-  encode = function (root) {
-    if (!root) return null;
-
-    const newRoot = new TreeNode(root.val);
-    if (root.children.length > 0) {
-      const firstChild = root.children[0];
-      newRoot.left = this.encode(firstChild);
-    }
-
-    let sibling = newRoot.left;
-    for (let i = 1; i < root.children.length; i++) {
-      sibling.right = this.encode(root.children[i]);
-      sibling = sibling.right;
-    }
-
-    return newRoot;
-  };
-
-  /**
-   * @param {TreeNode|null} root
-   * @return {Node|null}
-   */
-  // Decodes your binary tree to an n-ary tree.
-  decode = function (root) {
-    if (!root) return null;
-
-    const newRoot = new Node(root.val, []);
-    let sibling = root.left;
-    while (sibling) {
-      newRoot.children.push(this.decode(sibling));
-      sibling = sibling.right;
-    }
-
-    return newRoot;
-  };
-}
-
-/*
- * Your Codec object will be instantiated and called as such:
- * codec = Codec()
- * codec.decode(codec.encode(root))
- */
 
 var codec = new Codec();
 
