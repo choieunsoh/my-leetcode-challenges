@@ -18,17 +18,13 @@ const { TreeNode, createTree, inOrder } = require('../../../_utils/tree');
 var largestValues = function (root) {
   if (!root) return [];
   const result = [];
-  let queue = [root];
-  while (queue.length) {
-    const nextQueue = [];
-    let max = Number.MIN_SAFE_INTEGER;
-    for (const node of queue) {
-      max = Math.max(max, node.val);
-      if (node.left) nextQueue.push(node.left);
-      if (node.right) nextQueue.push(node.right);
-    }
-    queue = nextQueue;
-    result.push(max);
+  const stack = [[root, 0]];
+  while (stack.length) {
+    const [node, depth] = stack.pop();
+    if (result.length === depth) result.push(node.val);
+    result[depth] = Math.max(result[depth], node.val);
+    if (node.right) stack.push([node.right, depth + 1]);
+    if (node.left) stack.push([node.left, depth + 1]);
   }
   return result;
 };
