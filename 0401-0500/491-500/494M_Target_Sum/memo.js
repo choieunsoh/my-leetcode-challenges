@@ -1,17 +1,17 @@
-// https://leetcode.com/problems/target-sum/
 // 494. Target Sum
+// https://leetcode.com/problems/target-sum/
 // Recursion with Memoization
+// T.C.: O(n*totalSum)
+// S.C.: O(n*totalSum)
 /**
  * @param {number[]} nums
  * @param {number} target
  * @return {number}
  */
 var findTargetSumWays = function (nums, target) {
-  const MIN = -10; // Number.MIN_SAFE_INTEGER
+  const MIN = -10;
   const total = nums.reduce((sum, num) => sum + num, 0);
-  const memo = Array(nums.length)
-    .fill(0)
-    .map((_) => Array(2 * total + 1).fill(MIN));
+  const memo = Array.from({ length: nums.length }, () => new Array(total * 2 + 1).fill(MIN));
 
   function backTracking(index = 0, sum = 0) {
     if (index === nums.length) {
@@ -27,22 +27,23 @@ var findTargetSumWays = function (nums, target) {
     return (memo[index][sum + total] = plus + minus);
   }
 
-  const count = backTracking(0, 0);
-  console.log(memo);
-  return count;
+  return backTracking(0, 0);
 };
 
 var nums = [1, 1, 1, 1, 1],
   target = 3;
 var expected = 5;
-console.log(findTargetSumWays(nums, target), expected);
+var result = findTargetSumWays(nums, target);
+console.log(result, result === expected);
 
 var nums = [1],
   target = 1;
 var expected = 1;
-console.log(findTargetSumWays(nums, target), expected);
+var result = findTargetSumWays(nums, target);
+console.log(result, result === expected);
 
 var nums = [0, 0, 0, 0, 0, 0, 0, 0, 1],
   target = 1;
 var expected = 256;
-console.log(findTargetSumWays(nums, target), expected);
+var result = findTargetSumWays(nums, target);
+console.log(result, result === expected);

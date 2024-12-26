@@ -1,6 +1,8 @@
-// https://leetcode.com/problems/target-sum/
 // 494. Target Sum
+// https://leetcode.com/problems/target-sum/
 // Brute Force - Back Tracking
+// T.C.: O(2^n)
+// S.C.: O(n)
 /**
  * @param {number[]} nums
  * @param {number} target
@@ -26,14 +28,17 @@ var findTargetSumWays = function (nums, target) {
 var nums = [1, 1, 1, 1, 1],
   target = 3;
 var expected = 5;
-console.log(findTargetSumWays(nums, target), expected);
+var result = findTargetSumWays(nums, target);
+console.log(result, result === expected);
 
 var nums = [1],
   target = 1;
 var expected = 1;
-console.log(findTargetSumWays(nums, target), expected);
+var result = findTargetSumWays(nums, target);
+console.log(result, result === expected);
 
 var nums = [0, 0, 0, 0, 0, 0, 0, 0, 1],
   target = 1;
 var expected = 256;
-console.log(findTargetSumWays(nums, target), expected);
+var result = findTargetSumWays(nums, target);
+console.log(result, result === expected);
