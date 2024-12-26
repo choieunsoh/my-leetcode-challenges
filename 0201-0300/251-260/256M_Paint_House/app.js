@@ -9,24 +9,15 @@
 var minCost = function (costs) {
   if (costs.length === 0) return 0;
 
-  let previousRow = costs[costs.length - 1];
-  for (let n = costs.length - 2; n >= 0; n--) {
-    const currentRow = costs[n];
-    /* PROBLEMATIC CODE IS HERE
-     * This line here is NOT making a copy of the original, it's simply
-     * making a reference to it Therefore, any writes into currentRow
-     * will also be written into "costs". This is not what we wanted!
-     */
-    // Total cost of painting the nth house red.
-    currentRow[0] += Math.min(previousRow[1], previousRow[2]);
-    // Total cost of painting the nth house green.
-    currentRow[1] += Math.min(previousRow[0], previousRow[2]);
-    // Total cost of painting the nth house blue.
-    currentRow[2] += Math.min(previousRow[0], previousRow[1]);
-    previousRow = currentRow;
+  let previousCosts = costs[costs.length - 1];
+  for (let houseIndex = costs.length - 2; houseIndex >= 0; houseIndex--) {
+    const currentCosts = costs[houseIndex];
+    currentCosts[0] += Math.min(previousCosts[1], previousCosts[2]);
+    currentCosts[1] += Math.min(previousCosts[0], previousCosts[2]);
+    currentCosts[2] += Math.min(previousCosts[0], previousCosts[1]);
+    previousCosts = currentCosts;
   }
-
-  return Math.min(Math.min(previousRow[0], previousRow[1]), previousRow[2]);
+  return Math.min(...previousCosts);
 };
 
 var costs = [
