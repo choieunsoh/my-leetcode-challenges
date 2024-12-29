@@ -7,18 +7,18 @@
  * @return {number}
  */
 var numberOfWays = function (numPeople) {
-  const MOD = 1e9 + 7;
+  const MOD = BigInt(1e9 + 7);
   const halfPeople = numPeople >> 1;
-  const memo = new Array(halfPeople + 1).fill(-1);
-  memo[0] = 1;
+  const memo = new Array(halfPeople + 1).fill(-1n);
+  memo[0] = 1n;
   dp(halfPeople);
-  return memo[halfPeople];
+  return Number(memo[halfPeople]);
 
   function dp(numPeople) {
-    if (numPeople === 1) return 1;
-    if (memo[numPeople] !== -1) return memo[numPeople];
+    if (numPeople === 1) return 1n;
+    if (memo[numPeople] !== -1n) return memo[numPeople];
 
-    let result = 0;
+    let result = 0n;
     for (let leftSide = 0; leftSide < numPeople; leftSide++) {
       const rightSide = numPeople - leftSide - 1;
       result = (result + dp(leftSide) * dp(rightSide)) % MOD;
@@ -34,5 +34,10 @@ console.log(result, result === expected);
 
 var numPeople = 6;
 var expected = 5;
+var result = numberOfWays(numPeople);
+console.log(result, result === expected);
+
+var numPeople = 140;
+var expected = 685542858;
 var result = numberOfWays(numPeople);
 console.log(result, result === expected);
