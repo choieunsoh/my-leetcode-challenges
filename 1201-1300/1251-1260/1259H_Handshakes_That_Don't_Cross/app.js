@@ -1,6 +1,6 @@
 // 1259. Handshakes That Don't Cross
 // https://leetcode.com/problems/handshakes-that-dont-cross/description/
-// T.C.: O(n)
+// T.C.: O(n^2)
 // S.C.: O(n)
 /**
  * @param {number} numPeople
