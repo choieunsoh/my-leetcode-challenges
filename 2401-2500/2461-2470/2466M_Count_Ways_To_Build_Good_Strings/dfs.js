@@ -1,5 +1,7 @@
 // 2466. Count Ways To Build Good Strings
 // https://leetcode.com/problems/count-ways-to-build-good-strings/
+// T.C.: O(high)
+// S.C.: O(high)
 /**
  * @param {number} low
  * @param {number} high
