@@ -1,5 +1,7 @@
 // 399. Evaluate Division
 // https://leetcode.com/problems/evaluate-division/
+// T.C.: O((n+m) log n)
+// S.C.: O(n)
 /**
  * @param {string[][]} equations
  * @param {number[]} values

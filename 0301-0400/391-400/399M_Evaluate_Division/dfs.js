@@ -1,5 +1,7 @@
 // 399. Evaluate Division
 // https://leetcode.com/problems/evaluate-division/
+// T.C.: O(n*m)
+// S.C.: O(n+m)
 /**
  * @param {string[][]} equations
  * @param {number[]} values
@@ -7,17 +9,14 @@
  * @return {number[]}
  */
 var calcEquation = function (equations, values, queries) {
-  const map = equations.reduce((result, [a, b], index) => {
-    const value = values[index];
-
-    let aChildren = result.get(a) ?? [];
-    let bChildren = result.get(b) ?? [];
-
-    result.set(a, [...aChildren, [b, value]]);
-    result.set(b, [...bChildren, [a, 1 / value]]);
-
-    return result;
-  }, new Map());
+  const map = new Map();
+  for (let i = 0; i < equations.length; i++) {
+    const [a, b] = equations[i];
+    if (!map.has(a)) map.set(a, []);
+    if (!map.has(b)) map.set(b, []);
+    map.get(a).push([b, values[i]]);
+    map.get(b).push([a, 1 / values[i]]);
+  }
 
   function dfs([a, b], visited = new Set(), current = 1) {
     if (!map.has(a) || !map.has(b)) return -1;
@@ -25,12 +24,10 @@ var calcEquation = function (equations, values, queries) {
     if (a === b) return current;
 
     visited.add(a);
-    let children = map.get(a);
-
-    for (const [string, value] of children) {
+    for (const [string, value] of map.get(a)) {
       if (visited.has(string)) continue;
-      let nextValue = current * value;
-      let result = dfs([string, b], visited, nextValue);
+      const nextValue = current * value;
+      const result = dfs([string, b], visited, nextValue);
       if (result !== null) return result;
     }
 

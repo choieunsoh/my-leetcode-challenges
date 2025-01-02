@@ -1,5 +1,7 @@
 // 399. Evaluate Division
 // https://leetcode.com/problems/evaluate-division/
+// T.C.: O(n*m)
+// S.C.: O(n+m)
 /**
  * @param {string[][]} equations
  * @param {number[]} values
@@ -9,7 +11,7 @@
 var calcEquation = function (equations, values, queries) {
   const graph = {};
   for (let i = 0; i < equations.length; i++) {
-    let [u, v] = equations[i];
+    const [u, v] = equations[i];
     if (!graph[u]) graph[u] = {};
     graph[u][v] = values[i];
 
