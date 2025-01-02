@@ -1,5 +1,6 @@
 // 1168. Optimize Water Distribution in a Village
 // https://leetcode.com/problems/optimize-water-distribution-in-a-village
+// Kruskal's Algorithm with Union-Find
 // T.C.: O((N+M) * log⁡(N+M))
 // S.C.: O(N+M)
 /**
@@ -12,9 +13,9 @@ var minCostToSupplyWater = function (n, wells, pipes) {
   // n + 1 vertices (n houses and 1 well)
   // Add edges coming from the well to pipes array
   for (let i = 0; i < wells.length; i++) {
-    let house = i + 1;
-    let wellId = 0;
-    let weight = wells[i];
+    const house = i + 1;
+    const wellId = 0;
+    const weight = wells[i];
     pipes.push([wellId, house, weight]);
   }
 
@@ -26,7 +27,7 @@ var minCostToSupplyWater = function (n, wells, pipes) {
   // data structure here. All the edges from pipes array
   // are added there
 
-  let unionFind = new UnionFind(pipes.length);
+  const unionFind = new UnionFind(pipes.length);
 
   // count is the number of vertices added to the MST
   let count = 0;
@@ -34,10 +35,10 @@ var minCostToSupplyWater = function (n, wells, pipes) {
   // total cost (minimum weight of the MST)
   let totalCost = 0;
   for (let i = 0; i < pipes.length; i++) {
-    let v1 = pipes[i][0];
-    let v1Group = unionFind.find(v1);
-    let v2 = pipes[i][1];
-    let v2Group = unionFind.find(v2);
+    const v1 = pipes[i][0];
+    const v1Group = unionFind.find(v1);
+    const v2 = pipes[i][1];
+    const v2Group = unionFind.find(v2);
 
     // We add an edge to the spanning tree if both the vertices
     // are not from the same group (thereby not forming a cycle)
@@ -71,8 +72,8 @@ class UnionFind {
   }
 
   union(x, y) {
-    let parentX = this.find(x);
-    let parentY = this.find(y);
+    const parentX = this.find(x);
+    const parentY = this.find(y);
 
     if (parentX === parentY) {
       return parentX;
