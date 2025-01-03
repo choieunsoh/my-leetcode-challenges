@@ -10,45 +10,28 @@
  * @return {boolean}
  */
 var validPath = function (n, edges, source, destination) {
-  const uf = new UnionFind(n);
+  const graph = Array.from({ length: n }, () => []);
   for (const [u, v] of edges) {
-    uf.union(u, v);
+    graph[u].push(v);
+    graph[v].push(u);
   }
-  return uf.isConnected(source, destination);
+
+  const visited = new Array(n).fill(false);
+  visited[source] = true;
+
+  const stack = [source];
+  while (stack.length) {
+    const node = stack.pop();
+    if (node === destination) return true;
+
+    for (const neighbor of graph[source]) {
+      if (visited[neighbor]) continue;
+      stack.push(neighbor);
+      visited[neighbor] = true;
+    }
+  }
+  return false;
 };
-
-class UnionFind {
-  constructor(size) {
-    this.root = Array.from({ length: size }, (_, i) => i);
-    this.rank = new Array(size).fill(1);
-    this.groups = size;
-  }
-
-  find(x) {
-    if (this.root[x] !== x) {
-      this.root[x] = this.find(this.root[x]);
-    }
-    return this.root[x];
-  }
-
-  union(x, y) {
-    const rootX = this.find(x);
-    const rootY = this.find(y);
-    if (rootX === rootY) return;
-
-    if (this.rank[rootX] >= this.rank[rootY]) {
-      this.root[rootY] = rootX;
-      this.rank[rootX] += this.rank[rootY];
-    } else {
-      this.root[rootX] = rootY;
-      this.rank[rootY] += this.rank[rootX];
-    }
-  }
-
-  isConnected(x, y) {
-    return this.find(x) === this.find(y);
-  }
-}
 
 var n = 3,
   edges = [
