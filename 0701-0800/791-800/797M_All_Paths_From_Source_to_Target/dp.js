@@ -1,28 +1,39 @@
 // 797. All Paths From Source to Target
 // https://leetcode.com/problems/all-paths-from-source-to-target/
 // T.C.: O(N*2^N)
-// S.C.: O(N)
+// S.C.: O(N*2^N)
 /**
  * @param {number[][]} graph
  * @return {number[][]}
  */
 var allPathsSourceTarget = function (graph) {
-  function dfs(index, path) {
-    path.push(index);
-    if (index === graph.length - 1) {
-      result.push([...path]);
-      return;
+  const target = graph.length - 1;
+  const memo = new Map();
+  return allPathsToTarget(0);
+
+  function allPathsToTarget(currNode) {
+    // memoization. check the result in the cache first
+    if (memo.has(currNode)) {
+      return memo.get(currNode);
     }
 
-    const nodes = graph[index];
-    for (const node of nodes) {
-      dfs(node, [...path]);
+    const results = [];
+
+    // base case
+    if (currNode === target) {
+      results.push([target]);
+      return results;
     }
+
+    // iterate through the paths starting from each neighbor.
+    for (const nextNode of graph[currNode]) {
+      for (const path of allPathsToTarget(nextNode)) {
+        results.push([currNode, ...path]);
+      }
+    }
+    memo.set(currNode, results);
+    return results;
   }
-
-  const result = [];
-  dfs(0, []);
-  return result;
 };
 
 var graph = [[1, 2], [3], [3], []];

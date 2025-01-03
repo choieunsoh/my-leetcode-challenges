@@ -1,5 +1,7 @@
 // 797. All Paths From Source to Target
 // https://leetcode.com/problems/all-paths-from-source-to-target/
+// T.C.: O(N*2^N)
+// S.C.: O(N)
 /**
  * @param {number[][]} graph
  * @return {number[][]}
@@ -9,14 +11,16 @@ var allPathsSourceTarget = function (graph) {
   dfs(0, []);
   return result;
 
-  function dfs(i, path) {
-    if (i === graph.length - 1) {
-      result.push([...path, i]);
+  function dfs(node, path) {
+    if (node === graph.length - 1) {
+      result.push([...path, node]);
       return;
     }
 
-    for (const next of graph[i]) {
-      dfs(next, [...path, i]);
+    for (const neighbor of graph[node]) {
+      path.push(node);
+      dfs(neighbor, path);
+      path.pop();
     }
   }
 };
