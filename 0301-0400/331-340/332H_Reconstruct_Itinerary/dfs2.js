@@ -8,29 +8,24 @@
  */
 var findItinerary = function (tickets) {
   const graph = new Map();
-  for (const [from, to] of tickets) {
-    if (!graph.has(from)) {
-      graph.set(from, []);
+  for (const [src, dst] of tickets) {
+    if (!graph.has(src)) graph.set(src, []);
+    graph.get(src).push(dst);
+  }
+
+  for (const [, airports] of graph) {
+    airports.sort((a, b) => b.localeCompare(a));
+  }
+
+  const stack = ['JFK'];
+  const itinerary = [];
+  while (stack.length > 0) {
+    while (graph.has(stack[stack.length - 1]) && graph.get(stack[stack.length - 1]).length > 0) {
+      stack.push(graph.get(stack[stack.length - 1]).pop());
     }
-    graph.get(from).push(to);
+    itinerary.push(stack.pop());
   }
-
-  for (const [, toAirports] of graph) {
-    toAirports.sort((a, b) => b.localeCompare(a));
-  }
-
-  const result = [];
-  dfs('JFK');
-  return result.reverse();
-
-  function dfs(fromAirport) {
-    const toAirports = graph.get(fromAirport) ?? [];
-    while (toAirports.length) {
-      const nextAirport = toAirports.pop();
-      dfs(nextAirport);
-    }
-    result.push(fromAirport);
-  }
+  return itinerary.reverse();
 };
 
 var tickets = [

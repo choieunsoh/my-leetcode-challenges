@@ -1,50 +1,31 @@
 // 332. Reconstruct Itinerary
 // https://leetcode.com/problems/reconstruct-itinerary/
+// T.C.: O(N log N)
+// S.C.: O(N)
 /**
  * @param {string[][]} tickets
  * @return {string[]}
  */
 var findItinerary = function (tickets) {
-  const flights = tickets.length;
   const graph = new Map();
-  const visitedMap = new Map();
-  for (const [from, to] of tickets) {
-    if (!graph.has(from)) {
-      graph.set(from, []);
-    }
-    graph.get(from).push(to);
-  }
-  for (const [fromAirport, toAirports] of graph) {
-    toAirports.sort();
-    visitedMap.set(fromAirport, new Array(toAirports.length).fill(false));
+  for (const [src, dst] of tickets) {
+    if (!graph.has(src)) graph.set(src, []);
+    graph.get(src).push(dst);
   }
 
-  let result = [];
-  const routes = ['JFK'];
-  backtrack('JFK', routes);
-  return result;
+  for (const [, airports] of graph) {
+    airports.sort((a, b) => b.localeCompare(a));
+  }
 
-  function backtrack(fromAirport, routes) {
-    if (routes.length === flights + 1) {
-      result = [...routes];
-      return true;
+  const itinerary = [];
+  dfs('JFK');
+  return itinerary.reverse();
+
+  function dfs(airport) {
+    while (graph.has(airport) && graph.get(airport).length > 0) {
+      dfs(graph.get(airport).pop());
     }
-
-    if (!graph.has(fromAirport)) return false;
-
-    const visited = visitedMap.get(fromAirport);
-    const toAirports = graph.get(fromAirport);
-    for (let i = 0; i < toAirports.length; i++) {
-      if (visited[i]) continue;
-
-      const toAirport = toAirports[i];
-      visited[i] = true;
-      const result = backtrack(toAirport, [...routes, toAirport]);
-      visited[i] = false;
-
-      if (result) return true;
-    }
-    return false;
+    itinerary.push(airport);
   }
 };
 
