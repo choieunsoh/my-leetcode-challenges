@@ -1,14 +1,18 @@
+// 3408. Design Task Manager
+// https://leetcode.com/problems/design-task-manager/description/
+// T.C.: O(n log n)
+// S.C.: O(n)
 const { PriorityQueue } = require('@datastructures-js/priority-queue');
 /**
  * @param {number[][]} tasks
  */
 var TaskManager = function (tasks) {
   // [userId, taskId, priority]
-  this.pq = new PriorityQueue({ compare: (a, b) => b[2] - a[2] || b[1] - a[1] });
-  this.map = new Map();
+  this.queue = new PriorityQueue({ compare: (a, b) => b[2] - a[2] || b[1] - a[1] });
+  this.tasks = new Map();
   for (const task of tasks) {
-    this.pq.enqueue(task);
-    this.map.set(task[1], task);
+    this.queue.enqueue(task);
+    this.tasks.set(task[1], task);
   }
 };
 
@@ -19,8 +23,8 @@ var TaskManager = function (tasks) {
  * @return {void}
  */
 TaskManager.prototype.add = function (userId, taskId, priority) {
-  this.pq.enqueue([userId, taskId, priority]);
-  this.map.set(taskId, [userId, taskId, priority]);
+  this.queue.enqueue([userId, taskId, priority]);
+  this.tasks.set(taskId, [userId, taskId, priority]);
 };
 
 /**
@@ -29,9 +33,9 @@ TaskManager.prototype.add = function (userId, taskId, priority) {
  * @return {void}
  */
 TaskManager.prototype.edit = function (taskId, newPriority) {
-  const [userId] = this.map.get(taskId);
-  this.map.set(taskId, [userId, taskId, newPriority]);
-  this.pq.enqueue([userId, taskId, newPriority]);
+  const [userId] = this.tasks.get(taskId);
+  this.tasks.set(taskId, [userId, taskId, newPriority]);
+  this.queue.enqueue([userId, taskId, newPriority]);
 };
 
 /**
@@ -39,26 +43,24 @@ TaskManager.prototype.edit = function (taskId, newPriority) {
  * @return {void}
  */
 TaskManager.prototype.rmv = function (taskId) {
-  this.map.delete(taskId);
+  this.tasks.delete(taskId);
 };
 
 /**
  * @return {number}
  */
 TaskManager.prototype.execTop = function () {
-  while (!this.pq.isEmpty()) {
-    const [userId, taskId, priority] = this.pq.front();
-    if (!this.map.has(taskId)) {
-      this.pq.dequeue();
+  while (!this.queue.isEmpty()) {
+    const [userId, taskId, priority] = this.queue.dequeue();
+    if (!this.tasks.has(taskId)) {
       continue;
     }
 
-    const curr = this.map.get(taskId);
+    const curr = this.tasks.get(taskId);
     if (userId === curr[0] && priority === curr[2]) {
-      this.map.delete(taskId);
+      this.tasks.delete(taskId);
       return userId;
     }
-    this.pq.dequeue();
   }
   return -1;
 };
