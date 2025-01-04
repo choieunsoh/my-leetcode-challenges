@@ -1,5 +1,7 @@
-// https://leetcode.com/problems/n-ary-tree-level-order-traversal/
 // 429. N-ary Tree Level Order Traversal
+// https://leetcode.com/problems/n-ary-tree-level-order-traversal/
+// T.C.: O(n)
+// S.C.: O(n)
 /**
  * // Definition for a Node.
  * function Node(val,children) {

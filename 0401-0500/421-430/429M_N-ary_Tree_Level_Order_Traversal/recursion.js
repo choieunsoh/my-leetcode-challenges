@@ -1,7 +1,7 @@
 // 429. N-ary Tree Level Order Traversal
 // https://leetcode.com/problems/n-ary-tree-level-order-traversal/
 // T.C.: O(n)
-// S.C.: O(n)
+// S.C.: O(log n)
 /**
  * // Definition for a Node.
  * function Node(val,children) {
@@ -17,19 +17,18 @@
 var levelOrder = function (root) {
   if (!root) return [];
   const result = [];
-  let queue = [root];
-  while (queue.length) {
-    const newQueue = [];
-    const level = [];
-    for (let i = 0; i < queue.length; i++) {
-      const node = queue[i];
-      level.push(node.val);
-      newQueue.push(...node.children);
-    }
-    result.push(level);
-    queue = newQueue;
-  }
+  traverseNode(root, 0);
   return result;
+
+  function traverseNode(node, level) {
+    if (result.length <= level) {
+      result.push([]);
+    }
+    result[level].push(node.val);
+    for (const child of node.children) {
+      traverseNode(child, level + 1);
+    }
+  }
 };
 
 function Node(val, children = []) {
