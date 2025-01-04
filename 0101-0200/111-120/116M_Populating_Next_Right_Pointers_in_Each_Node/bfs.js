@@ -19,18 +19,19 @@ const { TreeNode, createTree, printTree } = require('../../../_utils/tree');
  */
 const connect = (root) => {
   if (!root) return null;
-  if (root.left && root.right) {
-    root.left.next = root.right;
-  }
-  if (root.right && root.next) {
-    root.right.next = root.next.left;
-  }
 
-  if (root.left) {
-    root.left = connect(root.left);
-  }
-  if (root.right) {
-    root.right = connect(root.right);
+  let queue = [root];
+  while (queue.length) {
+    const nextQueue = [];
+    for (let i = 0; i < queue.length; i++) {
+      const node = queue[i];
+      if (i < queue.length - 1) {
+        node.next = queue[i + 1];
+      }
+      if (node.left) nextQueue.push(node.left);
+      if (node.right) nextQueue.push(node.right);
+    }
+    queue = nextQueue;
   }
   return root;
 };
@@ -39,4 +40,4 @@ var root = createTree([1, 2, 3, 4, 5, 6, 7]);
 var expected = [1, '#', 2, 3, '#', 4, 5, 6, 7, '#'];
 var result = connect(root);
 printTree(result, 'level');
-console.log(expected.join(' '));
+console.log(result, expected.join());
