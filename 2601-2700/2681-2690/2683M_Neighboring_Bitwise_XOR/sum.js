@@ -7,12 +7,11 @@
  * @return {boolean}
  */
 var doesValidArrayExist = function (derived) {
-  let curr = false;
-  for (const bit of derived) {
-    if (bit) curr = !curr;
+  let sum = 0;
+  for (const num of derived) {
+    sum += num;
   }
-
-  return !curr;
+  return sum % 2 === 0;
 };
 
 var derived = [1, 1, 0];
