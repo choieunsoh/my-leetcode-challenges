@@ -1,5 +1,7 @@
 // 605. Can Place Flowers
 // https://leetcode.com/problems/can-place-flowers/
+// T.C.: O(n)
+// S.C.: O(1)
 /**
  * @param {number[]} flowerbed
  * @param {number} n
