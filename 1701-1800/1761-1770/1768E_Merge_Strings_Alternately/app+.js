@@ -9,11 +9,10 @@
  */
 var mergeAlternately = function (word1, word2) {
   let result = '';
-  let i = 0;
-  let j = 0;
-  while (i < word1.length || j < word2.length) {
-    result += word1.charAt(i++) ?? '';
-    result += word2.charAt(j++) ?? '';
+  const maxLength = Math.max(word1.length, word2.length);
+  for (let i = 0; i < maxLength; i++) {
+    if (i < word1.length) result += word1.charAt(i);
+    if (i < word2.length) result += word2.charAt(i);
   }
   return result;
 };
