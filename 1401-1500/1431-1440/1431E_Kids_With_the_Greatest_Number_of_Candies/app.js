@@ -1,5 +1,7 @@
 // 1431. Kids With the Greatest Number of Candies
 // https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/
+// T.C.: O(n)
+// S.C.: O(n)
 /**
  * @param {number[]} candies
  * @param {number} extraCandies
