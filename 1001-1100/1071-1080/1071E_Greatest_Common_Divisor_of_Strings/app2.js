@@ -1,22 +1,32 @@
 // 1071. Greatest Common Divisor of Strings
 // https://leetcode.com/problems/greatest-common-divisor-of-strings/
-// T.C.: O(m+n)
-// S.C.: O(m+n)
+// T.C.: O(min(m,n)*(m+n))
+// S.C.: O(min(m,n))
 /**
  * @param {string} str1
  * @param {string} str2
  * @return {string}
  */
 var gcdOfStrings = function (str1, str2) {
-  if (str1 + str2 !== str2 + str1) return '';
-  const len = gcd(str1.length, str2.length);
-  return str1.substring(0, len);
+  const len1 = str1.length;
+  const len2 = str2.length;
 
-  function gcd(a, b) {
-    while (b) {
-      [a, b] = [b, a % b];
+  for (let i = Math.min(len1, len2); i >= 1; i--) {
+    if (valid(str1, str2, i)) {
+      return str1.substring(0, i);
     }
-    return a;
+  }
+  return '';
+
+  function valid(str1, str2, k) {
+    const len1 = str1.length;
+    const len2 = str2.length;
+    if (len1 % k > 0 || len2 % k > 0) {
+      return false;
+    } else {
+      const base = str1.substring(0, k);
+      return str1.split(base).join('') === '' && str2.split(base).join('') === '';
+    }
   }
 };
 
