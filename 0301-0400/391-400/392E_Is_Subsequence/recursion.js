@@ -1,24 +1,21 @@
 // 392. Is Subsequence
 // https://leetcode.com/problems/is-subsequence/
 // T.C.: O(n)
-// S.C.: O(1)
+// S.C.: O(n)
 /**
  * @param {string} s
  * @param {string} t
  * @return {boolean}
  */
 var isSubsequence = function (s, t) {
-  if (s === t) return true;
+  return isSubsequenceRecursive(0, 0);
 
-  let sIndex = 0;
-  let tIndex = 0;
-  while (tIndex < t.length) {
-    if (s[sIndex] === t[tIndex]) sIndex++;
+  function isSubsequenceRecursive(sIndex, tIndex) {
     if (sIndex === s.length) return true;
-    tIndex++;
+    if (tIndex === t.length) return false;
+    if (s[sIndex] === t[tIndex]) return isSubsequenceRecursive(sIndex + 1, tIndex + 1);
+    return isSubsequenceRecursive(sIndex, tIndex + 1);
   }
-
-  return sIndex === s.length;
 };
 
 var s = 'abc',
