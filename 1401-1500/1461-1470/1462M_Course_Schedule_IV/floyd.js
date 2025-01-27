@@ -1,5 +1,6 @@
 // 1462. Course Schedule IV
 // https://leetcode.com/problems/course-schedule-iv/description/
+// Floyd-Warshall Algorithm
 // T.C.: O(n^3+m)
 // S.C.: O(n^2)
 /**
@@ -9,46 +10,29 @@
  * @return {boolean[]}
  */
 var checkIfPrerequisite = function (numCourses, prerequisites, queries) {
-  const graph = Array.from({ length: numCourses }, () => []);
-  const memo = Array.from({ length: numCourses }, () => new Array(numCourses).fill(false));
-  const inDegree = new Array(numCourses).fill(0);
+  const isPrerequisite = Array.from({ length: numCourses }, () => Array(numCourses).fill(false));
+
+  // Initialize the isPrerequisite matrix with the given prerequisites
   for (const [course, nextCourse] of prerequisites) {
-    graph[course].push(nextCourse);
-    inDegree[nextCourse]++;
+    isPrerequisite[course][nextCourse] = true;
   }
 
-  let queue = [];
-  for (let course = 0; course < numCourses; course++) {
-    if (inDegree[course] === 0) {
-      queue.push(course);
-    }
-  }
-
-  while (queue.length) {
-    const newQueue = [];
-    for (const course of queue) {
-      for (const nextCourse of graph[course]) {
-        memo[course][nextCourse] = true;
-        for (let i = 0; i < numCourses; i++) {
-          if (memo[i][course]) {
-            memo[i][nextCourse] = true;
-          }
-        }
-
-        if (--inDegree[nextCourse] === 0) {
-          newQueue.push(nextCourse);
-        }
+  // Floyd-Warshall algorithm to find all pairs reachability
+  for (let intermediate = 0; intermediate < numCourses; intermediate++) {
+    for (let src = 0; src < numCourses; src++) {
+      for (let target = 0; target < numCourses; target++) {
+        isPrerequisite[src][target] ||= isPrerequisite[src][intermediate] && isPrerequisite[intermediate][target];
       }
     }
-    queue = newQueue;
   }
 
-  const result = [];
+  // Answer the queries
+  const answer = [];
   for (const [a, b] of queries) {
-    result.push(memo[a][b]);
+    answer.push(isPrerequisite[a][b]);
   }
 
-  return result;
+  return answer;
 };
 
 var numCourses = 2,

@@ -1,6 +1,6 @@
 // 1462. Course Schedule IV
 // https://leetcode.com/problems/course-schedule-iv/description/
-// T.C.: O(n^3+m)
+// T.C.: O(n^2*m)
 // S.C.: O(n^2)
 /**
  * @param {number} numCourses
@@ -10,45 +10,28 @@
  */
 var checkIfPrerequisite = function (numCourses, prerequisites, queries) {
   const graph = Array.from({ length: numCourses }, () => []);
-  const memo = Array.from({ length: numCourses }, () => new Array(numCourses).fill(false));
-  const inDegree = new Array(numCourses).fill(0);
   for (const [course, nextCourse] of prerequisites) {
     graph[course].push(nextCourse);
-    inDegree[nextCourse]++;
-  }
-
-  let queue = [];
-  for (let course = 0; course < numCourses; course++) {
-    if (inDegree[course] === 0) {
-      queue.push(course);
-    }
-  }
-
-  while (queue.length) {
-    const newQueue = [];
-    for (const course of queue) {
-      for (const nextCourse of graph[course]) {
-        memo[course][nextCourse] = true;
-        for (let i = 0; i < numCourses; i++) {
-          if (memo[i][course]) {
-            memo[i][nextCourse] = true;
-          }
-        }
-
-        if (--inDegree[nextCourse] === 0) {
-          newQueue.push(nextCourse);
-        }
-      }
-    }
-    queue = newQueue;
   }
 
   const result = [];
   for (const [a, b] of queries) {
-    result.push(memo[a][b]);
+    result.push(isPrerequisite(a, b, new Array(numCourses).fill(false)));
   }
 
   return result;
+
+  function isPrerequisite(source, target, visited) {
+    visited[source] = true;
+    if (source === target) return true;
+
+    for (const nextCourse of graph[source]) {
+      if (!visited[nextCourse] && isPrerequisite(nextCourse, target, visited)) {
+        return true;
+      }
+    }
+    return false;
+  }
 };
 
 var numCourses = 2,

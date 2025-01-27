@@ -10,45 +10,36 @@
  */
 var checkIfPrerequisite = function (numCourses, prerequisites, queries) {
   const graph = Array.from({ length: numCourses }, () => []);
-  const memo = Array.from({ length: numCourses }, () => new Array(numCourses).fill(false));
-  const inDegree = new Array(numCourses).fill(0);
   for (const [course, nextCourse] of prerequisites) {
     graph[course].push(nextCourse);
-    inDegree[nextCourse]++;
   }
 
-  let queue = [];
-  for (let course = 0; course < numCourses; course++) {
-    if (inDegree[course] === 0) {
-      queue.push(course);
-    }
-  }
-
-  while (queue.length) {
-    const newQueue = [];
-    for (const course of queue) {
-      for (const nextCourse of graph[course]) {
-        memo[course][nextCourse] = true;
-        for (let i = 0; i < numCourses; i++) {
-          if (memo[i][course]) {
-            memo[i][nextCourse] = true;
-          }
-        }
-
-        if (--inDegree[nextCourse] === 0) {
-          newQueue.push(nextCourse);
-        }
-      }
-    }
-    queue = newQueue;
-  }
+  const isPrerequisite = Array.from({ length: numCourses }, () => new Array(numCourses).fill(false));
+  preprocess(numCourses, graph, isPrerequisite);
 
   const result = [];
   for (const [a, b] of queries) {
-    result.push(memo[a][b]);
+    result.push(isPrerequisite[a][b]);
   }
 
   return result;
+
+  function preprocess(numCourses, graph, isPrerequisite) {
+    for (let course = 0; course < numCourses; course++) {
+      let queue = [course];
+      while (queue.length) {
+        const newQueue = [];
+        for (const course of queue) {
+          for (const nextCourse of graph[course]) {
+            if (isPrerequisite[course][nextCourse]) continue;
+            isPrerequisite[course][nextCourse] = true;
+            newQueue.push(nextCourse);
+          }
+        }
+        queue = newQueue;
+      }
+    }
+  }
 };
 
 var numCourses = 2,
