@@ -17,13 +17,20 @@ const { ListNode, createList, toArray } = require('../../../_utils/list');
 var deleteMiddle = function (head) {
   if (!head.next) return null;
 
-  let slow = head;
-  let fast = head.next.next;
-  while (fast && fast.next) {
-    slow = slow.next;
-    fast = fast.next.next;
+  let p1 = head;
+  let p2 = head;
+  let count = 0;
+  while (p1) {
+    p1 = p1.next;
+    count++;
   }
-  slow.next = slow.next.next;
+
+  const middle = count >> 1;
+  for (let i = 0; i < middle - 1; i++) {
+    p2 = p2.next;
+  }
+
+  p2.next = p2.next.next;
   return head;
 };
 
