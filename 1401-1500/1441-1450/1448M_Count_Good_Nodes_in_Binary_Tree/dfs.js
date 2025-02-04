@@ -16,21 +16,24 @@ const { TreeNode, createTree } = require('../../../_utils/tree');
  * @return {number}
  */
 var goodNodes = function (root) {
-  return dfs(root, root.val);
-
-  function dfs(root, max) {
-    let count = 0;
-    if (!root) return count;
-
-    if (root.val >= max) {
-      max = root.val;
-      count = 1;
+  let numGoodNodes = 0;
+  const stack = [[root, -Infinity]];
+  while (stack.length > 0) {
+    const [node, maxSoFar] = stack.pop();
+    if (maxSoFar <= node.val) {
+      numGoodNodes++;
     }
 
-    count += dfs(root.left, max);
-    count += dfs(root.right, max);
-    return count;
+    if (node.left !== null) {
+      stack.push([node.left, Math.max(node.val, maxSoFar)]);
+    }
+
+    if (node.right !== null) {
+      stack.push([node.right, Math.max(node.val, maxSoFar)]);
+    }
   }
+
+  return numGoodNodes;
 };
 
 var root = [3, 1, 4, 3, null, 1, 5];
