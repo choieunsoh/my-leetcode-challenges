@@ -44,7 +44,7 @@ public class Solution
     return currentCount + leftCount + rightCount;
   }
 
-  private int Dfs(TreeNode root, int currentSum)
+  private int Dfs(TreeNode root, long currentSum)
   {
     if (root == null)
     {
@@ -87,5 +87,17 @@ root.right.right.left = new TreeNode(5);
 root.right.right.right = new TreeNode(1);
 targetSum = 22;
 expected = 3;
+result = new Solution().PathSum(root, targetSum);
+Console.WriteLine($"{result}, {result == expected}");
+
+// [1000000000, 1000000000, null, 294967296, null, 1000000000, null, 1000000000, null, 1000000000]
+root = new TreeNode(1000000000);
+root.left = new TreeNode(1000000000);
+root.left.left = new TreeNode(294967296);
+root.left.left.left = new TreeNode(1000000000);
+root.left.left.left.left = new TreeNode(1000000000);
+root.left.left.left.left.left = new TreeNode(1000000000);
+targetSum = 0;
+expected = 0;
 result = new Solution().PathSum(root, targetSum);
 Console.WriteLine($"{result}, {result == expected}");
