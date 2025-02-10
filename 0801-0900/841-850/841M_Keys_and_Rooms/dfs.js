@@ -1,26 +1,27 @@
 // 841. Keys and Rooms
 // https://leetcode.com/problems/keys-and-rooms/
+// T.C: O(N + E)
+// S.C: O(N)
 /**
  * @param {number[][]} rooms
  * @return {boolean}
  */
 var canVisitAllRooms = function (rooms) {
-  const visited = Array(rooms.length).fill(false);
-  let queue = [0];
-  while (queue.length) {
-    const newQueue = [];
-    for (let i = 0; i < queue.length; i++) {
-      const room = queue[i];
-      visited[room] = true;
-      const keys = rooms[room];
-      for (const key of keys) {
-        if (visited[key]) continue;
-        newQueue.push(key);
+  const visited = new Array(rooms.length).fill(false);
+  dfs(0);
+  for (let i = 0; i < visited.length; i++) {
+    if (!visited[i]) return false;
+  }
+  return true;
+
+  function dfs(roomIndex) {
+    visited[roomIndex] = true;
+    for (const key of rooms[roomIndex]) {
+      if (!visited[key]) {
+        dfs(key);
       }
     }
-    queue = newQueue;
   }
-  return visited.every(Boolean);
 };
 
 var rooms = [[1], [2], [3], []];
