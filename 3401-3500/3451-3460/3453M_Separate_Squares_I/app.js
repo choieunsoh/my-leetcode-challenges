@@ -8,15 +8,10 @@
  */
 var separateSquares = function (squares) {
   const error = 5e-6;
-
+  const maxY = getMaxY();
   let lowY = 0;
-  let highY = Number.MAX_SAFE_INTEGER;
-  for (const [, y, l] of squares) {
-    lowY = Math.max(lowY, y);
-    highY = Math.min(highY, y + l);
-  }
-
-  let minY = highY;
+  let highY = maxY;
+  let minY = maxY;
   while (lowY <= highY) {
     const midY = (lowY + highY) / 2;
     if (Math.abs(minY - midY) <= error) {
@@ -32,6 +27,14 @@ var separateSquares = function (squares) {
     }
   }
   return Number(minY.toFixed(5));
+
+  function getMaxY() {
+    let maxY = 0;
+    for (const [, y, l] of squares) {
+      maxY = Math.max(maxY, y + l);
+    }
+    return maxY;
+  }
 
   function getArea(pivot) {
     let areaBelow = 0;
