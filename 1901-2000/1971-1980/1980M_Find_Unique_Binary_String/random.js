@@ -1,19 +1,29 @@
 // 1980. Find Unique Binary String
 // https://leetcode.com/problems/find-unique-binary-string/
-// Cantor's Diagonal Argument
-// T.C.: O(n)
-// S.C.: O(1)
+// T.C.: O(inf)
+// S.C.: O(n)
 /**
  * @param {string[]} nums
  * @return {string}
  */
 var findDifferentBinaryString = function (nums) {
-  let result = '';
-  for (let i = 0; i < nums.length; i++) {
-    const char = nums[i].charAt(i);
-    result += char === '0' ? '1' : '0';
+  const integers = new Set();
+  for (const num of nums) {
+    integers.add(parseInt(num, 2));
   }
-  return result;
+
+  let ans = parseInt(nums[0], 2);
+  const n = nums.length;
+
+  while (integers.has(ans)) {
+    ans = (Math.random() * (1 << n)) | 0;
+  }
+
+  let s = ans.toString(2);
+  while (s.length < n) {
+    s = '0' + s;
+  }
+  return s;
 };
 
 var nums = ['01', '10'];
