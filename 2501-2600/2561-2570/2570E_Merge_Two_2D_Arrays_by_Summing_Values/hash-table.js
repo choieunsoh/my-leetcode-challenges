@@ -1,6 +1,6 @@
 // 2570. Merge Two 2D Arrays by Summing Values
 // https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/
-// T.C.: O(n+m)
+// T.C.: O((n+m) log (n+m))
 // S.C.: O(n+m)
 /**
  * @param {number[][]} nums1
@@ -8,28 +8,20 @@
  * @return {number[][]}
  */
 var mergeArrays = function (nums1, nums2) {
-  const result = [];
-  let i = 0;
-  let j = 0;
-  while (i < nums1.length && j < nums2.length) {
-    const [id1, num1] = nums1[i];
-    const [id2, num2] = nums2[j];
-    if (id1 === id2) {
-      result.push([id1, num1 + num2]);
-      i++;
-      j++;
-    } else if (id1 < id2) {
-      result.push([id1, num1]);
-      i++;
-    } else {
-      result.push([id2, num2]);
-      j++;
-    }
+  const keyToSum = new Map();
+  for (const [id, num] of nums1) {
+    keyToSum.set(id, num);
   }
-  if (i < nums1.length) result.push(...nums1.slice(i));
-  if (j < nums2.length) result.push(...nums2.slice(j));
+  for (const [id, num] of nums2) {
+    keyToSum.set(id, (keyToSum.get(id) ?? 0) + num);
+  }
 
-  return result;
+  const result = [];
+  for (const [id, num] of keyToSum) {
+    result.push([id, num]);
+  }
+
+  return result.sort((a, b) => a[0] - b[0]);
 };
 
 var nums1 = [
