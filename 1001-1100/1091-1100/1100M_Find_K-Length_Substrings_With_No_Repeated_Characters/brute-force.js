@@ -1,28 +1,42 @@
 // 1100. Find K-Length Substrings With No Repeated Characters
 // https://leetcode.com/problems/find-k-length-substrings-with-no-repeated-characters/description/
-// T.C.: O(n)
-// S.C.: O(1)
+// T.C.: O(n*min(m,k))
+// S.C.: O(m)
 /**
  * @param {string} s
  * @param {number} k
  * @return {number}
  */
 var numKLenSubstrNoRepeats = function (s, k) {
+  if (k > 26) return 0;
+
   const a = 'a'.charCodeAt(0);
   const n = s.length;
-  const counts = new Array(26).fill(0);
-  let left = 0;
-  let substrCount = 0;
-  for (let right = 0; right < n; right++) {
-    const rightIndex = s.charCodeAt(right) - a;
-    counts[rightIndex]++;
-    while (counts[rightIndex] > 1) {
-      const leftIndex = s.charCodeAt(left++) - a;
-      counts[leftIndex]--;
+  let result = 0;
+  for (let i = 0; i <= n - k; i++) {
+    const freq = new Array(26).fill(0);
+    let isUnique = true;
+    for (let j = i; j < i + k; j++) {
+      const ch = s[j];
+
+      // Incrementing the frequency of current character
+      freq[ch.charCodeAt(0) - a]++;
+
+      // If a repeated character is found, we stop the loop
+      if (freq[ch.charCodeAt(0) - a] > 1) {
+        isUnique = false;
+        break;
+      }
     }
-    if (right - left + 1 >= k) substrCount++;
+
+    // If the substring does not have any repeated characters,
+    // we increment the answer
+    if (isUnique) {
+      result++;
+    }
   }
-  return substrCount;
+
+  return result;
 };
 
 var s = 'havefunonleetcode',
