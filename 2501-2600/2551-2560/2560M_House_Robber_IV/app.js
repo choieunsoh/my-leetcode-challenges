@@ -1,5 +1,7 @@
 // 2560. House Robber IV
 // https://leetcode.com/problems/house-robber-iv/
+// T.C: O(n log m)
+// S.C: O(1)
 /**
  * @param {number[]} nums
  * @param {number} k
@@ -8,14 +10,17 @@
 var minCapability = function (nums, k) {
   let left = Math.min(...nums);
   let right = Math.max(...nums);
-  while (left < right) {
+  let result = right;
+  while (left <= right) {
     const mid = (left + right) >> 1;
     if (valid(mid, k)) {
-      right = mid;
+      result = mid;
+      right = mid - 1;
     } else {
       left = mid + 1;
     }
   }
+  return result;
 
   function valid(limit, remain) {
     for (let i = 0; i < nums.length; i++) {
@@ -26,8 +31,6 @@ var minCapability = function (nums, k) {
     }
     return false;
   }
-
-  return left;
 };
 
 var nums = [2, 3, 5, 9],
