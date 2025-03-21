@@ -1,8 +1,8 @@
 // 2115. Find All Possible Recipes from Given Supplies
 // https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/
 // Array, Hash Table, String, Graph, Topological Sort
-// Time: O(N)
-// Space: O(N)
+// T.C.: O(n+m+s)
+// S.C.: O(n+m+s)
 /**
  * @param {string[]} recipes
  * @param {string[][]} ingredients

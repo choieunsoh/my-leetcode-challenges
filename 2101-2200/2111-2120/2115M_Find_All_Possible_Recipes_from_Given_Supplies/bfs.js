@@ -1,8 +1,8 @@
 // 2115. Find All Possible Recipes from Given Supplies
 // https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/
 // Array, Hash Table, String, Graph, Topological Sort
-// T.C.: O(n+m+s)
-// S.C.: O(n+m+s)
+// T.C.: O(n*m+s)
+// S.C.: O(n+s)
 /**
  * @param {string[]} recipes
  * @param {string[][]} ingredients
@@ -10,34 +10,46 @@
  * @return {string[]}
  */
 var findAllRecipes = function (recipes, ingredients, supplies) {
-  const ingredientToRecipes = new Map();
-  const inDegree = new Map();
-  for (let i = 0; i < recipes.length; i++) {
-    const recipe = recipes[i];
-    for (const ingredient of ingredients[i]) {
-      if (!ingredientToRecipes.has(ingredient)) {
-        ingredientToRecipes.set(ingredient, []);
+  // Track available ingredients and recipes
+  const available = new Set(supplies);
+
+  // Queue to process recipe indices
+  let recipeQueue = [...recipes.keys()];
+
+  const createdRecipes = [];
+  let lastSize = -1;
+
+  // Continue while we keep finding new recipes
+  while (available.size > lastSize) {
+    lastSize = available.size;
+    const newRecipeQueue = [];
+
+    // Process all recipes in current queue
+    for (const recipeIdx of recipeQueue) {
+      let canCreate = true;
+
+      // Check if all ingredients are available
+      for (const ingredient of ingredients[recipeIdx]) {
+        if (!available.has(ingredient)) {
+          canCreate = false;
+          break;
+        }
       }
-      ingredientToRecipes.get(ingredient).push(recipe);
+
+      if (!canCreate) {
+        newRecipeQueue.push(recipeIdx);
+      } else {
+        // Recipe can be created - add to available items
+        available.add(recipes[recipeIdx]);
+        createdRecipes.push(recipes[recipeIdx]);
+      }
     }
-    inDegree.set(recipe, ingredients[i].length);
+
+    // Update queue for next iteration
+    recipeQueue = newRecipeQueue;
   }
 
-  const result = [];
-  const available = [...supplies];
-  while (available.length) {
-    const ingredient = available.shift();
-    if (!ingredientToRecipes.has(ingredient)) continue;
-
-    for (const recipe of ingredientToRecipes.get(ingredient)) {
-      inDegree.set(recipe, inDegree.get(recipe) - 1);
-      if (inDegree.get(recipe) === 0) {
-        available.push(recipe);
-        result.push(recipe);
-      }
-    }
-  }
-  return result;
+  return createdRecipes;
 };
 
 var recipes = ['bread'],
