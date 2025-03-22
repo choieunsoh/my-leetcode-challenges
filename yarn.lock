@@ -2,19 +2,19 @@
 # yarn lockfile v1
 
 
-"@datastructures-js/heap@^3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@datastructures-js/heap/-/heap-3.2.0.tgz#d8fcdbf58c462c8a3f0fdfd9c6a57ca11505321e"
-  integrity sha512-FcU5ZAyb+VIOZz1HABsJUsbJi2ZyUDO7aoe97hq4d3tK3z8nMgwdxf5bO0gafR0ExFi18YTspntqHLzt4XOgnA==
+"@datastructures-js/heap@^4.3.3":
+  version "4.3.3"
+  resolved "https://registry.npmjs.org/@datastructures-js/heap/-/heap-4.3.3.tgz"
+  integrity sha512-UcUu/DLh/aM4W3C8zZfwxxm6/6FIZUlm3mcAXuNOCa6Aj4iizNvNXQyb8DjZQH2jKSQbMRyNlngP6TPimuGjpQ==
 
-"@datastructures-js/priority-queue@5.4.0":
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/@datastructures-js/priority-queue/-/priority-queue-5.4.0.tgz#6de46a909f447dacf4ac56befe7540911cf74609"
-  integrity sha512-x+EkL8tjbwBMCUyVIwsOiKnWiOvMiFAIrnWQihcO42sUZ8uc4sRsJgHAS164wnibM2kVgQUJcfvhIdssBOzxRg==
+"@datastructures-js/priority-queue@^6.3.2":
+  version "6.3.2"
+  resolved "https://registry.npmjs.org/@datastructures-js/priority-queue/-/priority-queue-6.3.2.tgz"
+  integrity sha512-hPmWlbmYRegOkZsWJuOzZw+BYcrOJ9B5xwy8Sz/QtEtLUPHtJbX9OpPpCB+KQPgOVb1QonqFqiddVDud/i5afw==
   dependencies:
-    "@datastructures-js/heap" "^3.2.0"
+    "@datastructures-js/heap" "^4.3.3"
 
 prettier@^3.3.3:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.3.3.tgz#30c54fe0be0d8d12e6ae61dbb10109ea00d53105"
-  integrity sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==
+  version "3.5.3"
+  resolved "https://registry.npmjs.org/prettier/-/prettier-3.5.3.tgz"
+  integrity sha512-QQtaxnoDJeAkDvDKWCLiwIXkTgRhwYDEQCghU9Z6q03iyek/rxRh/2lC3HB7P8sWT2xC/y5JDctPLBIGzHKbhw==
