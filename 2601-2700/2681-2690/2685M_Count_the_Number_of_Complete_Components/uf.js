@@ -1,5 +1,7 @@
 // 2685. Count the Number of Complete Components
 // https://leetcode.com/problems/count-the-number-of-complete-components/
+// T.C.: O(n + m)
+// S.C.: O(n)
 /**
  * @param {number} n
  * @param {number[][]} edges

@@ -1,5 +1,7 @@
 // 2685. Count the Number of Complete Components
 // https://leetcode.com/problems/count-the-number-of-complete-components/
+// T.C.: O(n + m)
+// S.C.: O(n + m)
 /**
  * @param {number} n
  * @param {number[][]} edges
@@ -8,10 +10,10 @@
 var countCompleteComponents = function (n, edges) {
   let count = 0;
   const adj = Array.from({ length: n }, () => []);
-  const visited = Array(n).fill(false);
-  for (const [a, b] of edges) {
-    adj[a].push(b);
-    adj[b].push(a);
+  const visited = new Array(n).fill(false);
+  for (const [u, v] of edges) {
+    adj[u].push(v);
+    adj[v].push(u);
   }
 
   for (let node = 0; node < n; node++) {
