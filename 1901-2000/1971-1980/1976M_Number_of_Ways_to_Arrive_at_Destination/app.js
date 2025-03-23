@@ -1,6 +1,7 @@
 // 1976. Number of Ways to Arrive at Destination
 // https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/description/
-// T.C.: O(n log n)
+// Dijkstra's Algorithm
+// T.C.: O((n + m) log n)
 // S.C.: O(n + m)
 const { MinPriorityQueue } = require('@datastructures-js/priority-queue');
 /**
@@ -24,8 +25,8 @@ var countPaths = function (n, roads) {
 
   function dijkstra() {
     const MOD = 1e9 + 7;
-    const pq = new MinPriorityQueue();
-    pq.enqueue([0, n - 1], 0);
+    const pq = new MinPriorityQueue((x) => x[0]);
+    pq.enqueue([0, n - 1]);
     while (!pq.isEmpty()) {
       const [dist, currNode] = pq.dequeue();
       if (dist > distance[currNode]) continue;
