@@ -1,13 +1,15 @@
 // 368. Largest Divisible Subset
 // https://leetcode.com/problems/largest-divisible-subset/
+// T.O.: O(n^2)
+// S.C.: O(n)
 /**
  * @param {number[]} nums
  * @return {number[]}
  */
 var largestDivisibleSubset = function (nums) {
   nums.sort((a, b) => a - b);
-  const dp = Array(nums.length).fill(1);
-  const prev = Array(nums.length).fill(-1);
+  const dp = new Array(nums.length).fill(1);
+  const prev = new Array(nums.length).fill(-1);
   let maxIndex = 0;
   for (let i = 1; i < nums.length; i++) {
     for (let j = i - 1; j >= 0; j--) {
