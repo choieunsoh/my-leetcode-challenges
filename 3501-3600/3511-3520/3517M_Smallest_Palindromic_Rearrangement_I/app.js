@@ -12,7 +12,6 @@ var smallestPalindrome = function (s) {
   for (const ch of s) {
     counts[ch.charCodeAt(0) - a]++;
   }
-  const n = s.length;
 
   let prefix = '';
   let suffix = '';
