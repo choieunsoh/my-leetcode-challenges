@@ -1,0 +1,21 @@
+{
+  "lockfileVersion": 1,
+  "workspaces": {
+    "": {
+      "devDependencies": {
+        "@datastructures-js/deque": "^1.0.5",
+        "@datastructures-js/priority-queue": "^6.3.2",
+        "prettier": "^3.5.3",
+      },
+    },
+  },
+  "packages": {
+    "@datastructures-js/deque": ["@datastructures-js/deque@1.0.5", "", {}, "sha512-ogeIkpcCGnM+LAZYZqXBXn6Nx0a/ikkKDFPoa1MzZWRFyEdfVUNwkHclET/T8jkyNM1dN6NmPDfenNKcKazjjg=="],
+
+    "@datastructures-js/heap": ["@datastructures-js/heap@4.3.3", "", {}, "sha512-UcUu/DLh/aM4W3C8zZfwxxm6/6FIZUlm3mcAXuNOCa6Aj4iizNvNXQyb8DjZQH2jKSQbMRyNlngP6TPimuGjpQ=="],
+
+    "@datastructures-js/priority-queue": ["@datastructures-js/priority-queue@6.3.2", "", { "dependencies": { "@datastructures-js/heap": "^4.3.3" } }, "sha512-hPmWlbmYRegOkZsWJuOzZw+BYcrOJ9B5xwy8Sz/QtEtLUPHtJbX9OpPpCB+KQPgOVb1QonqFqiddVDud/i5afw=="],
+
+    "prettier": ["prettier@3.5.3", "", { "bin": "bin/prettier.cjs" }, "sha512-QQtaxnoDJeAkDvDKWCLiwIXkTgRhwYDEQCghU9Z6q03iyek/rxRh/2lC3HB7P8sWT2xC/y5JDctPLBIGzHKbhw=="],
+  }
+}
