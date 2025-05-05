@@ -1,7 +1,7 @@
 // 790. Domino and Tromino Tiling
 // https://leetcode.com/problems/domino-and-tromino-tiling/
-// T.C.: O(N)
-// S.C.: O(1)
+// T.C.: O(n)
+// S.C.: O(n)
 /**
  * @param {number} n
  * @return {number}
