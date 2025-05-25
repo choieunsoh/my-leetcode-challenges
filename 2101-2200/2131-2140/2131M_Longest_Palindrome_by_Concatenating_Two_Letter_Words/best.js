@@ -7,32 +7,24 @@
  * @return {number}
  */
 var longestPalindrome = function (words) {
-  let longest = 0;
-  const map = new Map();
-  for (let i = 0; i < words.length; i++) {
-    const word = words[i];
-    const reverseWord = word[1] + word[0];
-    const reverseCount = map.get(reverseWord) ?? 0;
-    if (reverseCount > 0) {
-      if (reverseCount - 1 === 0) {
-        map.delete(reverseWord);
-      } else {
-        map.set(reverseWord, reverseCount - 1);
-      }
-      longest += 4;
-    } else {
-      const count = map.get(word) ?? 0;
-      map.set(word, count + 1);
-    }
+  const S = 5;
+  const M = (1 << S) - 1;
+  const freq = new Array(1 << (S << 1)).fill(0);
+  for (const s of words) {
+    freq[((s.charCodeAt(0) & M) << S) | (s.charCodeAt(1) & M)]++;
   }
 
-  for (const [word, count] of map) {
-    if (word[0] === word[1] && count > 0) {
-      return longest + 2;
+  let result = 0;
+  let mid = 0;
+  for (let i = 1; i <= 26; i++) {
+    const dupe = freq[(i << S) | i];
+    result += dupe >> 1;
+    mid |= dupe & 1;
+    for (let j = i + 1; j <= 26; j++) {
+      result += Math.min(freq[(i << S) | j], freq[(j << S) | i]);
     }
   }
-
-  return longest;
+  return (result << 2) | (mid << 1);
 };
 
 var words = ['lc', 'cl', 'gg'];

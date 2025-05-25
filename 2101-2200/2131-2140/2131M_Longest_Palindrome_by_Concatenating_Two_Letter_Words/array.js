@@ -1,5 +1,7 @@
 // 2131. Longest Palindrome by Concatenating Two Letter Words
 // https://leetcode.com/problems/longest-palindrome-by-concatenating-two-letter-words/
+// T.C.: O(n)
+// S.C.: O(n)
 /**
  * @param {string[]} words
  * @return {number}
@@ -18,7 +20,7 @@ var longestPalindrome = function (words) {
   for (let i = 0; i < 26; i++) {
     for (let j = 0; j < 26; j++) {
       const count = map[i][j];
-      if (i == j) {
+      if (i === j) {
         pairs += count >> 1;
         center ||= count & 1;
       } else {
