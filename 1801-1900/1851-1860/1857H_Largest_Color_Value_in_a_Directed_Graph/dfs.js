@@ -1,5 +1,7 @@
 // 1857. Largest Color Value in a Directed Graph
 // https://leetcode.com/problems/largest-color-value-in-a-directed-graph/solution/
+// T.C.: O(n + m)
+// S.C.: O(n + m)
 /**
  * @param {string} colors
  * @param {number[][]} edges
