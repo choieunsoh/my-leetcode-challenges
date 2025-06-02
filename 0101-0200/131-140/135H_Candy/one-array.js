@@ -8,25 +8,20 @@
  */
 var candy = function (ratings) {
   const n = ratings.length;
-  const left2right = new Array(n).fill(1);
+  const candies = new Array(n).fill(1);
   for (let i = 1; i < n; i++) {
     if (ratings[i] > ratings[i - 1]) {
-      left2right[i] = left2right[i - 1] + 1;
+      candies[i] = candies[i - 1] + 1;
     }
   }
-
-  const right2left = new Array(n).fill(1);
-  for (let i = n - 2; i > -1; i--) {
+  let sum = candies[n - 1];
+  for (let i = n - 2; i >= 0; i--) {
     if (ratings[i] > ratings[i + 1]) {
-      right2left[i] = right2left[i + 1] + 1;
+      candies[i] = Math.max(candies[i], candies[i + 1] + 1);
     }
+    sum += candies[i];
   }
-
-  let candies = 0;
-  for (let i = 0; i < n; i++) {
-    candies += Math.max(left2right[i], right2left[i]);
-  }
-  return candies;
+  return sum;
 };
 
 var ratings = [1, 0, 2];
