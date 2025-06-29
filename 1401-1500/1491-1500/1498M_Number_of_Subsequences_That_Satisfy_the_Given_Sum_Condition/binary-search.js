@@ -16,18 +16,30 @@ var numSubseq = function (nums, target) {
     power[i] = (power[i - 1] << 1) % MOD;
   }
 
-  let left = 0;
-  let right = nums.length - 1;
-  while (left <= right) {
-    if (nums[left] + nums[right] <= target) {
+  for (let left = 0; left < nums.length; left++) {
+    const right = binarySearchRightmost(nums, target - nums[left]);
+    if (right >= left) {
       result = (result + power[right - left]) % MOD;
-      left++;
-    } else {
-      right--;
     }
   }
 
   return result;
+
+  function binarySearchRightmost(nums, target) {
+    let left = 0;
+    let right = nums.length - 1;
+    let rightmost = -1;
+    while (left <= right) {
+      const middle = left + Math.floor((right - left) / 2);
+      if (nums[middle] <= target) {
+        left = middle + 1;
+        rightmost = middle;
+      } else {
+        right = middle - 1;
+      }
+    }
+    return rightmost;
+  }
 };
 
 var nums = [3, 5, 6, 7],
