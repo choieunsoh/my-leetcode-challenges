@@ -1,5 +1,7 @@
-// https://leetcode.com/problems/longest-harmonious-subsequence/
 // 594. Longest Harmonious Subsequence
+// https://leetcode.com/problems/longest-harmonious-subsequence/
+// T.C.: O(n)
+// S.C.: O(n)
 /**
  * @param {number[]} nums
  * @return {number}

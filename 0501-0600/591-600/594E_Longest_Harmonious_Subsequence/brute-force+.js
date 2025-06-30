@@ -1,20 +1,26 @@
 // 594. Longest Harmonious Subsequence
 // https://leetcode.com/problems/longest-harmonious-subsequence/
-// T.C.: O(n)
-// S.C.: O(n)
+// T.C.: O(n^2)
+// S.C.: O(1)
 /**
  * @param {number[]} nums
  * @return {number}
  */
 var findLHS = function (nums) {
   let result = 0;
-  const map = new Map();
   for (let i = 0; i < nums.length; i++) {
-    map.set(nums[i], map.get(nums[i]) + 1 || 1);
-  }
-  for (const num of map.keys()) {
-    if (map.has(num + 1)) {
-      result = Math.max(result, map.get(num) + map.get(num + 1));
+    let count = 0;
+    let found = false;
+    for (let j = 0; j < nums.length; j++) {
+      if (nums[j] === nums[i]) {
+        count++;
+      } else if (nums[j] + 1 === nums[i]) {
+        count++;
+        found = true;
+      }
+    }
+    if (found) {
+      result = Math.max(count, result);
     }
   }
   return result;
