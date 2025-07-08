@@ -1,5 +1,7 @@
 // 285. Inorder Successor in BST
 // https://leetcode.com/problems/inorder-successor-in-bst/
+// T.C.: O(n)
+// S.C.: O(1)
 const { TreeNode, createTree, inOrder } = require('../../../_utils/tree');
 /**
  * Definition for a binary tree node.
