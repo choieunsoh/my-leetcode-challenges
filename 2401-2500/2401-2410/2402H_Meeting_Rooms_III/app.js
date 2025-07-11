@@ -1,6 +1,6 @@
 // 2402. Meeting Rooms III
 // https://leetcode.com/problems/meeting-rooms-iii/description/
-// T.C.: O(n log n)
+// T.C.: O(n log n + m*n)
 // S.C.: O(n)
 /**
  * @param {number} n
