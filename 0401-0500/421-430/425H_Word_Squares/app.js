@@ -1,5 +1,7 @@
 // 425. Word Squares
 // https://leetcode.com/problems/word-squares/
+// T.C.: O(N*26*L)
+// S.C.: O(N*L)
 /**
  * @param {string[]} words
  * @return {string[][]}
