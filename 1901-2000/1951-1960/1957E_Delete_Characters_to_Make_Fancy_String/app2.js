@@ -9,16 +9,18 @@
 var makeFancyString = function (s) {
   if (s.length < 3) return s;
 
-  let [firstChar, secondChar] = s;
-  let result = firstChar + secondChar;
-  for (let i = 2; i < s.length; i++) {
-    const char = s[i];
-    if (char === firstChar && char === secondChar) continue;
-    firstChar = secondChar;
-    secondChar = char;
-    result += char;
+  const n = s.length;
+  s = s.split('');
+  let left = 2;
+  let right = 2;
+  while (right < n) {
+    if (s[right] !== s[left - 1] || s[right] !== s[left - 2]) {
+      s[left++] = s[right];
+    }
+    right++;
   }
-  return result;
+  s.length = left;
+  return s.join('');
 };
 
 var s = 'leeetcode';
