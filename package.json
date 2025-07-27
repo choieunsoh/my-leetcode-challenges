@@ -1,10 +1,10 @@
 {
   "devDependencies": {
     "@datastructures-js/deque": "^1.0.5",
-    "@datastructures-js/priority-queue": "^6.3.2",
-    "prettier": "^3.5.3"
+    "@datastructures-js/priority-queue": "^6.3.3",
+    "prettier": "^3.6.2"
   },
   "volta": {
-    "node": "22.16.0"
+    "node": "24.4.1"
   }
 }

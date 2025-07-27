@@ -4,8 +4,8 @@
     "": {
       "devDependencies": {
         "@datastructures-js/deque": "^1.0.5",
-        "@datastructures-js/priority-queue": "^6.3.2",
-        "prettier": "^3.5.3",
+        "@datastructures-js/priority-queue": "^6.3.3",
+        "prettier": "^3.6.2",
       },
     },
   },
@@ -14,8 +14,8 @@
 
     "@datastructures-js/heap": ["@datastructures-js/heap@4.3.3", "", {}, "sha512-UcUu/DLh/aM4W3C8zZfwxxm6/6FIZUlm3mcAXuNOCa6Aj4iizNvNXQyb8DjZQH2jKSQbMRyNlngP6TPimuGjpQ=="],
 
-    "@datastructures-js/priority-queue": ["@datastructures-js/priority-queue@6.3.2", "", { "dependencies": { "@datastructures-js/heap": "^4.3.3" } }, "sha512-hPmWlbmYRegOkZsWJuOzZw+BYcrOJ9B5xwy8Sz/QtEtLUPHtJbX9OpPpCB+KQPgOVb1QonqFqiddVDud/i5afw=="],
+    "@datastructures-js/priority-queue": ["@datastructures-js/priority-queue@6.3.3", "", { "dependencies": { "@datastructures-js/heap": "^4.3.3" } }, "sha512-CIbUf0h4TPu1tHJ2gV4OTjwPkh7XZNb37u44bwoW6Py2vPdgaRUhFh3qFET6jvhyMNq/+ChWfOBRh+9s5WUtvA=="],
 
-    "prettier": ["prettier@3.5.3", "", { "bin": "bin/prettier.cjs" }, "sha512-QQtaxnoDJeAkDvDKWCLiwIXkTgRhwYDEQCghU9Z6q03iyek/rxRh/2lC3HB7P8sWT2xC/y5JDctPLBIGzHKbhw=="],
+    "prettier": ["prettier@3.6.2", "", { "bin": { "prettier": "bin/prettier.cjs" } }, "sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ=="],
   }
 }
