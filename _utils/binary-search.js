@@ -78,10 +78,42 @@ function greatestLesser(array, key, low = 0, high = array.length - 1) {
   return ans;
 }
 
+// lowerBound equals to leastGreater
+function lowerBound(arr, left, right, val) {
+  let result = right + 1;
+  while (left <= right) {
+    const mid = left + Math.floor((right - left) / 2);
+    if (arr[mid] >= val) {
+      result = mid;
+      right = mid - 1;
+    } else {
+      left = mid + 1;
+    }
+  }
+  return result;
+}
+
+// upperBound equals to greatestLesser
+function upperBound(arr, left, right, val) {
+  let result = right + 1;
+  while (left <= right) {
+    const mid = left + Math.floor((right - left) / 2);
+    if (arr[mid] > val) {
+      result = mid;
+      right = mid - 1;
+    } else {
+      left = mid + 1;
+    }
+  }
+  return result;
+}
+
 module.exports = {
   contains,
   first,
   last,
   leastGreater,
   greatestLesser,
+  lowerBound,
+  upperBound,
 };
