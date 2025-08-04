@@ -7,31 +7,23 @@
  * @return {number}
  */
 var totalFruit = function (fruits) {
-  let result = 0;
-  let basketCount = 0;
-  let lastBasketCount = 0;
-  let firstBasket = -1;
-  let lastBasket = -1;
-
-  for (const fruit of fruits) {
-    if (fruit === lastBasket) {
-      basketCount++;
-      lastBasketCount++;
-    } else if (fruit === firstBasket) {
-      basketCount++;
-      lastBasketCount = 1;
-      firstBasket = lastBasket;
-      lastBasket = fruit;
-    } else {
-      basketCount = lastBasketCount + 1;
-      lastBasketCount = 1;
-      firstBasket = lastBasket;
-      lastBasket = fruit;
+  const n = fruits.length;
+  const basket = new Map();
+  let maxPicked = 0;
+  let left = 0;
+  for (let right = 0; right < n; right++) {
+    basket.set(fruits[right], (basket.get(fruits[right]) ?? 0) + 1);
+    while (basket.size > 2) {
+      basket.set(fruits[left], basket.get(fruits[left]) - 1);
+      if (basket.get(fruits[left]) === 0) {
+        basket.delete(fruits[left]);
+      }
+      left++;
     }
-
-    result = Math.max(basketCount, result);
+    maxPicked = Math.max(maxPicked, right - left + 1);
   }
-  return result;
+
+  return maxPicked;
 };
 
 var fruits = [1, 2, 1];

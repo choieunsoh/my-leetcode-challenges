@@ -1,37 +1,29 @@
 // 904. Fruit Into Baskets
 // https://leetcode.com/problems/fruit-into-baskets/
-// T.C.: O(n)
+// T.C.: O(n^2)
 // S.C.: O(1)
 /**
  * @param {number[]} fruits
  * @return {number}
  */
 var totalFruit = function (fruits) {
-  let result = 0;
-  let basketCount = 0;
-  let lastBasketCount = 0;
-  let firstBasket = -1;
-  let lastBasket = -1;
+  let maxPicked = 0;
+  const n = fruits.length;
 
-  for (const fruit of fruits) {
-    if (fruit === lastBasket) {
-      basketCount++;
-      lastBasketCount++;
-    } else if (fruit === firstBasket) {
-      basketCount++;
-      lastBasketCount = 1;
-      firstBasket = lastBasket;
-      lastBasket = fruit;
-    } else {
-      basketCount = lastBasketCount + 1;
-      lastBasketCount = 1;
-      firstBasket = lastBasket;
-      lastBasket = fruit;
+  for (let left = 0; left < n; left++) {
+    const basket = new Set();
+    let right = left;
+    while (right < n) {
+      if (!basket.has(fruits[right]) && basket.size === 2) {
+        break;
+      }
+      basket.add(fruits[right]);
+      right++;
     }
-
-    result = Math.max(basketCount, result);
+    maxPicked = Math.max(maxPicked, right - left);
   }
-  return result;
+
+  return maxPicked;
 };
 
 var fruits = [1, 2, 1];
