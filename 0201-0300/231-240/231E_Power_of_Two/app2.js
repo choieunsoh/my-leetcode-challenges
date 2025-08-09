@@ -7,7 +7,8 @@
  * @return {boolean}
  */
 var isPowerOfTwo = function (n) {
-  return n > 0 && (1 << 30) % n === 0;
+  if (n <= 0) return false;
+  return (n & -n) === n;
 };
 
 var n = 1;
