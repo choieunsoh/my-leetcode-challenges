@@ -1,13 +1,21 @@
 // 326. Power of Three
 // https://leetcode.com/problems/power-of-three/
 // T.C.: O(log3 n)
-// S.C.: O(log3 n)
+// S.C.: O(1)
 /**
  * @param {number} n
  * @return {boolean}
  */
 var isPowerOfThree = function (n) {
-  return (Math.log(n) / Math.log(3)) % 1 === 0;
+  if (n < 1) {
+    return false;
+  }
+
+  while (n % 3 === 0) {
+    n /= 3;
+  }
+
+  return n === 1;
 };
 
 var n = 27;

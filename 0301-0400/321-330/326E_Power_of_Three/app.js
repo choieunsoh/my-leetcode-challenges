@@ -1,4 +1,7 @@
+// 326. Power of Three
 // https://leetcode.com/problems/power-of-three/
+// T.C.: O(log3 n)
+// S.C.: O(1)
 /**
  * @param {number} n
  * @return {boolean}
@@ -14,28 +17,51 @@ var isPowerOfThree = function (n) {
 };
 
 var n = 27;
-console.log(n, isPowerOfThree(n));
+var expected = true;
+var result = isPowerOfThree(n);
+console.log(result, result === expected);
+
+var n = -27;
+var expected = false;
+var result = isPowerOfThree(n);
+console.log(result, result === expected);
 
 var n = 0;
-console.log(n, isPowerOfThree(n));
+var expected = false;
+var result = isPowerOfThree(n);
+console.log(result, result === expected);
 
 var n = 1;
-console.log(n, isPowerOfThree(n));
+var expected = true;
+var result = isPowerOfThree(n);
+console.log(result, result === expected);
 
 var n = 2;
-console.log(n, isPowerOfThree(n));
+var expected = false;
+var result = isPowerOfThree(n);
+console.log(result, result === expected);
 
 var n = 3;
-console.log(n, isPowerOfThree(n));
+var expected = true;
+var result = isPowerOfThree(n);
+console.log(result, result === expected);
 
 var n = 9;
-console.log(n, isPowerOfThree(n));
+var expected = true;
+var result = isPowerOfThree(n);
+console.log(result, result === expected);
 
 var n = 6;
-console.log(n, isPowerOfThree(n));
+var expected = false;
+var result = isPowerOfThree(n);
+console.log(result, result === expected);
 
 var n = 45;
-console.log(n, isPowerOfThree(n));
+var expected = false;
+var result = isPowerOfThree(n);
+console.log(result, result === expected);
 
 var n = 81 * 81 * 81;
-console.log(n, isPowerOfThree(n));
+var expected = true;
+var result = isPowerOfThree(n);
+console.log(result, result === expected);
