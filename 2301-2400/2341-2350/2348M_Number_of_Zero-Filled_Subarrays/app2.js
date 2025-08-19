@@ -7,21 +7,17 @@
  * @return {number}
  */
 var zeroFilledSubarray = function (nums) {
-  let result = 0;
-  let i = 0;
-  while (i < nums.length) {
-    let count = 0;
+  let zeros = 0;
+  let res = 0;
+  for (let i = nums.length - 1; i >= 0; i--) {
     if (nums[i] === 0) {
-      count++;
-      while (nums[i + 1] === 0) {
-        i++;
-        count++;
-      }
-      result += (count * (count + 1)) / 2;
+      res += zeros + 1;
+      zeros++;
+    } else {
+      zeros = 0;
     }
-    i++;
   }
-  return result;
+  return res;
 };
 
 var nums = [1, 3, 0, 0, 2, 0, 0, 4];
