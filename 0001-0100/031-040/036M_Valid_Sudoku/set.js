@@ -1,5 +1,7 @@
 // 36. Valid Sudoku
 // https://leetcode.com/problems/valid-sudoku/
+// T.C.: O(n^2)
+// S.C.: O(n^2)
 /**
  * @param {character[][]} board
  * @return {boolean}
@@ -40,9 +42,9 @@ var board = [
     ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
     ['.', '.', '.', '.', '8', '.', '.', '7', '9'],
   ],
-  expect = true;
+  expected = true;
 var result = isValidSudoku(board);
-console.log(result, result === expect);
+console.log(result, result === expected);
 
 var board = [
     ['8', '3', '.', '.', '7', '.', '.', '.', '.'],
@@ -55,9 +57,9 @@ var board = [
     ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
     ['.', '.', '.', '.', '8', '.', '.', '7', '9'],
   ],
-  expect = false;
+  expected = false;
 var result = isValidSudoku(board);
-console.log(result, result === expect);
+console.log(result, result === expected);
 
 var board = [
     ['5', '3', '.', '.', '7', '.', '.', '.', '.'],
@@ -70,6 +72,6 @@ var board = [
     ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
     ['.', '.', '.', '.', '8', '.', '.', '7', '9'],
   ],
-  expect = true;
+  expected = true;
 var result = isValidSudoku(board);
-console.log(result, result === expect);
+console.log(result, result === expected);

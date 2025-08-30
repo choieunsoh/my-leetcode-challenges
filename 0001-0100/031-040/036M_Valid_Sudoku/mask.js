@@ -1,39 +1,47 @@
 // 36. Valid Sudoku
 // https://leetcode.com/problems/valid-sudoku/
 // T.C.: O(n^2)
-// S.C.: O(n^2)
+// S.C.: O(n)
 /**
  * @param {character[][]} board
  * @return {boolean}
  */
 var isValidSudoku = function (board) {
-  const N = 9;
-  const rows = Array.from(Array(N), () => new Array(N).fill(0));
-  const cols = Array.from(Array(N), () => new Array(N).fill(0));
-  const boxes = Array.from(Array(N), () => new Array(N).fill(0));
-  for (let r = 0; r < N; r++) {
-    for (let c = 0; c < N; c++) {
-      if (board[r][c] == '.') {
+  const n = 9;
+  // Use a binary number to record previous occurrence
+  const rows = new Array(n).fill(0);
+  const cols = new Array(n).fill(0);
+  const boxes = new Array(n).fill(0);
+  for (let r = 0; r < n; r++) {
+    for (let c = 0; c < n; c++) {
+      // Check if the position is filled with number
+      if (board[r][c] === '.') {
         continue;
       }
 
-      const pos = board[r][c].charCodeAt(0) - '1'.charCodeAt(0);
-      if (rows[r][pos] == 1) {
+      const pos = 1 << (Number(board[r][c]) - 1);
+
+      // Check the row
+      if (rows[r] & pos) {
         return false;
       }
 
-      rows[r][pos] = 1;
-      if (cols[c][pos] == 1) {
+      rows[r] |= pos;
+
+      // Check the column
+      if (cols[c] & pos) {
         return false;
       }
 
-      cols[c][pos] = 1;
-      const idx = Math.floor(r / 3) * 3 + Math.floor(c / 3);
-      if (boxes[idx][pos] == 1) {
+      cols[c] |= pos;
+
+      // Check the box
+      const idx = ((r / 3) | 0) * 3 + ((c / 3) | 0);
+      if (boxes[idx] & pos) {
         return false;
       }
 
-      boxes[idx][pos] = 1;
+      boxes[idx] |= pos;
     }
   }
   return true;
