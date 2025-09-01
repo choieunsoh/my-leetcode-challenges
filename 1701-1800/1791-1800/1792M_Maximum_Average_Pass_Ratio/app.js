@@ -1,6 +1,6 @@
 // 1792. Maximum Average Pass Ratio
 // https://leetcode.com/problems/maximum-average-pass-ratio/description/
-const { MaxPriorityQueue } = require('@datastructures-js/priority-queue');
+const { PriorityQueue } = require('@datastructures-js/priority-queue');
 // T.C.: O(n log n)
 // S.C.: O(n)
 /**
@@ -9,13 +9,14 @@ const { MaxPriorityQueue } = require('@datastructures-js/priority-queue');
  * @return {number}
  */
 var maxAverageRatio = function (classes, extraStudents) {
-  const maxGain = new MaxPriorityQueue({ priority: ({ pass, total }) => (pass + 1) / (total + 1) - pass / total });
+  const ratioFn = ({ pass, total }) => (pass + 1) / (total + 1) - pass / total;
+  const maxGain = new PriorityQueue((a, b) => ratioFn(b) - ratioFn(a));
   for (const [pass, total] of classes) {
     maxGain.enqueue({ pass, total });
   }
 
   while (!maxGain.isEmpty() && extraStudents > 0) {
-    const { pass, total } = maxGain.dequeue().element;
+    const { pass, total } = maxGain.dequeue();
     const newPass = pass + 1;
     const newTotal = total + 1;
     maxGain.enqueue({ pass: newPass, total: newTotal });
@@ -24,7 +25,7 @@ var maxAverageRatio = function (classes, extraStudents) {
 
   let sum = 0;
   while (!maxGain.isEmpty()) {
-    const { pass, total } = maxGain.dequeue().element;
+    const { pass, total } = maxGain.dequeue();
     sum += pass / total;
   }
   return Math.round((sum / classes.length) * 1e5) / 1e5;
