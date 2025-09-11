@@ -1,36 +1,30 @@
 // 2785. Sort Vowels in a String
 // https://leetcode.com/problems/sort-vowels-in-a-string/
-// T.C.: O(n)
-// S.C.: O(1)
+// T.C.: O(n log n)
+// S.C.: O(n)
 /**
  * @param {string} s
  * @return {string}
  */
 var sortVowels = function (s) {
-  const vowels = 'AEIOUaeiou'.split('').map((ch) => [ch, 0]);
-  const counter = new Map(vowels);
-  let result = '';
-  for (let i = 0; i < s.length; i++) {
-    const ch = s.charAt(i);
-    if (counter.has(ch)) {
-      counter.set(ch, counter.get(ch) + 1);
+  const vowels = new Set('AEIOUaeiou'.split(''));
+  const tempVowels = [];
+  for (const ch of s) {
+    if (vowels.has(ch)) {
+      tempVowels.push(ch);
     }
   }
+  tempVowels.sort();
 
-  const chars = [...counter.values()];
+  let result = '';
   let index = 0;
   for (const ch of s) {
-    if (counter.has(ch)) {
-      while (chars[index] === 0) {
-        index++;
-      }
-      chars[index]--;
-      result += vowels[index][0];
+    if (vowels.has(ch)) {
+      result += tempVowels[index++];
     } else {
       result += ch;
     }
   }
-
   return result;
 };
 
