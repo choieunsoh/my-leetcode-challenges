@@ -7,13 +7,19 @@
  * @return {number}
  */
 var minimumTotal = function (triangle) {
-  for (let i = triangle.length - 1; i > 0; i--) {
-    const row = triangle[i];
-    for (let j = 0; j < row.length - 1; j++) {
-      triangle[i - 1][j] += Math.min(row[j], row[j + 1]);
+  for (let row = 1; row < triangle.length; row++) {
+    for (let col = 0; col <= row; col++) {
+      let smallestAbove = Number.MAX_VALUE;
+      if (col > 0) {
+        smallestAbove = triangle[row - 1][col - 1];
+      }
+      if (col < row) {
+        smallestAbove = Math.min(smallestAbove, triangle[row - 1][col]);
+      }
+      triangle[row][col] += smallestAbove;
     }
   }
-  return triangle[0][0];
+  return Math.min(...triangle[triangle.length - 1]);
 };
 
 var triangle = [[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]];

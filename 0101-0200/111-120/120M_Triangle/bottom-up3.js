@@ -1,16 +1,16 @@
 // 120. Triangle
 // https://leetcode.com/problems/triangle/
 // T.C.: O(n^2)
-// S.C.: O(1)
+// S.C.: O(n)
 /**
  * @param {number[][]} triangle
  * @return {number}
  */
 var minimumTotal = function (triangle) {
-  for (let i = triangle.length - 1; i > 0; i--) {
-    const row = triangle[i];
-    for (let j = 0; j < row.length - 1; j++) {
-      triangle[i - 1][j] += Math.min(row[j], row[j + 1]);
+  for (let row = triangle.length - 2; row >= 0; row--) {
+    for (let col = 0; col <= row; col++) {
+      let bestBelow = Math.min(triangle[row + 1][col], triangle[row + 1][col + 1]);
+      triangle[row][col] += bestBelow;
     }
   }
   return triangle[0][0];
