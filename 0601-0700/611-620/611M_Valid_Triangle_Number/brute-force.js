@@ -1,26 +1,23 @@
 // 611. Valid Triangle Number
 // https://leetcode.com/problems/valid-triangle-number/
-// T.C.: O(n^2)
-// S.C.: O(log n)
+// T.C.: O(n^3)
+// S.C.: O(1)
 /**
  * @param {number[]} nums
  * @return {number}
  */
 var triangleNumber = function (nums) {
-  let result = 0;
-  nums.sort((a, b) => a - b);
+  let count = 0;
   for (let i = 0; i < nums.length - 2; i++) {
-    if (nums[i] === 0) continue;
-    let k = i + 2;
     for (let j = i + 1; j < nums.length - 1; j++) {
-      while (k < nums.length && nums[i] + nums[j] > nums[k]) {
-        k++;
+      for (let k = j + 1; k < nums.length; k++) {
+        if (nums[i] + nums[j] > nums[k] && nums[i] + nums[k] > nums[j] && nums[j] + nums[k] > nums[i]) {
+          count++;
+        }
       }
-      // (k-1)-(j+1)+1 = k-1-j-1+1 = k-j-1
-      result += k - j - 1;
     }
   }
-  return result;
+  return count;
 };
 
 var nums = [2, 2, 3, 4];
