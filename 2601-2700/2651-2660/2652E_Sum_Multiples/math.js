@@ -7,6 +7,7 @@
  * @return {number}
  */
 var sumOfMultiples = function (n) {
+  // Sum(A ∪ B ∪ C) = Sum(A) + Sum(B) + Sum(C) - Sum(A ∩ B) - Sum(A ∩ C) - Sum(B ∩ C) + Sum(A ∩ B ∩ C)
   const sum3 = sumDivisibleBy(3);
   const sum5 = sumDivisibleBy(5);
   const sum7 = sumDivisibleBy(7);
