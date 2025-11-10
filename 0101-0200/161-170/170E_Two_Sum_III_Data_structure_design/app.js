@@ -1,5 +1,7 @@
 // 170. Two Sum III - Data structure design
 // https://leetcode.com/problems/two-sum-iii-data-structure-design/
+// T.C.: O(n)
+// S.C.: O(n)
 
 var TwoSum = function () {
   this.nums = new Map();
@@ -19,12 +21,13 @@ TwoSum.prototype.add = function (number) {
  * @return {boolean}
  */
 TwoSum.prototype.find = function (value) {
-  for (const [num] of this.nums) {
+  for (const num of this.nums.keys()) {
     const target = value - num;
-    const count = this.nums.get(target) ?? 0;
-    const needed = num === target ? 2 : 1;
-    console.log(value, num, target, count, needed);
-    if (count >= needed) return true;
+    if (target !== num) {
+      if (this.nums.has(target)) return true;
+    } else {
+      if (this.nums.get(target) > 1) return true;
+    }
   }
   return false;
 };
@@ -36,62 +39,42 @@ TwoSum.prototype.find = function (value) {
  * var param_2 = obj.find(value)
  */
 
-var ops = ['TwoSum', 'add', 'add', 'add', 'find', 'find'];
-var inputs = [[], [1], [3], [5], [4], [7]];
-var outputs = [null, null, null, null, true, false];
-var twoSum = null;
-for (let i = 0; i < ops.length; i++) {
-  if (ops[i] === 'TwoSum') {
-    twoSum = new TwoSum();
-  } else if (ops[i] === 'add') {
-    twoSum.add(inputs[i][0]);
-  } else {
-    const result = twoSum.find(inputs[i][0]);
-    console.log(i, inputs[i][0], result, result === outputs[i]);
+function run(ops, inputs, outputs) {
+  let twoSum = null;
+  for (let i = 0; i < ops.length; i++) {
+    if (ops[i] === 'TwoSum') {
+      twoSum = new TwoSum();
+    } else if (ops[i] === 'add') {
+      twoSum.add(inputs[i][0]);
+    } else {
+      const result = twoSum.find(inputs[i][0]);
+      console.log(i, inputs[i][0], result, result === outputs[i]);
+    }
   }
+  console.log();
 }
 
-var ops = ['TwoSum', 'add', 'find'];
-var inputs = [[], [0], [0]];
-var outputs = [null, null, false];
-var twoSum = null;
-for (let i = 0; i < ops.length; i++) {
-  if (ops[i] === 'TwoSum') {
-    twoSum = new TwoSum();
-  } else if (ops[i] === 'add') {
-    twoSum.add(inputs[i][0]);
-  } else {
-    const result = twoSum.find(inputs[i][0]);
-    console.log(i, inputs[i][0], result, result === outputs[i]);
-  }
-}
+var ops = ['TwoSum', 'add', 'add', 'add', 'find', 'find'],
+  inputs = [[], [1], [3], [5], [4], [7]],
+  outputs = [null, null, null, null, true, false];
+run(ops, inputs, outputs);
 
-var ops = ['TwoSum', 'add', 'add', 'find'];
-var inputs = [[], [0], [0], [0]];
-var outputs = [null, null, null, true];
-var twoSum = null;
-for (let i = 0; i < ops.length; i++) {
-  if (ops[i] === 'TwoSum') {
-    twoSum = new TwoSum();
-  } else if (ops[i] === 'add') {
-    twoSum.add(inputs[i][0]);
-  } else {
-    const result = twoSum.find(inputs[i][0]);
-    console.log(i, inputs[i][0], result, result === outputs[i]);
-  }
-}
+var ops = ['TwoSum', 'add', 'find'],
+  inputs = [[], [0], [0]],
+  outputs = [null, null, false];
+run(ops, inputs, outputs);
 
-var ops = ['TwoSum', 'add', 'add', 'add', 'add', 'find', 'find', 'find', 'find'];
-var inputs = [[], [0], [-1], [-1], [0], [-2], [0], [-1], [1]];
-var outputs = [null, null, null, null, null, true, true, true, false];
-var twoSum = null;
-for (let i = 0; i < ops.length; i++) {
-  if (ops[i] === 'TwoSum') {
-    twoSum = new TwoSum();
-  } else if (ops[i] === 'add') {
-    twoSum.add(inputs[i][0]);
-  } else {
-    const result = twoSum.find(inputs[i][0]);
-    console.log(i, inputs[i][0], result, result === outputs[i]);
-  }
-}
+var ops = ['TwoSum', 'add', 'add', 'find'],
+  inputs = [[], [0], [0], [0]],
+  outputs = [null, null, null, true];
+run(ops, inputs, outputs);
+
+var ops = ['TwoSum', 'add', 'add', 'add', 'add', 'find', 'find', 'find', 'find'],
+  inputs = [[], [0], [-1], [-1], [0], [-2], [0], [-1], [1]],
+  outputs = [null, null, null, null, null, true, true, true, false];
+run(ops, inputs, outputs);
+
+var ops = ['TwoSum', 'add', 'add', 'add', 'add', 'find', 'find', 'find', 'find'],
+  inputs = [[], [0], [-1], [-1], [0], [-2], [0], [-1], [1]],
+  outputs = [null, null, null, null, null, true, true, true, false];
+run(ops, inputs, outputs);
