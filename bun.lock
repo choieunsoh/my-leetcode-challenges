@@ -2,6 +2,9 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
+      "dependencies": {
+        "datastructures-js": "^13.0.0",
+      },
       "devDependencies": {
         "@datastructures-js/deque": "^1.0.5",
         "@datastructures-js/priority-queue": "^6.3.3",
@@ -10,12 +13,30 @@
     },
   },
   "packages": {
+    "@datastructures-js/binary-search-tree": ["@datastructures-js/binary-search-tree@5.4.0", "", {}, "sha512-dPmPRRgAEvfC1+xq9voBJcIanbXZbaOR1908R6RfhceXignnlCL1wX7LToPVHSKVCb+bGa+tAbK22cit0BLWDA=="],
+
     "@datastructures-js/deque": ["@datastructures-js/deque@1.0.5", "", {}, "sha512-ogeIkpcCGnM+LAZYZqXBXn6Nx0a/ikkKDFPoa1MzZWRFyEdfVUNwkHclET/T8jkyNM1dN6NmPDfenNKcKazjjg=="],
+
+    "@datastructures-js/graph": ["@datastructures-js/graph@5.3.1", "", { "dependencies": { "@datastructures-js/queue": "^3.1.3" } }, "sha512-tFuysPL+PKxaLitXcHeWZOwOwmSIaa5OzBh4CNSwYYnAVZRxItl50LiX432+AMo+WZLYpDEhTyXtLVlt3qtc9w=="],
 
     "@datastructures-js/heap": ["@datastructures-js/heap@4.3.3", "", {}, "sha512-UcUu/DLh/aM4W3C8zZfwxxm6/6FIZUlm3mcAXuNOCa6Aj4iizNvNXQyb8DjZQH2jKSQbMRyNlngP6TPimuGjpQ=="],
 
+    "@datastructures-js/linked-list": ["@datastructures-js/linked-list@6.1.4", "", {}, "sha512-lwM6KDBPgV9xxJMzozCqZzdofzc0fx8FPjNfrWDf8+u8Fm7zcjksvXrv6Z9dA2Kg40HZIUKqLPaQriqLhhAisg=="],
+
     "@datastructures-js/priority-queue": ["@datastructures-js/priority-queue@6.3.3", "", { "dependencies": { "@datastructures-js/heap": "^4.3.3" } }, "sha512-CIbUf0h4TPu1tHJ2gV4OTjwPkh7XZNb37u44bwoW6Py2vPdgaRUhFh3qFET6jvhyMNq/+ChWfOBRh+9s5WUtvA=="],
 
+    "@datastructures-js/queue": ["@datastructures-js/queue@4.3.0", "", {}, "sha512-2RYt1+N4dtdcilwmB+A6j9HT/5MImHSK2UUjBA8WQAHoA2AEJC4YxJSSGhGTOBMyLMKpMiowwTrnB315YgtTrA=="],
+
+    "@datastructures-js/set": ["@datastructures-js/set@4.2.2", "", {}, "sha512-6TilB1kZV3elcT3PiXnzBzjgf+HqcfcbyPjL3q7fubIpaKwFF1qSjJjzXdE7s8utA6ptyQrhQiU6knhVPcDZMA=="],
+
+    "@datastructures-js/stack": ["@datastructures-js/stack@3.1.6", "", {}, "sha512-HtArTBadxEK8j/whIuXanzoCj9VPz7BXJOn5n4ktr7K+DtGryrCLERZczbN35WujqEwIjIdVTTbxGoma1qGDuQ=="],
+
+    "@datastructures-js/trie": ["@datastructures-js/trie@4.2.3", "", {}, "sha512-4Iu2okR18BE3d/KQBKnpGZ+98cv/EwYl7wSwOU4yICxjSJfjUJixugBjh3kPhHe9Qf652qVDN/Ugp2dj4ak68w=="],
+
+    "datastructures-js": ["datastructures-js@13.0.0", "", { "dependencies": { "@datastructures-js/binary-search-tree": "^5.3.1", "@datastructures-js/deque": "^1.0.4", "@datastructures-js/graph": "^5.3.0", "@datastructures-js/heap": "^4.3.2", "@datastructures-js/linked-list": "^6.1.0", "@datastructures-js/priority-queue": "^6.3.0", "@datastructures-js/queue": "^4.2.3", "@datastructures-js/set": "^4.2.1", "@datastructures-js/stack": "^3.1.4", "@datastructures-js/trie": "^4.2.2" } }, "sha512-3KLehk8sGWS2IuncLv0/Wxl1a1VtvQagLDtGNBw3SNbi7893PPxWT8dac+cuHA/N4V25BQL6pHF7IVjdaZFB3Q=="],
+
     "prettier": ["prettier@3.6.2", "", { "bin": { "prettier": "bin/prettier.cjs" } }, "sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ=="],
+
+    "@datastructures-js/graph/@datastructures-js/queue": ["@datastructures-js/queue@3.1.4", "", {}, "sha512-8QqkdAJQDDd25OBX28lKj7HXD+Cxs6Ee0ogJkZUjD5R1fAvRAWsrCeKop0szqANYjMwdQQd75vyc3Cm8qNJH+Q=="],
   }
 }
