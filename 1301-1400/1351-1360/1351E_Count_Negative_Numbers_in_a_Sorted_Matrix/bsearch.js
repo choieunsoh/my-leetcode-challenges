@@ -1,5 +1,7 @@
 // 1351. Count Negative Numbers in a Sorted Matrix
 // https://leetcode.com/problems/count-negative-numbers-in-a-sorted-matrix/
+// T.C.: O(n log m)
+// S.C.: O(1)
 /**
  * @param {number[][]} grid
  * @return {number}

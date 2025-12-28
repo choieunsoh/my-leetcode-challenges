@@ -1,26 +1,21 @@
 // 1351. Count Negative Numbers in a Sorted Matrix
 // https://leetcode.com/problems/count-negative-numbers-in-a-sorted-matrix/
-// T.C.: O(n+m)
+// T.C.: O(n*m)
 // S.C.: O(1)
 /**
  * @param {number[][]} grid
  * @return {number}
  */
 var countNegatives = function (grid) {
-  let result = 0;
-  const rows = grid.length;
-  const columns = grid[0].length;
-  let r = rows - 1;
-  let c = 0;
-  while (r >= 0 && c < columns) {
-    if (grid[r][c] < 0) {
-      r--;
-      result += columns - c;
-    } else {
-      c++;
-    }
-  }
-  return result;
+  let count = 0;
+  grid.forEach((row) => {
+    row.forEach((element) => {
+      if (element < 0) {
+        count++;
+      }
+    });
+  });
+  return count;
 };
 
 var grid = [
