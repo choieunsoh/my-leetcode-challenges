@@ -1,5 +1,7 @@
 // 712. Minimum ASCII Delete Sum for Two Strings
 // https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/
+// T.C.: O(m*n)
+// S.C.: O(min(m,n))
 /**
  * @param {string} s1
  * @param {string} s2

@@ -1,5 +1,7 @@
 // 712. Minimum ASCII Delete Sum for Two Strings
 // https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/
+// T.C.: O(m*n)
+// S.C.: O(m*n)
 /**
  * @param {string} s1
  * @param {string} s2
@@ -42,6 +44,7 @@ var minimumDeleteSum = function (s1, s2) {
     return cost;
   }
 };
+
 var s1 = 'sea',
   s2 = 'eat';
 var expected = 231;
