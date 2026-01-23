@@ -3,7 +3,7 @@
     "prettier": "^3.6.2"
   },
   "volta": {
-    "node": "24.4.1"
+    "node": "24.13.0"
   },
   "dependencies": {
     "@datastructures-js/deque": "^1.0.5",
