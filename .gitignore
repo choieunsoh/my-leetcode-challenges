@@ -9,3 +9,5 @@ STEP.md
 **/kt/**/*.jar
 
 private/**/*
+
+*.exe
