@@ -9,18 +9,27 @@
  */
 var maximumJumps = function (nums, target) {
   const n = nums.length;
-  const dp = new Array(n).fill(-1);
-  dp[0] = 0;
-  for (let i = 0; i < n; i++) {
-    if (dp[i] === -1) continue;
+  const memo = new Array(n).fill(Number.MIN_SAFE_INTEGER);
+  const result = dfs(0);
+  return result < 0 ? -1 : result;
+
+  function dfs(i) {
+    if (i === n - 1) {
+      return 0;
+    }
+    if (memo[i] !== Number.MIN_SAFE_INTEGER) {
+      return memo[i];
+    }
+
+    let result = Number.MIN_SAFE_INTEGER;
     for (let j = i + 1; j < n; j++) {
-      const diff = nums[j] - nums[i];
-      if (diff >= -target && diff <= target) {
-        dp[j] = Math.max(dp[j], dp[i] + 1);
+      if (Math.abs(nums[i] - nums[j]) <= target) {
+        result = Math.max(result, dfs(j) + 1);
       }
     }
+    memo[i] = result;
+    return result;
   }
-  return dp[n - 1];
 };
 
 var nums = [1, 0, 2],
