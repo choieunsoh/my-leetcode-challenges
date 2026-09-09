@@ -21,11 +21,11 @@ var result = countCommas(n);
 console.log(result, result === expected);
 
 var n = 9999;
-var expected = 0;
+var expected = 9000;
 var result = countCommas(n);
 console.log(result, result === expected);
 
 var n = 10000;
-var expected = 0;
+var expected = 9001;
 var result = countCommas(n);
 console.log(result, result === expected);
