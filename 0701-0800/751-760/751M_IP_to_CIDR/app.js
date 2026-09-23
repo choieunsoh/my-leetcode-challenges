@@ -48,3 +48,9 @@ var ip = '117.145.102.62',
 var expected = ['117.145.102.62/31', '117.145.102.64/30', '117.145.102.68/31'];
 var result = ipToCIDR(ip, n);
 console.log(result, result.join() === expected.join());
+
+var ip = '0.0.0.0',
+  n = 2;
+var expected = ['0.0.0.0/31'];
+var result = ipToCIDR(ip, n);
+console.log(result, result.join() === expected.join());
