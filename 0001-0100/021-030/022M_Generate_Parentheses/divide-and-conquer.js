@@ -1,29 +1,26 @@
 // 22. Generate Parentheses
 // https://leetcode.com/problems/generate-parentheses/
 // T.C.: O(4^n / sqrt(n))
-// S.C.: O(4^n / sqrt(n))
+// S.C.: O(n)
+/**
+ * @param {number} n
+ * @return {string[]}
+ */
 var generateParenthesis = function (n) {
+  if (n === 0) {
+    return [''];
+  }
+
   const result = [];
-
-  function dfs(count, openCount, closeCount, parts) {
-    if (count === n * 2) {
-      result.push(parts.join(''));
-      return;
-    }
-
-    if (openCount < n) {
-      parts.push('(');
-      dfs(count + 1, openCount + 1, closeCount, parts);
-      parts.pop();
-    }
-
-    if (closeCount < openCount) {
-      parts.push(')');
-      dfs(count + 1, openCount, closeCount + 1, parts);
-      parts.pop();
+  for (let leftCount = 0; leftCount < n; ++leftCount) {
+    let leftStrings = generateParenthesis(leftCount);
+    let rightStrings = generateParenthesis(n - 1 - leftCount);
+    for (let leftString of leftStrings) {
+      for (let rightString of rightStrings) {
+        result.push('(' + leftString + ')' + rightString);
+      }
     }
   }
-  dfs(0, 0, 0, []);
   return result;
 };
 

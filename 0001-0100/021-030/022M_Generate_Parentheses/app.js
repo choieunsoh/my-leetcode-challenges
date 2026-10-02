@@ -1,5 +1,7 @@
-// https://leetcode.com/problems/generate-parentheses/
 // 22. Generate Parentheses
+// https://leetcode.com/problems/generate-parentheses/
+// T.C.: O(4^n * n)
+// S.C.: O(n)
 var generateParenthesis = function (n) {
   const result = [];
 
@@ -23,4 +25,12 @@ var generateParenthesis = function (n) {
   return result;
 };
 
-console.log(generateParenthesis(3));
+var n = 3;
+var expected = ['((()))', '(()())', '(())()', '()(())', '()()()'];
+var result = generateParenthesis(n);
+console.log(result, result.toString() === expected.toString());
+
+var n = 1;
+var expected = ['()'];
+var result = generateParenthesis(n);
+console.log(result, result.toString() === expected.toString());
